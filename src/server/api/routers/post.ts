@@ -4,6 +4,15 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { posts } from "~/server/db/schema";
 
 export const postRouter = createTRPCRouter({
+
+  bye: publicProcedure
+  .input(z.object({ text: z.string() }))
+  .query(({ input }) => {
+    return {
+      farewell: `Goodbye ${input.text}`,
+    }
+  }),
+
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {

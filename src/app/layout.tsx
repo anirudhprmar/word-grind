@@ -3,6 +3,8 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
+// two different fonts
+
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
