@@ -1,16 +1,26 @@
 'use client';
 
+import Hero from "~/components/Hero";
 import Navbar from "./_components/Navbar";
+import Features from "~/components/Features";
+import Demo from "~/components/Demo";
+import Pricing from "~/components/Pricing";
+import CTA from "~/components/CTA";
 
 export default function Home() {
 //landing page
   return (
-    <div>
+    <div className=" min-h-screen">
       
     <Navbar/>
 
       <main>
     {/* sections components */}
+    <Hero/>
+    <Features/>
+    <Demo/>
+    <Pricing/>
+    <CTA/>
       </main>
 
       <footer>

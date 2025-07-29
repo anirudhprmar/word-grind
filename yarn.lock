@@ -3686,6 +3686,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.533.0":
+  version: 0.533.0
+  resolution: "lucide-react@npm:0.533.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/91dd90b41f7aede6b43bc80d2542482ff822c35e4cc82b2d8361b35d2ae9d3d387e5f41f552181061e9ce6c65579f8e53bdaaf75fd76918705d1deadff5c06e1
+  languageName: node
+  linkType: hard
+
 "magic-string@npm:^0.30.17":
   version: 0.30.17
   resolution: "magic-string@npm:0.30.17"
@@ -5090,6 +5099,7 @@ __metadata:
     eslint: "npm:^9.23.0"
     eslint-config-next: "npm:^15.2.3"
     eslint-plugin-drizzle: "npm:^0.2.3"
+    lucide-react: "npm:^0.533.0"
     next: "npm:^15.2.3"
     next-auth: "npm:^5.0.0-beta.29"
     postcss: "npm:^8.5.3"

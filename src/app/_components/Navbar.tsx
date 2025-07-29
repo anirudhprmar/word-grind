@@ -4,8 +4,8 @@ import Link from "next/link"
 
 function Navbar() {
   return (
-    <header >
-      <nav className="top-5 fixed rounded-full z-50  left-0 right-0 flex items-center justify-between max-w-86 sm:max-w-100 md:max-w-150 lg:max-w-220 xl:max-w-300 2xl:max-w-170 mx-auto py-2 px-4 sm:px-6 bg-gray-50 text-black shadow-sm  transition-all duration-200">
+    <header  >
+      <nav className="top-5 fixed rounded-full backdrop-filter backdrop-blur-lg bg-opacity-30 bg-transparent  z-10  left-0 right-0 flex items-center justify-between max-w-86 sm:max-w-100 md:max-w-150 lg:max-w-220  mx-auto py-2 px-4 sm:px-6 text-black shadow-sm  transition-all duration-200">
         <Link href={'/'}>
             <div>
                 {/* <Image src={''} width={''} height={''}/> */}
