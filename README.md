@@ -1,10 +1,9 @@
 # Vocab Builder
 
-- [X]- Build the navbar
-- [X]- hero section
-- [X]- feature section
-- [X]- Demo section
-- [X]- Pricing section
 - [ ]- Faq section
-- [ ]- CTA and footer section
+- [X]- CTA and footer section
+- [X]- figure out the name for the app
+- [ ]- work on other features of landing page
+- [ ]- make it responsive
+- [ ]- Deploy to prod
 - [ ]- add authentication

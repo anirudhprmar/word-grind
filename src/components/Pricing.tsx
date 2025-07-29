@@ -2,7 +2,7 @@ import React from 'react'
 
 function Pricing() {
   return (
-     <section className="flex flex-col items-center justify-around gap-5  bg-gray-100 min-h-screen">
+     <section className="flex flex-col items-center justify-around gap-5  min-h-screen">
       <div>
         <h4 className="font-bold text-3xl">Choose your Learning journey </h4>
       </div>

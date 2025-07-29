@@ -20,8 +20,8 @@ function Hero() {
     <section className="flex items-center justify-start px-50 min-h-screen relative ">
 
       <div className="flex flex-col items-start gap-5">
-        <h1 className="text-5xl font-bold max-w-100">Unlock a World of  Words – Boost Your Vocabulary Effortlessly</h1>
-        <p className="font-semibold text-xl max-w-110">Tired of reading daily without seeing real improvements ?  Vocab turns every page into a vocab victory with smart, personalized learning.</p>
+        <h1 className="text-5xl font-bold max-w-100  tracking-tight">Unlock a World of  Words – Boost Your Vocabulary Effortlessly</h1>
+        <p className="font-semibold text-xl max-w-110 ">Tired of reading daily without seeing real improvements ?  Vocab turns every page into a vocab victory with smart, personalized learning.</p>
         <button className="bg-green-900 text-white p-3 rounded-lg text-xl cursor-pointer">Get Vocab</button>
       </div>
 

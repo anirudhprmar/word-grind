@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Geist } from "next/font/google";
+import {Playfair_Display } from "next/font/google";
 
 // two different fonts
 
@@ -13,16 +13,17 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-const geist = Geist({
+
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-playfair-display",
 });
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable}`}>
+    <html lang="en" className={`${playfair.className}`}>
       <body>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>

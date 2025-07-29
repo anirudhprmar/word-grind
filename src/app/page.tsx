@@ -6,6 +6,7 @@ import Features from "~/components/Features";
 import Demo from "~/components/Demo";
 import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
+import Footer from "~/components/Footer";
 
 export default function Home() {
 //landing page
@@ -25,6 +26,7 @@ export default function Home() {
 
       <footer>
         {/* footer component */}
+        <Footer/>
       </footer>
     </div>
   );

@@ -9,7 +9,7 @@ function Navbar() {
         <Link href={'/'}>
             <div>
                 {/* <Image src={''} width={''} height={''}/> */}
-                <span className="text-xl font-bold ">Vocab</span>
+                <span className="text-xl font-bold ">Vocab Grinder</span>
             </div>
         </Link>
         <ul className="flex gap-5 items-center">
@@ -26,7 +26,7 @@ function Navbar() {
 
         <div className="flex gap-5 items-center">
             <button className="text-xl cursor-pointer">Login</button>
-            <button className="bg-green-900 text-white p-2 rounded-lg cursor-pointer">Get Vocab</button>
+            <button className="bg-green-900 text-white p-2 rounded-lg cursor-pointer">Get Started</button>
         </div>
       </nav>
     </header>
