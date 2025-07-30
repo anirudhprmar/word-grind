@@ -34,8 +34,8 @@ export default function Footer() {
             <div>
              <ul className="space-y-2 mb-8">
               <li>Login</li>
+              <li>Demo</li>
               <li>Pricing</li>
-              <li>Support</li>
               {/* <li>discord Join Us</li> */}
              </ul>
             </div>

@@ -7,6 +7,7 @@ import Demo from "~/components/Demo";
 import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
 import Footer from "~/components/Footer";
+import FAQ from "~/components/FAQ";
 
 export default function Home() {
 //landing page
@@ -21,6 +22,7 @@ export default function Home() {
     <Features/>
     <Demo/>
     <Pricing/>
+    <FAQ/>
     <CTA/>
       </main>
 

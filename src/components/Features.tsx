@@ -2,7 +2,7 @@
 
 function Features() {
   return (
-    <section className="flex flex-col items-center justify-around gap-5  bg-gray-100 min-h-screen">
+    <section className="flex flex-col items-center justify-center gap-25  bg-gray-100 min-h-screen">
       <div>
         <h2 className="font-bold text-3xl  ">Wondering why you read every day but still don’t see improvements in your vocabulary ?  </h2>
       </div>

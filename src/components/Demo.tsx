@@ -2,7 +2,7 @@
 
 function Demo() {
   return (
-     <section className="flex flex-col items-center justify-around gap-5 min-h-screen">
+     <section className="flex flex-col items-center justify-center gap-10 min-h-screen">
       <div>
         <h3 className="font-bold text-3xl">Learning new vocab is so easy and fun !! </h3>
       </div>

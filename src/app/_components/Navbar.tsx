@@ -1,5 +1,6 @@
 // import Image from "next/image"
 import Link from "next/link"
+import { Button } from "~/components/ui/button"
 
 
 function Navbar() {
@@ -26,7 +27,7 @@ function Navbar() {
 
         <div className="flex gap-5 items-center">
             <button className="text-xl cursor-pointer">Login</button>
-            <button className="bg-green-900 text-white p-2 rounded-lg cursor-pointer">Get Started</button>
+            <Button variant={'default'} size={'sm'} className="bg-green-900 text-white p-2 rounded-lg cursor-pointer">Get Vocab Grinder</Button>
         </div>
       </nav>
     </header>
