@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { posts } from "~/server/db/schema";
+import { users } from "~/server/db/schema";
 
 export const postRouter = createTRPCRouter({
 
-  bye: publicProcedure
+  welcome: publicProcedure
   .input(z.object({ text: z.string() }))
-  .query(({ input }) => {
+  .mutation(() => {
     return {
-      farewell: `Goodbye ${input.text}`,
+      farewell: `Goodbye ${users.email, null}`,
     }
   }),
 
