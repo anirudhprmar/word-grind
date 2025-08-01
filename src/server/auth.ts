@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (account?.provider === "google" && profile?.email) {
         // Check if user already exists
         const existing = await db.query.users.findFirst({
-          where: (u,{ eq }) => eq(u.email, profile.email),
+          where: (u,{ eq }) => eq(u.email, profile.email!),
         });
         if (!existing) {
           await db.insert(users).values({
@@ -39,10 +39,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         return true;
       }
-      // For credentials, you may want to handle differently
-      if (account?.provider === "credentials") {
-        return true;
-      }
+    
       return false;
     },
     session: ({ session, user }) => ({
