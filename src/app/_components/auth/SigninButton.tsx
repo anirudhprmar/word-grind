@@ -1,4 +1,4 @@
-import { signIn } from "~/server/auth/config"
+import { signIn } from "~/server/auth"
 
 export function SigninButton() {
   
@@ -40,7 +40,7 @@ export function SigninButton() {
         }
         >
         <button type="submit" className="bg-blue-500  text-white px-4 py-2 rounded">
-          Sign in with Google
+          Sign in 
         </button>
 
         </form>

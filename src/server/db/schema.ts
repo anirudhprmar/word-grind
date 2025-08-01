@@ -28,10 +28,10 @@ export const users = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
-    //isadmin,
+    isadmin:d.boolean("isadmin").default(false).notNull()
   }),
   (t) => [index("email_idx").on(t.email)],
-) // basic info and payment info and user progress like words learned and vocab expanded
+) // payment info and user progress like words learned and vocab expanded
 
 //meaning, pronunciation, synonyms, example sentences,learned or not
 export const words = createTable(
@@ -48,44 +48,30 @@ export const words = createTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
+    learned: d.boolean().default(false).notNull(),
   }),
   (t) => [index("word_idx").on(t.word)],
 )
 
 
-export const userWords = createTable(
-  "user_words",
-  (d) =>({
-    id:d.integer().primaryKey().generatedByDefaultAsIdentity(),
-    userId: d.text().notNull().references(() => users.id),
-    wordId: d.text().notNull().references(() => words.id),
-    learned: d.boolean().default(false).notNull(),
-    quizWins:d.integer().default(0).notNull(), // number of times the user has won the quiz for this word,
-  }),
-  (t) => [
-    index("user_word_idx").on(t.userId, t.wordId)
-  ]
-)
 
-// probably need to don't need userwords and livetests , just keep one
-
-export const liveTest = createTable(
-  "user_tests",
+export const quizzes = createTable(
+  "quizzes",
   (d)=>({
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
     userId: d.text().notNull().references(() => users.id),
     wordId: d.text().notNull().references(() => words.id),
-    spokenSentence: d.varchar({ length: 256 }).notNull(),
-    pronunciationCorrect: d.boolean().default(false).notNull(),
-    sentenceCorrect: d.boolean().default(false).notNull(),
+    quizType: d.text("quizType").notNull(), // e.g., "multiple-choice", "fill-in-the-blank"
     createdAt: d
       .timestamp({ withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updatedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date())
+    completedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date())
   }),
   (t)=> [index("user_tests_idx").on(t.userId, t.wordId)]
 )
+
+
 
 export const accounts = createTable(
   "accounts",
