@@ -73,12 +73,18 @@ export const createCallerFactory = t.createCallerFactory;
  */
 export const protectedProcedure = t.procedure
   .use(({ ctx, next }) => {
-    if (!ctx.session?.user) {
+    if (!ctx.session?.user?.id) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     return next({
       ctx: {
-        session: { ...ctx.session, user: ctx.session.user },
+        session: { 
+          ...ctx.session, 
+          user: { 
+            ...ctx.session.user,
+            id: ctx.session.user.id // This ensures id is not undefined
+          } 
+        },
       },
     });
   });
