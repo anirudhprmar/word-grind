@@ -8,10 +8,9 @@
 - [ ]- dark mode ?
 - [ ]- make it responsive
 
-## Core functionalities
-- [X]- implement email and google login  
-- [ ]- get basic api's working (signup,login and dashboard for protected route via trpc)
-- [ ]- Deploy to prod
+## Core functionalities 
+- [ ]- middleware not working 
+- [ ]- signout page 
 - [ ]- build trpc procedures for CRUD on vocab
 - [ ]- build dashboard
 - [ ]- build out basic progress tracking system and display on dashboard
