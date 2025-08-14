@@ -8,27 +8,52 @@ import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
 import Footer from "~/components/Footer";
 import FAQ from "~/components/FAQ";
+import { useRef, type RefObject } from "react";
 
 export default function Home() {
-//landing page
+ const featuresRef = useRef<HTMLElement>(null)
+  const demoRef = useRef<HTMLElement>(null)
+  const pricingRef = useRef<HTMLElement>(null)
+  
+
+  const scrollFunction = (ref:RefObject<HTMLElement | null>)=>{
+    ref.current?.scrollIntoView({
+      behavior:'smooth',
+      block:"start"
+    })
+  }
   return (
     <div className=" min-h-screen">
       
-    <Navbar/>
+    <Navbar 
+    scrollFunction={scrollFunction}
+
+      refs={{
+        features:featuresRef,
+        demo:demoRef,
+        pricing:pricingRef
+      }}
+      />
 
       <main>
-    {/* sections components */}
     <Hero/>
-    <Features/>
-    <Demo/>
-    <Pricing/>
+    <Features ref={featuresRef}/>
+    {/* <Demo ref={demoRef}/> */}
+    <Pricing ref={pricingRef}/>
     <FAQ/>
     <CTA/>
       </main>
 
       <footer>
-        {/* footer component */}
-        <Footer/>
+        <Footer
+        scrollFunction={scrollFunction}
+
+      refs={{
+        features:featuresRef,
+        demo:demoRef,
+        pricing:pricingRef
+      }}
+        />
       </footer>
     </div>
   );

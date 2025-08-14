@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { motion } from "motion/react";
 
 
 function Hero() {
@@ -18,14 +19,35 @@ function Hero() {
   { word: "eloquent", definition: "fluent and persuasive", position: { top: '45%', right: '30%' } }
 ];
   return (
-    <section className="flex items-center justify-start px-50 min-h-screen relative ">
+    <section className="md:flex md:items-center md:justify-start px-3 md:px-50 min-h-screen max-sm:pt-45  md:top-10 md:relative ">
 
-      <div className="flex flex-col items-start gap-5">
-        <h1 className="text-5xl font-bold max-w-100  tracking-tight">Unlock a World of  Words - Boost Your Vocabulary Effortlessly</h1>
-        <p className="font-semibold text-2xl max-w-110  ">Tired of reading daily without seeing real improvements ?  Vocab turns every page into a vocab victory with smart, personalized learning.</p>
-        <Button variant={'default'} size={'lg'} className="bg-green-900 text-white  rounded-lg text-xl cursor-pointer">Get Vocab Grinder</Button>
+      <div className="flex flex-col items-start gap-10 text-center ">
+        <motion.h1 
+         initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8,delay:0.25 }}
+        className="text-5xl font-bold max-w-100  tracking-tight">Unlock a World of  Words - Boost Your Vocabulary Effortlessly</motion.h1>
+        <motion.p 
+         initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8,delay:0.45 }}
+        className="font-normal text-xl max-w-110 font-serif  ">Tired of reading daily without seeing real improvements ?  We turn every page into a vocab victory with smart, personalized learning.</motion.p>
+        <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8,delay:0.7 }}
+        className="flex justify-center items-center w-full px-10"
+        >
+          <Button variant={'default'} size={'lg'} className="bg-foreground text-primary-foreground  rounded-lg text-xl cursor-pointer">Get Word Grind</Button>
+        </motion.div>
       </div>
 
+<motion.div
+   initial={{ opacity: 0}}
+   animate={{ opacity: 1}}
+   transition={{ duration: 0.8,delay:0.8 }}
+   className="hidden md:block"
+>
      {vocabularyWords.map((vocab, index) => (
         <div
           key={vocab.word}
@@ -35,16 +57,17 @@ function Hero() {
             animationDelay: `${index * 0.5}s`
           }}
         >
-          <div className="bg-green-900 backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-200 hover:scale-105 transition-transform duration-300">
-            <div className="text-gray-50 font-semibold text-sm glow-word">
+          <div className="bg-primary backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-200 hover:scale-105 transition-transform duration-300">
+            <div className="text-primary-foreground font-semibold text-sm glow-word">
               {vocab.word}
             </div>
-            <div className="text-gray-50 text-xs mt-1">
+            <div className="text-primary-foreground text-xs mt-1">
               {vocab.definition}
             </div>
           </div>
         </div>
       ))}
+</motion.div>
       
     </section>
   )
