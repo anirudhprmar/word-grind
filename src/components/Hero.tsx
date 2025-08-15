@@ -19,19 +19,20 @@ function Hero() {
   { word: "eloquent", definition: "fluent and persuasive", position: { top: '45%', right: '30%' } }
 ];
   return (
-    <section className="md:flex md:items-center md:justify-start px-3 md:px-50 min-h-screen max-sm:pt-45  md:top-10 md:relative ">
+    <section className="md:flex md:items-center md:justify-start px-3 md:px-50 min-h-screen max-sm:pt-45  md:relative ">
 
       <div className="flex flex-col items-start gap-10 text-center ">
         <motion.h1 
          initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8,delay:0.25 }}
-        className="text-5xl font-bold max-w-100  tracking-tight">Unlock a World of  Words - Boost Your Vocabulary Effortlessly</motion.h1>
+        className="text-5xl font-bold max-w-130  tracking-tight">Unlock Your Ultimate Vocabulary – Fast, Fun, and Forever
+        </motion.h1>
         <motion.p 
          initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8,delay:0.45 }}
-        className="font-normal text-xl max-w-110 font-serif  ">Tired of reading daily without seeing real improvements ?  We turn every page into a vocab victory with smart, personalized learning.</motion.p>
+        className="font-normal text-xl max-w-130 font-serif  ">Level up your language with Wordgrind: build your word collection, master meanings, and practice real conversations. Get AI feedback and boost your fluency—all in one addictive app for ambitious learners.</motion.p>
         <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

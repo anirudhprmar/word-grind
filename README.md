@@ -3,18 +3,17 @@
 ## Landing Page
 day 1 (Thurday)
 
-- [X]- remove unncessary animation after hero page
-- [ ]- work on ui like bento grid like something for features and fix the pricing card
-- [ ]- hooks for the site and content
-push
-- [ ]- put some thought into in the landing page (links working, proper content for faq accordian, and features section, footer tagline below name, )
-push
-- [ ]- Perfected Landing page that converts that'll get the user why they need it so bad
-push
-- [ ]- add seo 
-push
+- [X]- work on ui like bento grid like something for features and fix the pricing card
+- [X]- hooks for the site and content
+- [X]- put some thought into in the landing page (proper content for faq accordian )
+- [X]- Perfected Landing page that converts that'll get the user why they need it so bad
+
+
+- [X]- add seo 
+
 - [ ]- think of logo 
 - [ ]- think of the schema properly  
+- [ ]- get landing page links working -> get wordgrind and login  
 push
 
 ## Core functionalities 
