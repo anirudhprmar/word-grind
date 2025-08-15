@@ -5,40 +5,22 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../components/ui/accordion"
-import {motion} from 'motion/react'
+import Link from 'next/link'
 
 export default function FAQ() {
-    const variants = {
-  hidden: {
-    filter: "blur(10px)",
-    transform: "translateY(20%)",
-    opacity: 0
-  },
-  visible: {
-    filter: "blur(0)",
-    transform: "translateY(0)",
-    opacity: 1
-  }
-}
+    
   return (
     <section className=' md:mx-30 px-4 grid grid-cols-1 md:grid-cols-2  pt-30'>
 
-      <motion.div 
-      initial="hidden"
-      whileInView="visible"       // For scroll in view
-      viewport={{ once: true }}   // Animate only the first time in view
-      transition={{ staggerChildren: 0.05 }}
-      variants={variants}   
+      <div 
       className='flex flex-col gap-4 w-full'>
-        <motion.h5
-         transition={{ duration: 1, ease: 'easeInOut' }}
-         variants={variants}
-        className='font-bold text-3xl text-center p-2'>Frequently Asked Questions</motion.h5>
-        <motion.p 
-        transition={{ duration: 1, ease: 'easeInOut' }}
-         variants={variants}
-        className='font-medium text-md text-center font-serif'>Have another question? Contact me on <span className='underline'>X</span> or by <span className='underline'>email</span></motion.p>
-      </motion.div>
+        <h5
+        className='font-bold text-3xl text-center p-2'>Frequently Asked Questions</h5>
+        <p 
+        className='font-medium text-lg  text-center font-serif'>Have another question? Contact me on <span className='underline'><Link href="https://x.com/anirudhprmar" target="_blank" rel="noopener noreferrer">X</Link></span> or by <span className='underline'><Link href="mailto:anirudhparmar2004@gmail.com" >
+                Mail
+              </Link></span></p>
+      </div>
       <div className='w-full  rounded-xl pt-10 '>
 
         <Accordion type="single" collapsible >

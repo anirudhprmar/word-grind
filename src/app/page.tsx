@@ -6,7 +6,6 @@ import Features from "~/components/Features";
 import Demo from "~/components/Demo";
 import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
-import Footer from "~/components/Footer";
 import FAQ from "~/components/FAQ";
 import { useRef, type RefObject } from "react";
 
@@ -44,17 +43,7 @@ export default function Home() {
     <CTA/>
       </main>
 
-      <footer>
-        <Footer
-        scrollFunction={scrollFunction}
-
-      refs={{
-        features:featuresRef,
-        demo:demoRef,
-        pricing:pricingRef
-      }}
-        />
-      </footer>
+     
     </div>
   );
 }

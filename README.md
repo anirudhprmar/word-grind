@@ -1,11 +1,9 @@
-# Vocab Builder
+# WordGrind
 
 ## Landing Page
 day 1 (Thurday)
-- [X]- animation on each section 
-- [X]- proper color and theme 
-- [X]- make it responsive
 
+- [X]- remove unncessary animation after hero page
 - [ ]- work on ui like bento grid like something for features and fix the pricing card
 - [ ]- hooks for the site and content
 push
@@ -17,7 +15,7 @@ push
 push
 - [ ]- think of logo 
 - [ ]- think of the schema properly  
-
+push
 
 ## Core functionalities 
 day 2 (Friday)

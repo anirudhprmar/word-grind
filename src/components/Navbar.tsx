@@ -64,7 +64,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
         <Link href={'/'}>
             <div>
                 {/* <Image src={''} width={''} height={''}/> */}
-                <span className="text-xl font-bold ">Word Grind</span>
+                <span className="text-xl font-bold ">WordGrind</span>
             </div>
         </Link>
          <div className='hidden md:block'>
@@ -93,7 +93,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
 
         <div className="hidden md:flex gap-5 items-center">
             <button className="text-xl cursor-pointer">Login</button>
-            <Button variant={'default'} size={'sm'} className="bg-foreground text-primary-foreground p-2 rounded-lg cursor-pointer">Get Word Grind</Button>
+            <Button variant={'default'} size={'sm'} className="bg-foreground text-primary-foreground p-2 rounded-lg cursor-pointer">Get WordGrind</Button>
         </div>
 
       {/* Mobile Menu Button */}
@@ -118,7 +118,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
                 <li key={item.label} className='text-center '>
                   <Link 
                     href={item.href}
-                    className='block font-light text-black hover:text-gray-600 transition-colors py-2'
+                    className='block font-light text-foreground hover:text-gray-600 transition-colors py-2'
                     onClick={(e) =>{
                        setisOpen(false)
                        handleNavClick(e, item)
@@ -142,7 +142,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
                       handleNavClick(e, navItems[2] ?? { label: 'Pricing', href: '',section:refs.pricing })
                     }}
                 >
-                Get Word Grind
+                Get WordGrind
               </a>
                 <ChevronRight className='size-5' />
               </Button>

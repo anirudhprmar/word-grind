@@ -38,7 +38,7 @@ function Hero() {
         transition={{ duration: 0.8,delay:0.7 }}
         className="flex justify-center items-center w-full px-10"
         >
-          <Button variant={'default'} size={'lg'} className="bg-foreground text-primary-foreground  rounded-lg text-xl cursor-pointer">Get Word Grind</Button>
+          <Button variant={'default'} size={'lg'} className="bg-foreground text-primary-foreground  rounded-lg text-xl cursor-pointer">Get WordGrind</Button>
         </motion.div>
       </div>
 
@@ -51,13 +51,13 @@ function Hero() {
      {vocabularyWords.map((vocab, index) => (
         <div
           key={vocab.word}
-          className={`absolute floating-word ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}
+          className={`absolute floating-word ${isVisible ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000 `}
           style={{
             ...vocab.position,
             animationDelay: `${index * 0.5}s`
           }}
         >
-          <div className="bg-primary backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-200 hover:scale-105 transition-transform duration-300">
+          <div className="bg-primary backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-200 hover:scale-105 transition-transform duration-300 cursor-pointer">
             <div className="text-primary-foreground font-semibold text-sm glow-word">
               {vocab.word}
             </div>
