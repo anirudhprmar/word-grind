@@ -16,8 +16,8 @@ function Pricing({ref}:props) {
       className="flex gap-4 flex-col max-w-90 md:max-w-full" 
       >
         <h4
-        className="font-bold text-3xl text-center md:text-4xl px-2">Unlock Your Potential—Choose Your Path to Fluency </h4>
-        <p className='text-lg text-center md:text-xl font-semibold text-secondary-foreground'>Flexible plans for every learner. Start mastering vocabulary your way.</p>
+        className="font-bold text-2xl md:text-3xl text-center lg:text-4xl px-2">Unlock Your Potential—Choose Your Path to Fluency </h4>
+        <p className='text-md md:text-lg text-center lg:text-xl font-semibold text-secondary-foreground'>Flexible plans for every learner. Start mastering vocabulary your way.</p>
       </div>
 
         <div 
@@ -70,7 +70,7 @@ function Pricing({ref}:props) {
                 <div className=' mt-2 border-t'></div>
                 <div className='mt-6 pt-4'>
                     <ul className='flex flex-col gap-2'>
-                        <li className='font-semibold text-lg flex gap-2 items-center'><Check/>Everything in Starter, plus:</li>
+                        <li className='font-semibold text-lg flex gap-2 items-center'><Check/>Everything in Standard, plus:</li>
                         <li className='font-semibold text-lg flex gap-2 items-center'><Check/>Unlimited AI conversations</li>
                         <li className='font-semibold text-lg flex gap-2 items-center'><Check/>Advanced feedback and explanations</li>
                         <li className='font-semibold text-lg flex gap-2 items-center'><Check/>Track progress with detailed insights</li>

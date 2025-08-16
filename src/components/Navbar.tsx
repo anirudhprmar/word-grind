@@ -60,7 +60,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
 
   return (
     <header  >
-      <nav className="top-5 fixed rounded-full bg-primary-foreground bg-opacity-30   z-10  left-0 right-0 flex items-center justify-between max-w-96 md:max-w-200 mx-auto p-2 px-4 sm:px-6 text-black shadow-md  transition-all duration-200">
+      <nav className="top-5 fixed rounded-full bg-primary-foreground bg-opacity-30   z-10  left-0 right-0 flex items-center justify-between max-w-96 md:max-w-200 mx-5 md:mx-auto p-2 px-4 sm:px-6 text-black shadow-md  transition-all duration-200">
         <Link href={'/'}>
             <div>
                 {/* <Image src={''} width={''} height={''}/> */}

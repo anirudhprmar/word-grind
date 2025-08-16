@@ -26,13 +26,13 @@ function Hero() {
          initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8,delay:0.25 }}
-        className="text-5xl font-bold max-w-130  tracking-tight">Unlock Your Ultimate Vocabulary – Fast, Fun, and Forever
+        className=" text-4xl md:text-5xl font-bold max-w-130  tracking-tight">Unlock Your Ultimate Vocabulary – Fast, Fun, and Forever
         </motion.h1>
         <motion.p 
          initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8,delay:0.45 }}
-        className="font-normal text-xl max-w-130 font-serif  ">Level up your language with Wordgrind: build your word collection, master meanings, and practice real conversations. Get AI feedback and boost your fluency—all in one addictive app for ambitious learners.</motion.p>
+        className="font-normal text-lg md:text-xl max-w-130 font-serif  ">Level up your language with Wordgrind: build your word collection, master meanings, and practice real conversations. Get AI feedback and boost your fluency—all in one addictive app for ambitious learners.</motion.p>
         <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

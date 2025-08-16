@@ -13,11 +13,11 @@ function Features({ref}:props) {
       <div     
       className="flex gap-4 flex-col max-w-90 md:max-w-full">
         <h2
-        className="font-bold text-3xl text-center md:text-4xl text-secondary-foreground">Wondering why you read every day but your vocabulary still isn’t growing?
+        className="font-bold text-2xl text-center md:text-3xl lg:text-4xl text-secondary-foreground">Wondering why you read every day but your vocabulary still isn’t growing?
 
  </h2>
         <p
-        className="text-lg text-center md:text-xl font-semibold text-secondary-foreground">It is the time to up your game </p>
+        className="text-md text-center md:text-xl font-semibold text-secondary-foreground">It is the time to up your game </p>
 
       </div>
     <div className="max-w-90 md:max-w-full"> 

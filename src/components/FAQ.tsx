@@ -15,9 +15,9 @@ export default function FAQ() {
       <div 
       className='flex flex-col gap-4 w-full'>
         <h5
-        className='font-bold text-3xl md:text-4xl text-center p-2'>Frequently Asked Questions</h5>
+        className='font-bold text-2xl md:text-3xl lg:text-4xl text-center p-2'>Frequently Asked Questions</h5>
         <p 
-        className='font-medium text-lg  text-center font-serif'>Have another question? Contact me on <span className='underline'><Link href="https://x.com/anirudhprmar" target="_blank" rel="noopener noreferrer">X</Link></span> or by <span className='underline'><Link href="mailto:anirudhparmar2004@gmail.com" >
+        className='font-medium text-md md:text-lg text-center font-serif'>Have another question? Contact me on <span className='underline'><Link href="https://x.com/anirudhprmar" target="_blank" rel="noopener noreferrer">X</Link></span> or by <span className='underline'><Link href="mailto:anirudhparmar2004@gmail.com" >
                 Mail
               </Link></span></p>
       </div>

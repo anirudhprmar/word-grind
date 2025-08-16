@@ -8,9 +8,9 @@ export default function CTA() {
       <div
       className="flex flex-col items-center justify-center gap-5">
         <h6 
-        className="font-bold text-3xl  md:text-4xl max-w-90 text-center md:max-w-full">Ready to Master Your Vocabulary and Speak with Confidence?</h6>
+        className="font-bold text-2xl md:text-3xl  lg:text-4xl max-w-90 text-center md:max-w-full">Ready to Master Your Vocabulary and Speak with Confidence?</h6>
 
-        <p className="text-lg text-center md:text-xl font-semibold text-secondary-foreground">Start your journey with Wordgrind today — unlock full access and lifetime updates with our paid plans.</p>
+        <p className=" text-md md:text-lg text-center lg:text-xl font-semibold text-secondary-foreground">Start your journey with Wordgrind today — unlock full access and lifetime updates with our paid plans.</p>
 
         <div
         >
