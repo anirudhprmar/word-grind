@@ -1,10 +1,9 @@
 import { words } from '~/server/db/schema';
-import { router, publicProcedure } from '../trpc';
+import { createTRPCRouter, publicProcedure } from '../trpc';
 import { z } from 'zod';
 import { eq } from 'drizzle-orm';
 
-//add a word: mutate, words list: query, delete a word:mutata, update like learned:mutate
-export const wordRouter = router({
+export const wordRouter = createTRPCRouter({
     addWord:publicProcedure
         .input(
             z.object({
