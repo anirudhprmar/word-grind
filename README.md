@@ -4,13 +4,13 @@
 - [ ]- think of logo 
 
 ## Core functionalities 
-- [ ]- think of the schema properly
+- [X]- think of the schema properly 
 
 - [ ]- build trpc procedures for CRUD on vocab (add word, list words, mark as learned). Tie to user auth so each user has their own list.
 - [ ]- build dashboard
 - [ ]- Users can add and view their words lists 
 - [ ]- users can add new words get all information about it (might implement scraping) and get to practice it
-- [ ]- Basic Progress Tracking: Add a simple model to track learned words and streaks. Display progress on the dashboard.
+- [ ]- Basic Progress Tracking: Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the dashboard.
 
 
 - [ ]- work on quiz/ practice functionlity 

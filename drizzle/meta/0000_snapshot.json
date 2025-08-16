@@ -1,231 +1,11 @@
 {
-  "id": "065bb81b-6e0b-4dc4-b21e-c56b575d2b6b",
+  "id": "fd12f29d-a9d6-43ea-9616-9dab2114988a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.vocab-grinder_accounts": {
-      "name": "vocab-grinder_accounts",
-      "schema": "",
-      "columns": {
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "type": {
-          "name": "type",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "provider": {
-          "name": "provider",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "providerAccountId": {
-          "name": "providerAccountId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "refresh_token": {
-          "name": "refresh_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "access_token": {
-          "name": "access_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "token_type": {
-          "name": "token_type",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "scope": {
-          "name": "scope",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "id_token": {
-          "name": "id_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "session_state": {
-          "name": "session_state",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "account.provider_idx": {
-          "name": "account.provider_idx",
-          "columns": [
-            {
-              "expression": "provider",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "providerAccountId",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "vocab-grinder_accounts_userId_vocab-grinder_users_id_fk": {
-          "name": "vocab-grinder_accounts_userId_vocab-grinder_users_id_fk",
-          "tableFrom": "vocab-grinder_accounts",
-          "tableTo": "vocab-grinder_users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.vocab-grinder_authenticators": {
-      "name": "vocab-grinder_authenticators",
-      "schema": "",
-      "columns": {
-        "credentialID": {
-          "name": "credentialID",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "providerAccountId": {
-          "name": "providerAccountId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "credentialPublicKey": {
-          "name": "credentialPublicKey",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "counter": {
-          "name": "counter",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "credentialDeviceType": {
-          "name": "credentialDeviceType",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "credentialBackedUp": {
-          "name": "credentialBackedUp",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "transports": {
-          "name": "transports",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "authenticators_idx": {
-          "name": "authenticators_idx",
-          "columns": [
-            {
-              "expression": "userId",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "credentialID",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "vocab-grinder_authenticators_userId_vocab-grinder_users_id_fk": {
-          "name": "vocab-grinder_authenticators_userId_vocab-grinder_users_id_fk",
-          "tableFrom": "vocab-grinder_authenticators",
-          "tableTo": "vocab-grinder_users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "vocab-grinder_authenticators_credentialID_unique": {
-          "name": "vocab-grinder_authenticators_credentialID_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "credentialID"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.vocab-grinder_user_tests": {
-      "name": "vocab-grinder_user_tests",
+    "public.wordgrind_quizzes": {
+      "name": "wordgrind_quizzes",
       "schema": "",
       "columns": {
         "id": {
@@ -235,7 +15,7 @@
           "notNull": true,
           "identity": {
             "type": "byDefault",
-            "name": "vocab-grinder_user_tests_id_seq",
+            "name": "wordgrind_quizzes_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -253,29 +33,9 @@
         },
         "wordId": {
           "name": "wordId",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
-        },
-        "spokenSentence": {
-          "name": "spokenSentence",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "pronunciationCorrect": {
-          "name": "pronunciationCorrect",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "sentenceCorrect": {
-          "name": "sentenceCorrect",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
         },
         "createdAt": {
           "name": "createdAt",
@@ -284,11 +44,29 @@
           "notNull": true,
           "default": "CURRENT_TIMESTAMP"
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "completedAt": {
+          "name": "completedAt",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
+        },
+        "result": {
+          "name": "result",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback": {
+          "name": "feedback",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "suggestion": {
+          "name": "suggestion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {
@@ -315,10 +93,10 @@
         }
       },
       "foreignKeys": {
-        "vocab-grinder_user_tests_userId_vocab-grinder_users_id_fk": {
-          "name": "vocab-grinder_user_tests_userId_vocab-grinder_users_id_fk",
-          "tableFrom": "vocab-grinder_user_tests",
-          "tableTo": "vocab-grinder_users",
+        "wordgrind_quizzes_userId_wordgrind_users_id_fk": {
+          "name": "wordgrind_quizzes_userId_wordgrind_users_id_fk",
+          "tableFrom": "wordgrind_quizzes",
+          "tableTo": "wordgrind_users",
           "columnsFrom": [
             "userId"
           ],
@@ -328,10 +106,10 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "vocab-grinder_user_tests_wordId_vocab-grinder_words_id_fk": {
-          "name": "vocab-grinder_user_tests_wordId_vocab-grinder_words_id_fk",
-          "tableFrom": "vocab-grinder_user_tests",
-          "tableTo": "vocab-grinder_words",
+        "wordgrind_quizzes_wordId_wordgrind_words_id_fk": {
+          "name": "wordgrind_quizzes_wordId_wordgrind_words_id_fk",
+          "tableFrom": "wordgrind_quizzes",
+          "tableTo": "wordgrind_words",
           "columnsFrom": [
             "wordId"
           ],
@@ -348,158 +126,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.vocab-grinder_sessions": {
-      "name": "vocab-grinder_sessions",
-      "schema": "",
-      "columns": {
-        "sessionToken": {
-          "name": "sessionToken",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "expires": {
-          "name": "expires",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "vocab-grinder_sessions_userId_vocab-grinder_users_id_fk": {
-          "name": "vocab-grinder_sessions_userId_vocab-grinder_users_id_fk",
-          "tableFrom": "vocab-grinder_sessions",
-          "tableTo": "vocab-grinder_users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.vocab-grinder_user_words": {
-      "name": "vocab-grinder_user_words",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "byDefault",
-            "name": "vocab-grinder_user_words_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
-        },
-        "userId": {
-          "name": "userId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "wordId": {
-          "name": "wordId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "learned": {
-          "name": "learned",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "quizWins": {
-          "name": "quizWins",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        }
-      },
-      "indexes": {
-        "user_word_idx": {
-          "name": "user_word_idx",
-          "columns": [
-            {
-              "expression": "userId",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "wordId",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "vocab-grinder_user_words_userId_vocab-grinder_users_id_fk": {
-          "name": "vocab-grinder_user_words_userId_vocab-grinder_users_id_fk",
-          "tableFrom": "vocab-grinder_user_words",
-          "tableTo": "vocab-grinder_users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "vocab-grinder_user_words_wordId_vocab-grinder_words_id_fk": {
-          "name": "vocab-grinder_user_words_wordId_vocab-grinder_words_id_fk",
-          "tableFrom": "vocab-grinder_user_words",
-          "tableTo": "vocab-grinder_words",
-          "columnsFrom": [
-            "wordId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.vocab-grinder_users": {
-      "name": "vocab-grinder_users",
+    "public.wordgrind_users": {
+      "name": "wordgrind_users",
       "schema": "",
       "columns": {
         "id": {
@@ -507,18 +135,18 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "email": {
           "name": "email",
-          "type": "varchar(256)",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
-        },
-        "username": {
-          "name": "username",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "emailVerified": {
           "name": "emailVerified",
@@ -528,7 +156,7 @@
         },
         "image": {
           "name": "image",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -544,6 +172,13 @@
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
+        },
+        "isAdmin": {
+          "name": "isAdmin",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
       "indexes": {
@@ -566,8 +201,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "vocab-grinder_users_email_unique": {
-          "name": "vocab-grinder_users_email_unique",
+        "wordgrind_users_email_unique": {
+          "name": "wordgrind_users_email_unique",
           "nullsNotDistinct": false,
           "columns": [
             "email"
@@ -578,71 +213,29 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.vocab-grinder_verification_tokens": {
-      "name": "vocab-grinder_verification_tokens",
-      "schema": "",
-      "columns": {
-        "identifier": {
-          "name": "identifier",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "token": {
-          "name": "token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "expires": {
-          "name": "expires",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "verification_token_idx": {
-          "name": "verification_token_idx",
-          "columns": [
-            {
-              "expression": "identifier",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "token",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.vocab-grinder_words": {
-      "name": "vocab-grinder_words",
+    "public.wordgrind_words": {
+      "name": "wordgrind_words",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "wordgrind_words_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
         },
-        "word": {
-          "name": "word",
+        "name": {
+          "name": "name",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": true
@@ -683,6 +276,13 @@
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
+        },
+        "learned": {
+          "name": "learned",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
       "indexes": {
@@ -690,7 +290,7 @@
           "name": "word_idx",
           "columns": [
             {
-              "expression": "word",
+              "expression": "name",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -705,11 +305,11 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "vocab-grinder_words_word_unique": {
-          "name": "vocab-grinder_words_word_unique",
+        "wordgrind_words_name_unique": {
+          "name": "wordgrind_words_name_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "word"
+            "name"
           ]
         }
       },
