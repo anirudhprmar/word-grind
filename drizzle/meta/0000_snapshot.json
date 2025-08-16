@@ -1,5 +1,5 @@
 {
-  "id": "fd12f29d-a9d6-43ea-9616-9dab2114988a",
+  "id": "d2c53750-c68c-44a8-95cf-01e9c8d2f5f5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -234,6 +234,12 @@
             "cycle": false
           }
         },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "name": {
           "name": "name",
           "type": "varchar(256)",
@@ -302,7 +308,21 @@
           "with": {}
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "wordgrind_words_userId_wordgrind_users_id_fk": {
+          "name": "wordgrind_words_userId_wordgrind_users_id_fk",
+          "tableFrom": "wordgrind_words",
+          "tableTo": "wordgrind_users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "wordgrind_words_name_unique": {

@@ -38,6 +38,7 @@ export const words = createTable(
   "words",
   (d) => ({
     id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    userId:d.text().notNull().references(()=> users.id),
     name: d.varchar({ length: 256 }).notNull().unique(),
     meaning: d.varchar({ length: 256 }).notNull(),
     example: d.varchar({ length: 256 }),

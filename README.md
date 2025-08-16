@@ -4,9 +4,7 @@
 - [ ]- think of logo 
 
 ## Core functionalities 
-- [X]- think of the schema properly 
-
-- [ ]- build trpc procedures for CRUD on vocab (add word, list words, mark as learned). Tie to user auth so each user has their own list.
+- [X]- build trpc procedures for CRUD on vocab (add word, list words, mark as learned). Tie to user auth so each user has their own list.
 - [ ]- build dashboard
 - [ ]- Users can add and view their words lists 
 - [ ]- users can add new words get all information about it (might implement scraping) and get to practice it
