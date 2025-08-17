@@ -11,11 +11,30 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "~/components/ui/sidebar"
-import Welcome from "../_components/Welcome"
-import WordSearchInput from "../_components/WordSearchInput"
-import Calendar01 from "~/components/calendar-01"
 
-export default function Page() {
+import { columns, type Payment } from "../_wordsCollection/columns"
+import { DataTable } from "../_wordsCollection/data-table"
+
+async function getData(): Promise<Payment[]> {
+  // Fetch data from your API here.
+  return [
+    {
+      id: "728ed52f",
+      amount: 100,
+      status: "pending",
+      email: "m@example.com",
+    },
+    // ...
+  ]
+}
+
+
+export default async function Page() {
+
+    
+
+  const data = await getData()
+
   return (
     <SidebarProvider>
 
@@ -34,7 +53,7 @@ export default function Page() {
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="/dashboard">
-                    dashboard
+                    collection
                   </BreadcrumbLink>
                 </BreadcrumbItem>
 
@@ -42,20 +61,13 @@ export default function Page() {
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
 
-          <div>
-            <Welcome/>
-          </div>
-
-          <div className=" mt-10 p-2 mx-auto min-w-full lg:min-w-200">
-            <WordSearchInput/>
-          </div>
-
-          <div className=" flex-1 rounded-xl min-h-min p-5 ">
-            <p className="text-left pb-2">Your Learning Streak</p>
-            <Calendar01/>
-          </div>
+       
+   <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
+        {/* rendered table will come here */}
+         <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data}  />
+    </div>
         </div>
       </SidebarInset>
 

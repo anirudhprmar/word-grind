@@ -4,11 +4,10 @@
 - [ ]- think of logo 
 
 ## Core functionalities 
-- [X]- build trpc procedures for CRUD on vocab (add word, list words, mark as learned). Tie to user auth so each user has their own list.
-- [ ]- build dashboard
+- [X]- build dashboard : different routes (how do i get the same layout as dashboard , well can't update the layout as page.tsx is landing page so what to do, copying the same code for each route how do i make it reuseable )
+- [X]- Basic Progress Tracking: gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the dashboard.
 - [ ]- Users can add and view their words lists 
 - [ ]- users can add new words get all information about it (might implement scraping) and get to practice it
-- [ ]- Basic Progress Tracking: Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the dashboard.
 
 
 - [ ]- work on quiz/ practice functionlity 
@@ -43,4 +42,4 @@ push
 - [ ]- Use tools like Google Forms for quick feedback.
 
 
-- [ ]- additional features to work on : llm suggestions after quiz a analysis , chat with an llm , speech to text conversation and one to one call   with aiusing the word you are learning, learderboard
+- [ ]- additional features to work on : llm suggestions after quiz a analysis , chat with an llm vercel ai sdk , speech to text conversation and one to one call   with aiusing the word you are learning, learderboard
