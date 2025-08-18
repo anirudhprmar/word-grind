@@ -7,13 +7,15 @@ import {useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
+import { useCompletion } from '@ai-sdk/react';
+
 
 
 export default function WordSearchInput() {
       const [isPending,setIsPending] = useState(false)
       
       const formSchema = z.object({
-  wordMsg: z.string().min(2, {
+  prompt: z.string().min(2, {
     message: "word must be at least 2 characters.",
   }),
 })
@@ -22,18 +24,22 @@ export default function WordSearchInput() {
 const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
   defaultValues: {
-    wordMsg: "",
+    prompt: "",
   },
 })
   
-const word = form.watch("wordMsg")
+const word = form.watch("prompt")
+
+ const { completion, complete } = useCompletion({
+    api: '/api/completion',
+  });
 
 
-function onSubmit(values: z.infer<typeof formSchema>) {
+async function onSubmit(values: z.infer<typeof formSchema>) {
   try {
     setIsPending(true)
     console.log(values)
-    // await server actions with this msg that will hit the out ai and which will trigger a popup open with everything about that word
+    await complete(values.prompt);
     form.reset()
     setIsPending(false)
   } catch (error) {
@@ -41,12 +47,14 @@ function onSubmit(values: z.infer<typeof formSchema>) {
   }
 }
   return (
+    <div>
+
     <div className='relative'>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name="wordMsg"
+            name="prompt"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
@@ -56,12 +64,18 @@ function onSubmit(values: z.infer<typeof formSchema>) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+            />
           <Button disabled={isPending} variant={'ghost'} size={'sm'} type='submit' className={`absolute right-7 bottom-4 text-foreground   rounded-full p-1 ${word ? 'bg-primary-foreground':'bg-secondary-foreground'}`}>
             <ArrowUp className='cursor-pointer'/>
           </Button>
         </form>
       </Form>
+    </div>
+
+     <div className='bg-primary text-primary-foreground mt-10'>
+        {completion}
+      </div>
+
     </div>
   )
 }

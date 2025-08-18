@@ -5,8 +5,8 @@
 
 ## Core functionalities 
 
-- [X]- proper authenticaiton with better auth 
-- [ ]- figure out how to get ai reponse from dashboard input (vercel ai sdk??)
+18 aug
+- [X]- figure out how to get ai reponse from dashboard input (vercel ai sdk??)
 - [ ]- implement trpc on the frontend 
 - [ ]- users can add new words get all information about it 
 - [ ]- Users can add and view their words lists 
@@ -19,8 +19,9 @@
 - [ ]- for different routes (how do i get the same layout as dashboard , well can't update the layout as page.tsx is landing page so what to do, copying the same code for each route how do i make it reuseable )
 - [ ]- work on ui on sidebar like logos for each sidebar content and also the main app's logo
 - [ ]- work on ui of collection's page
+- [ ]- add a word manually in collections page
 
-
+_____________________
 
 - [ ]- work on quiz/ practice functionlity 
 - [ ]- Create tRPC endpoints for generating quizzes (e.g., multiple-choice from user's vocab). Implement scoring and update progress.
