@@ -59,7 +59,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
               <FormItem>
                 <FormControl>
                   <Input placeholder="What's the word you'd like to explore" {...field} 
-                  className='text-left px-5 pb-15 bg-foreground text-primary-foreground ' />
+                  className='text-left px-5 pb-15 bg-foreground text-primary-foreground' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -73,7 +73,8 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
     </div>
 
      <div className='bg-primary text-primary-foreground mt-10'>
-        {completion}
+        {completion} 
+        {/* get extract the info of a word from here then represent that info usinig a modal with options to add or ignore then on add user trpc to add the word to collection  */}
       </div>
 
     </div>

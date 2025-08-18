@@ -6,8 +6,12 @@
 ## Core functionalities 
 
 18 aug
-- [X]- figure out how to get ai reponse from dashboard input (vercel ai sdk??)
-- [ ]- implement trpc on the frontend 
+
+- [X]- implement trpc on the frontend 
+- [X]- a modal with options to add or ignore then on add user trpc to add the word to collection  
+
+- [ ]- extract the info of a word from here then represent that info usinig 
+
 - [ ]- users can add new words get all information about it 
 - [ ]- Users can add and view their words lists 
 

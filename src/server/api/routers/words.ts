@@ -10,7 +10,7 @@ export const wordRouter = createTRPCRouter({
             userId: z.string(),
             name:z.string(),
             meaning:z.string(),
-            example:z.string(),
+            example:z.array(z.string()),
             pronunciation:z.string(),
             synonyms:z.array(z.string()),
             learned: z.boolean().default(false)
