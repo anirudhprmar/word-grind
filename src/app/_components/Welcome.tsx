@@ -1,10 +1,14 @@
 import React from 'react'
 
-export default function Welcome() {
+interface props{
+  name:string
+}
+
+export default function Welcome({name}:props) {
   return (
     <div className='max-w-full'>
       <div className='text-center'>
-        <p className='text-4xl font-bold font-serif'>Hello, {'Anirudh'}</p>
+        <p className='text-4xl font-bold font-serif'>Hello, {name}</p>
       </div>
     </div>
   )

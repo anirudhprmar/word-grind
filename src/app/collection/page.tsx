@@ -14,6 +14,9 @@ import {
 
 import { columns, type Payment } from "../_wordsCollection/columns"
 import { DataTable } from "../_wordsCollection/data-table"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
+import { auth } from "~/lib/auth"
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -31,14 +34,24 @@ async function getData(): Promise<Payment[]> {
 
 export default async function Page() {
 
+      const session = await auth.api.getSession({
+        headers:await headers()
+      })
     
+      if(!session) {
+            redirect("/")
+        }
+    const username = session.user.name;
+    const email = session.user.email;
+    const avatar = session.user.image ?? "/default-avatar.png" 
 
   const data = await getData()
+  
 
   return (
     <SidebarProvider>
 
-      <AppSidebar />
+      <AppSidebar userInfo={{name:username,email,avatar}} />
 
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">

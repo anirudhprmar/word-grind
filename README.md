@@ -4,10 +4,22 @@
 - [ ]- think of logo 
 
 ## Core functionalities 
-- [X]- build dashboard : different routes (how do i get the same layout as dashboard , well can't update the layout as page.tsx is landing page so what to do, copying the same code for each route how do i make it reuseable )
-- [X]- Basic Progress Tracking: gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the dashboard.
+
+- [X]- proper authenticaiton with better auth 
+- [ ]- figure out how to get ai reponse from dashboard input (vercel ai sdk??)
+- [ ]- implement trpc on the frontend 
+- [ ]- users can add new words get all information about it 
 - [ ]- Users can add and view their words lists 
-- [ ]- users can add new words get all information about it (might implement scraping) and get to practice it
+
+- [ ]- gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the calender.
+
+- [ ]- logout btn in sidebar>navuser 
+
+
+- [ ]- for different routes (how do i get the same layout as dashboard , well can't update the layout as page.tsx is landing page so what to do, copying the same code for each route how do i make it reuseable )
+- [ ]- work on ui on sidebar like logos for each sidebar content and also the main app's logo
+- [ ]- work on ui of collection's page
+
 
 
 - [ ]- work on quiz/ practice functionlity 
@@ -20,7 +32,7 @@
 
 (Sunday)
 - [ ]- update the landing page with demo video
-- [ ]- proper authenticaiton with better auth
+- [ ]- proper authenticaiton with better auth with polar integration also login with email using magic link
 - [ ]- if user cookie is detected then no need to show landing page redirect back to dashboard
 - [ ]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones.
 - [ ]- Integrate Polar. Set up webhooks and tRPC for subscription checks.

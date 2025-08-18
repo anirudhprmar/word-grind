@@ -1,9 +1,114 @@
 {
-  "id": "d2c53750-c68c-44a8-95cf-01e9c8d2f5f5",
+  "id": "7d93b543-f6e8-4628-96a8-18dadbf07f7b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.wordgrind_account": {
+      "name": "wordgrind_account",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider_id": {
+          "name": "provider_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access_token": {
+          "name": "access_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token": {
+          "name": "refresh_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id_token": {
+          "name": "id_token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "access_token_expires_at": {
+          "name": "access_token_expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token_expires_at": {
+          "name": "refresh_token_expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "wordgrind_account_user_id_wordgrind_user_id_fk": {
+          "name": "wordgrind_account_user_id_wordgrind_user_id_fk",
+          "tableFrom": "wordgrind_account",
+          "tableTo": "wordgrind_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.wordgrind_quizzes": {
       "name": "wordgrind_quizzes",
       "schema": "",
@@ -93,10 +198,10 @@
         }
       },
       "foreignKeys": {
-        "wordgrind_quizzes_userId_wordgrind_users_id_fk": {
-          "name": "wordgrind_quizzes_userId_wordgrind_users_id_fk",
+        "wordgrind_quizzes_userId_wordgrind_user_id_fk": {
+          "name": "wordgrind_quizzes_userId_wordgrind_user_id_fk",
           "tableFrom": "wordgrind_quizzes",
-          "tableTo": "wordgrind_users",
+          "tableTo": "wordgrind_user",
           "columnsFrom": [
             "userId"
           ],
@@ -126,8 +231,91 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.wordgrind_users": {
-      "name": "wordgrind_users",
+    "public.wordgrind_session": {
+      "name": "wordgrind_session",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "wordgrind_session_user_id_wordgrind_user_id_fk": {
+          "name": "wordgrind_session_user_id_wordgrind_user_id_fk",
+          "tableFrom": "wordgrind_session",
+          "tableTo": "wordgrind_user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "wordgrind_session_token_unique": {
+          "name": "wordgrind_session_token_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "token"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.wordgrind_user": {
+      "name": "wordgrind_user",
       "schema": "",
       "columns": {
         "id": {
@@ -140,19 +328,19 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
-        "emailVerified": {
-          "name": "emailVerified",
-          "type": "timestamp",
+        "email_verified": {
+          "name": "email_verified",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "image": {
           "name": "image",
@@ -160,18 +348,17 @@
           "primaryKey": false,
           "notNull": false
         },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp with time zone",
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "CURRENT_TIMESTAMP"
+          "notNull": true
         },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp with time zone",
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "isAdmin": {
           "name": "isAdmin",
@@ -201,14 +388,63 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "wordgrind_users_email_unique": {
-          "name": "wordgrind_users_email_unique",
+        "wordgrind_user_email_unique": {
+          "name": "wordgrind_user_email_unique",
           "nullsNotDistinct": false,
           "columns": [
             "email"
           ]
         }
       },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.wordgrind_verification": {
+      "name": "wordgrind_verification",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -309,10 +545,10 @@
         }
       },
       "foreignKeys": {
-        "wordgrind_words_userId_wordgrind_users_id_fk": {
-          "name": "wordgrind_words_userId_wordgrind_users_id_fk",
+        "wordgrind_words_userId_wordgrind_user_id_fk": {
+          "name": "wordgrind_words_userId_wordgrind_user_id_fk",
           "tableFrom": "wordgrind_words",
-          "tableTo": "wordgrind_users",
+          "tableTo": "wordgrind_user",
           "columnsFrom": [
             "userId"
           ],

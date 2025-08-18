@@ -1,5 +1,6 @@
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { wordRouter } from "./routers/words";
+import { userRouter } from "./routers/users";
 
 /**
  * This is the primary router for your server.
@@ -7,7 +8,7 @@ import { wordRouter } from "./routers/words";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  // user: userRouter,
+  user: userRouter,
   word:wordRouter,
   // quiz:quizRouter,
 });

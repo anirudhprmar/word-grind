@@ -14,12 +14,27 @@ import {
 import Welcome from "../_components/Welcome"
 import WordSearchInput from "../_components/WordSearchInput"
 import Calendar01 from "~/components/calendar-01"
+import { auth } from "~/lib/auth"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth.api.getSession({
+    headers:await headers()
+  })
+
+  if(!session) {
+        redirect("/")
+    }
+const username = session.user.name;
+const email = session.user.email;
+const avatar = session.user.image ?? "/default-avatar.png" 
+// console.log(email)
+// console.log(avatar)
   return (
     <SidebarProvider>
 
-      <AppSidebar />
+      <AppSidebar userInfo={{name:username,email,avatar}}  />
 
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -45,7 +60,7 @@ export default function Page() {
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
 
           <div>
-            <Welcome/>
+            <Welcome name={username}/>
           </div>
 
           <div className=" mt-10 p-2 mx-auto min-w-full lg:min-w-200">
