@@ -8,11 +8,24 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '~/component
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { useCompletion } from '@ai-sdk/react';
+import { WordInfoModal } from './WordInfoModal'
 
+interface workObjProps {
+     name:string,
+    meaning:string,
+    example:string[],
+    pronunciation:string,
+    synonyms:string[],
+}
 
+interface prop {
+  userId:string
+}
 
-export default function WordSearchInput() {
-      const [isPending,setIsPending] = useState(false)
+//atleast get the userid
+export default function WordSearchInput({userId}:prop) {
+
+    const [isPending,setIsPending] = useState(false)
       
       const formSchema = z.object({
   prompt: z.string().min(2, {
@@ -34,6 +47,11 @@ const word = form.watch("prompt")
     api: '/api/completion',
   });
 
+  //on getting completion -> pushh forward this data to modal 
+
+  const userID = userId
+  const wordObj:workObjProps = completion && JSON.parse(completion)
+  console.log(wordObj)
 
 async function onSubmit(values: z.infer<typeof formSchema>) {
   try {
@@ -47,7 +65,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
   }
 }
   return (
-    <div>
+    <div className='flex flex-col'>
 
     <div className='relative'>
       <Form {...form}>
@@ -59,7 +77,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
               <FormItem>
                 <FormControl>
                   <Input placeholder="What's the word you'd like to explore" {...field} 
-                  className='text-left px-5 pb-15 bg-foreground text-primary-foreground' />
+                  className='text-left px-5 pt-7 pb-15 bg-foreground text-primary-foreground' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -72,9 +90,11 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
       </Form>
     </div>
 
-     <div className='bg-primary text-primary-foreground mt-10'>
-        {completion} 
-        {/* get extract the info of a word from here then represent that info usinig a modal with options to add or ignore then on add user trpc to add the word to collection  */}
+     <div className=' mt-10'>
+      {wordObj && userID ? 
+        <WordInfoModal wordInfo={{userId:userID,name:wordObj?.name,meaning:wordObj?.meaning,pronunciation:wordObj?.pronunciation,example:wordObj?.example,synonyms:wordObj?.synonyms,learned:false}}/>
+      : ""
+      }
       </div>
 
     </div>

@@ -29,6 +29,7 @@ export default async function Page() {
 const username = session.user.name;
 const email = session.user.email;
 const avatar = session.user.image ?? "/default-avatar.png" 
+const userId = session.user.id 
 // console.log(email)
 // console.log(avatar)
   return (
@@ -63,13 +64,13 @@ const avatar = session.user.image ?? "/default-avatar.png"
             <Welcome name={username}/>
           </div>
 
-          <div className=" mt-10 p-2 mx-auto min-w-full lg:min-w-200">
-            <WordSearchInput/>
+          <div className=" mt-10 p-2 mx-auto min-w-full lg:min-w-150">
+            <WordSearchInput userId={userId }/>
           </div>
 
           <div className=" flex-1 rounded-xl min-h-min p-5 ">
             <p className="text-left pb-2">Your Learning Streak</p>
-            <Calendar01/>
+            {/* <Calendar01/> */}
           </div>
         </div>
       </SidebarInset>

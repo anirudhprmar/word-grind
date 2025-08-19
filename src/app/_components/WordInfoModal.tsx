@@ -1,14 +1,15 @@
 "use client"
 import { Button } from "~/components/ui/button"
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "~/components/ui/dialog"
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { api } from "~/lib/api"
@@ -25,7 +26,7 @@ interface wordInfoProps {
     }
 }
 
-export function DialogCloseButton({wordInfo}:wordInfoProps) {
+export function WordInfoModal({wordInfo}:wordInfoProps) {
 
     const addWord = api.word.addWord.useMutation()
 
@@ -34,14 +35,14 @@ export function DialogCloseButton({wordInfo}:wordInfoProps) {
     }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Share</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Your Word: {wordInfo.name}</DialogTitle>
-        </DialogHeader>
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <Button variant="outline">Show the Word</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="sm:max-w-md">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Your Word: {wordInfo.name}</AlertDialogTitle>
+        </AlertDialogHeader>
 
         <div className="flex items-center gap-2">
             <div className="flex flex-col">
@@ -57,14 +58,14 @@ export function DialogCloseButton({wordInfo}:wordInfoProps) {
                 <Label>
                     Example
                 </Label>
-                <Input
-                defaultValue={wordInfo?.meaning[0]}
-                readOnly
-                />
-                <Input
-                defaultValue={wordInfo?.meaning[1]}
-                readOnly
-                />
+                { wordInfo?.example?.map(ex => (
+                     <Input
+                     key={ex}
+                    defaultValue={ex }
+                    readOnly
+                    />
+                  ))
+                }
             </div>
             <div className="flex flex-col">
                 <Label>
@@ -79,14 +80,16 @@ export function DialogCloseButton({wordInfo}:wordInfoProps) {
                 <Label>
                     Synonyms
                 </Label>
-                <Input
-                defaultValue={wordInfo.synonyms[0]}
-                readOnly
-                />
-                <Input
-                defaultValue={wordInfo.synonyms[1]}
-                readOnly
-                />
+
+                {
+                  wordInfo?.synonyms?.map(word => (
+                     <Input
+                     key={word}
+                    defaultValue={word }
+                    readOnly
+                    />
+                  ))
+                }
             </div>
         </div>
 
@@ -95,17 +98,24 @@ export function DialogCloseButton({wordInfo}:wordInfoProps) {
         {addWord.isError && <p>Error: {addWord.error.message}</p>}
 
 
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild className="flex flex-wrap">
-            <Button type="button" disabled={addWord.isPending} onClick={handleAddToCollection} variant="secondary">
-              Add to Collection
-            </Button>
-            <Button type="button" variant="secondary">
-              Ignore
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        <AlertDialogFooter className="sm:justify-start">
+          <div className="flex flex-wrap">
+            <AlertDialogAction>
+
+              <Button type="button" disabled={addWord.isPending} onClick={handleAddToCollection} variant="secondary">
+                Add to Collection
+              </Button>
+            </AlertDialogAction>
+
+            <AlertDialogCancel>
+              <Button type="button" variant="secondary">
+                Ignore
+              </Button>
+
+            </AlertDialogCancel>
+          </div>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }

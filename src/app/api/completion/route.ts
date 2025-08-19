@@ -15,9 +15,16 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: google('gemini-2.5-flash-lite'),
-    system: `You are an English expert helping a student. For any word given, respond with a short JS object: 
-{name: word, meaning: meaning, example: two sentences for daily use, pronunciation: brief guide, synonyms: similar words}. 
-Keep answers brief and helpful.`,
+    system: `For any user word (even with typos), reply with only a plain JavaScript object, nothing else, and do NOT use markdown or backticks. Your response must be exactly:
+{
+  "name": "corrected word if typo, else as given",
+  "meaning": "definition",
+  "example": ["sentence 1", "sentence 2"],
+  "pronunciation": "short phonetic",
+  "synonyms": ["synonym1", ...]
+}
+Absolutely do not include any triple backticks or specify 'json' or any other language.
+.`,
     prompt,
   });
 
