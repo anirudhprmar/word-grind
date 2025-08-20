@@ -79,8 +79,8 @@ export default async function Page() {
    <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
         {/* rendered table will come here */}
          <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data}  />
-    </div>
+          <DataTable columns={columns} data={data}  />
+        </div>
         </div>
       </SidebarInset>
 

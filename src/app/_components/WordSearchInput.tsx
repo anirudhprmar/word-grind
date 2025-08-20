@@ -77,13 +77,13 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
               <FormItem>
                 <FormControl>
                   <Input placeholder="What's the word you'd like to explore" {...field} 
-                  className='text-left px-5 pt-7 pb-15 bg-foreground text-primary-foreground' />
+                  className='text-left px-5 pt-7 pb-15 bg-accent text-foreground' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
             />
-          <Button disabled={isPending} variant={'ghost'} size={'sm'} type='submit' className={`absolute right-7 bottom-4 text-foreground   rounded-full p-1 ${word ? 'bg-primary-foreground':'bg-secondary-foreground'}`}>
+          <Button disabled={isPending} variant={'ghost'} size={'sm'} type='submit' className={`absolute right-7 bottom-4 text-foreground   rounded-full p-1 ${word ? 'bg-primary text-primary-foreground':'bg-primary-foreground'}`}>
             <ArrowUp className='cursor-pointer'/>
           </Button>
         </form>

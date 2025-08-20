@@ -2,17 +2,14 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
   Book,
   BookOpen,
   Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
+  CheckCheckIcon,
+  LayoutIcon,
+  MessageCircle,
   Settings2,
-  SquareTerminal,
+  SquareLibrary,
 } from "lucide-react"
 
 import { NavMain } from "~/components/nav-main"
@@ -39,24 +36,24 @@ const data = {
   ],
   navMain: [
     {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: LayoutIcon,
+    },
+    {
       title: "Collection",
       url: "/collection",
-      icon: SquareTerminal,
+      icon: SquareLibrary,
     },
     {
       title: "Quiz",
       url: "quiz",
-      icon: Bot,
+      icon: CheckCheckIcon,
     },
     {
       title: "Conversation",
       url: "conversation",
-      icon: BookOpen,
-    },
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: Settings2,
+      icon: MessageCircle,
     },
   ],
   

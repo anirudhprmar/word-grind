@@ -31,15 +31,29 @@ import {
   TableRow,
 } from "~/components/ui/table"
 import { DataTablePagination } from "./DataTablePagination"
+import { AddWordDialogBox } from "~/components/AddWordDialogBox"
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  userId:string
+}
+
+interface wordInfoProps {
+    userId: string,
+    name:string,
+    meaning:string,
+    example:string[],
+    pronunciation:string,
+    synonyms:string[],
+    learned: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  userId
 }: DataTableProps<TData, TValue>) {
      const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -67,18 +81,26 @@ export function DataTable<TData, TValue>({
     }
   })
 
+  
+
   return (
     <div>
 
        <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-        }
-        className="max-w-sm"
-        />
+        <div className="flex gap-3 ">
+          <Input
+            placeholder="Filter emails..."
+            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+          />
+
+          <AddWordDialogBox/>
+          
+          {/* validate the input using zod with shadcn form -> add the word with trpc  */}
+        </div>
 
          <DropdownMenu>
           <DropdownMenuTrigger asChild>
