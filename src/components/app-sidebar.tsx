@@ -1,39 +1,32 @@
 "use client"
 
 import * as React from "react"
-import {
-  Book,
-  BookOpen,
-  Bot,
-  CheckCheckIcon,
-  LayoutIcon,
-  MessageCircle,
-  Settings2,
-  SquareLibrary,
-} from "lucide-react"
 
 import { NavMain } from "~/components/nav-main"
-import { NavProjects } from "~/components/nav-projects"
+// import { NavSecondary } from "~/components/nav-secondary"
 import { NavUser } from "~/components/nav-user"
-import { TeamSwitcher } from "~/components/team-switcher"
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
 } from "~/components/ui/sidebar"
+import { CheckCheck, LayoutIcon, MessageCircle, SquareLibrary } from "lucide-react"
 
+interface userProps{
+  userInfo:{
+    name:string
+    email:string 
+    avatar:string
+  }
+}
+
+type AppSidebarProps = userProps & React.ComponentProps<typeof Sidebar>
 
 const data = {
-  teams: [
-    {
-      name: "WordGrind",
-      plan: "Standard",
-      logo:Book,
-      url:'/dashboard'
-    }
-  ],
   navMain: [
     {
       title: "Dashboard",
@@ -42,52 +35,61 @@ const data = {
     },
     {
       title: "Collection",
-      url: "/collection",
+      url: "/dashboard/collection",
       icon: SquareLibrary,
     },
     {
       title: "Quiz",
-      url: "quiz",
-      icon: CheckCheckIcon,
+      url: "/dashboard/quiz",
+      icon: CheckCheck,
     },
     {
       title: "Conversation",
-      url: "conversation",
+      url: "/dashboard/conversation",
       icon: MessageCircle,
-    },
+    }
   ],
-  
+  // navSecondary: [
+  //   {
+  //     title: "Settings",
+  //     url: "#",
+  //     icon: IconSettings,
+  //   },
+  //   {
+  //     title: "Get Help",
+  //     url: "#",
+  //     icon: IconHelp,
+  //   },
+  // ],
+
 }
 
-interface userProps {
-  userInfo:{
-    name:string
-  email:string
-  avatar:string
-  }
-}
 
-type AppSidebarProps = userProps & React.ComponentProps<typeof Sidebar>
 
-export function AppSidebar({userInfo, ...props }:AppSidebarProps ) {
+export function AppSidebar({userInfo, ...props }:AppSidebarProps) {
   return (
-    <Sidebar collapsible="icon" {...props}>
-
+    <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} /> 
-        {/* show logo on collapse for right now im just hiding the name */}
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
+              <a href="/dashboard">
+                <span className="text-base font-semibold">WordGrind</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
-
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain}  />
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
-
       <SidebarFooter>
-        <NavUser user={userInfo} />
+        <NavUser user={userInfo}  />
       </SidebarFooter>
-
-      <SidebarRail />
-      
     </Sidebar>
   )
 }
