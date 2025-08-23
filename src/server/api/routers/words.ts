@@ -13,17 +13,16 @@ export const wordRouter = createTRPCRouter({
             example:z.array(z.string()),
             pronunciation:z.string(),
             synonyms:z.array(z.string()),
-            learned: z.boolean().default(false)
         })
         ).mutation(async ({input,ctx})=>{
+
             await ctx.db.insert(words).values({
                 userId:input.userId,
                 name:input.name,
                 meaning:input.meaning,
                 example:input.example,
-                pronunciation:input.pronunciation,
                 synonyms:input.synonyms,
-                learned:input.learned
+                pronunciation:input.pronunciation,
             })
             return {
                 message:"word added"

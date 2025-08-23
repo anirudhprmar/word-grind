@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
 import { Button } from "~/components/ui/button"
 import {
   Dialog,
@@ -17,53 +17,85 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form"
 import { Input } from "~/components/ui/input"
+import { api } from "~/lib/api"
 
+interface wordInfo{
 
-
+  userId: string,
+  name:string,
+  meaning:string,
+  example:string[],
+  pronunciation:string,
+  synonyms:string[],
+}
 
 const formSchema = z.object({
 name: z.string().min(2).max(50),
 meaning:z.string(),
-example:z.array(z.string()),
+example: z.array(z.object({ value: z.string() })),
+synonyms: z.array(z.object({ value: z.string() })),
 pronunciation:z.string(),
-synonyms:z.array(z.string()),
 })
 
-export function AddWordDialogBox() {
+export function AddWordDialogBox({userId}:{userId:string}) {
 
 const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       meaning:"",
-      example:[""],
+      example: [],
       pronunciation:"",
-      synonyms:[""]
+      synonyms: []
     },
   })
- 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+
+  const {control} = form;
+  const {fields:exampleFields,append:appendExample,remove:removeExample} = useFieldArray({
+    control,
+    name:"example"
+  })
+  const {fields:synonymsFields,append:appendSynonyms,remove:removeSynonyms} = useFieldArray({
+    control,
+    name:"synonyms"
+  })
+
+  
+  const addWord = api.word.addWord.useMutation()
+
+
+  function onSubmit(values: z.infer<typeof formSchema>) { 
+
+    const exampleArray = Array.isArray(values.example) ? values.example : []
+    const synonymsArray = Array.isArray(values.synonyms) ? values.synonyms : []
+
+    const payload:wordInfo = {
+      name:values.name,
+      meaning:values.meaning,
+      pronunciation:values.pronunciation,
+      example: exampleArray.map((item) => item.value),
+      synonyms: synonymsArray.map((item) => item.value),
+      userId:userId
+    }
+    console.log('Transformed payload:', payload)
+    addWord.mutate(payload)
+    form.reset()
   }
 
   return (
     <Dialog>
       <Form {...form}> 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <DialogTrigger asChild>
             <Button variant="outline">Add a Word</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <DialogHeader>
               <DialogTitle>Add a Word of Choice</DialogTitle>
               <DialogDescription>
@@ -81,9 +113,6 @@ const form = useForm<z.infer<typeof formSchema>>({
                     <FormControl>
                       <Input placeholder="greatness" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -96,31 +125,12 @@ const form = useForm<z.infer<typeof formSchema>>({
                     <FormLabel>Meaning</FormLabel>
                     <FormControl>
                       <Input placeholder="capability to do something great" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+                    </FormControl>       
                     <FormMessage />
                   </FormItem>
                 )}
               />
-                <FormField
-                control={form.control}
-                name="example"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Example</FormLabel>
-                    <FormControl>
-                      <Input placeholder="i'm meant for greatness" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-                <FormField
+                      <FormField
                 control={form.control}
                 name="pronunciation"
                 render={({ field }) => (
@@ -128,40 +138,65 @@ const form = useForm<z.infer<typeof formSchema>>({
                     <FormLabel>Pronunciation</FormLabel>
                     <FormControl>
                       <Input placeholder="ga rate ness" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
+                    </FormControl>            
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+                {exampleFields.map((field, index) => (
                 <FormField
-                control={form.control}
-                name="synonyms"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Synonyms</FormLabel>
-                    <FormControl>
-                      <Input placeholder="success,hardword" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  key={field.id}
+                  control={control}
+                  name={`example.${index}.value`}
+                  render={({ field }) => (
+                    <FormItem>
+                       <FormLabel>Examples</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <Button type="button" onClick={() => removeExample(index)}>Remove</Button>
+                       <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+              <Button type="button" onClick={() => appendExample({value:""})}>Add Example</Button>
+
+
+               {synonymsFields.map((field, index) => (
+                <FormField
+                  key={field.id}
+                  control={control}
+                  name={`synonyms.${index}.value`}
+                  render={({ field }) => (
+                    <FormItem className="">
+                       <FormLabel>Synonyms</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <Button type="button" onClick={() => removeSynonyms(index)}>Remove</Button>
+                       <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+              <Button type="button" onClick={() => appendSynonyms({value:""})}>Add Synonyms</Button>
+
+               {addWord.isPending && <p>Adding word...</p>}
+              {addWord.isSuccess && <p>Word added!</p>}
+              {addWord.isError && <p>Error: {addWord.error.message}</p>}
+
          </div>
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </DialogClose>
-              <Button type="submit">Save Changes</Button>
+                <Button type="submit" disabled={addWord.isPending} >Save Changes</Button>
             </DialogFooter>
-          </DialogContent>
         </form>
+          </DialogContent>
       </Form>
-    </Dialog>
+     </Dialog>
   )
 }

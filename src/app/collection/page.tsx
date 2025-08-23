@@ -44,6 +44,7 @@ export default async function Page() {
     const username = session.user.name;
     const email = session.user.email;
     const avatar = session.user.image ?? "/default-avatar.png" 
+    const userId = session.user.id
 
   const data = await getData()
   
@@ -79,7 +80,7 @@ export default async function Page() {
    <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
         {/* rendered table will come here */}
          <div className="container mx-auto py-10">
-          <DataTable columns={columns} data={data}  />
+          <DataTable columns={columns} data={data} userId={userId} />
         </div>
         </div>
       </SidebarInset>

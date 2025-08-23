@@ -40,15 +40,6 @@ interface DataTableProps<TData, TValue> {
   userId:string
 }
 
-interface wordInfoProps {
-    userId: string,
-    name:string,
-    meaning:string,
-    example:string[],
-    pronunciation:string,
-    synonyms:string[],
-    learned: boolean
-}
 
 export function DataTable<TData, TValue>({
   columns,
@@ -96,10 +87,9 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
           />
+        
+          <AddWordDialogBox userId={userId} />
 
-          <AddWordDialogBox/>
-          
-          {/* validate the input using zod with shadcn form -> add the word with trpc  */}
         </div>
 
          <DropdownMenu>

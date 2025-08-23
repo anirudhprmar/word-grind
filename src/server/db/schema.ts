@@ -42,8 +42,8 @@ export const words = createTable(
     userId:d.text().notNull().references(()=> user.id),
     name: d.varchar({ length: 256 }).notNull().unique(),
     meaning: d.varchar({ length: 256 }).notNull(),
-    example: d.varchar({ length: 256 }).array(),
     pronunciation: d.varchar({ length: 256 }),
+    example: d.varchar({ length: 256 }).array(),
     synonyms: d.varchar({ length: 64 }).array(), 
     createdAt: d
       .timestamp({ withTimezone: true })
