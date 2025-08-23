@@ -24,6 +24,8 @@ import {
 } from "~/components/ui/form"
 import { Input } from "~/components/ui/input"
 import { api } from "~/lib/api"
+import { Toaster } from "./ui/sonner"
+import { toast } from "sonner"
 
 interface wordInfo{
 
@@ -37,7 +39,7 @@ interface wordInfo{
 
 const formSchema = z.object({
 name: z.string().min(2).max(50),
-meaning:z.string(),
+meaning:z.string().min(2),
 example: z.array(z.object({ value: z.string() })),
 synonyms: z.array(z.object({ value: z.string() })),
 pronunciation:z.string(),
@@ -72,20 +74,29 @@ const form = useForm<z.infer<typeof formSchema>>({
 
   function onSubmit(values: z.infer<typeof formSchema>) { 
 
-    const exampleArray = Array.isArray(values.example) ? values.example : []
-    const synonymsArray = Array.isArray(values.synonyms) ? values.synonyms : []
-
-    const payload:wordInfo = {
-      name:values.name,
-      meaning:values.meaning,
-      pronunciation:values.pronunciation,
-      example: exampleArray.map((item) => item.value),
-      synonyms: synonymsArray.map((item) => item.value),
-      userId:userId
+    try {
+      const exampleArray = Array.isArray(values.example) ? values.example : []
+      const synonymsArray = Array.isArray(values.synonyms) ? values.synonyms : []
+  
+      const payload:wordInfo = {
+        name:values.name,
+        meaning:values.meaning,
+        pronunciation:values.pronunciation,
+        example: exampleArray.map((item) => item.value),
+        synonyms: synonymsArray.map((item) => item.value),
+        userId:userId
+      }
+      addWord.mutate(payload)
+      if (addWord.isSuccess) {
+        toast("Word added!")
+      }
+      form.reset()
+    } catch (error) {
+      console.log("error in adding word",error)
+      if (addWord.isError) {
+        toast(`${addWord.error.message}`)
+      }
     }
-    console.log('Transformed payload:', payload)
-    addWord.mutate(payload)
-    form.reset()
   }
 
   return (
@@ -102,7 +113,7 @@ const form = useForm<z.infer<typeof formSchema>>({
                 If you want to add your own word of choice to the collection. Input the details and click on save changes
               </DialogDescription>
             </DialogHeader>
-                <div className="grid gap-4">
+                <div className="flex flex-col gap-4">
               
                 <FormField
                 control={form.control}
@@ -137,7 +148,7 @@ const form = useForm<z.infer<typeof formSchema>>({
                   <FormItem>
                     <FormLabel>Pronunciation</FormLabel>
                     <FormControl>
-                      <Input placeholder="ga rate ness" {...field} />
+                      <Input placeholder="grayt nuhs" {...field} />
                     </FormControl>            
                     <FormMessage />
                   </FormItem>
@@ -151,7 +162,7 @@ const form = useForm<z.infer<typeof formSchema>>({
                   name={`example.${index}.value`}
                   render={({ field }) => (
                     <FormItem>
-                       <FormLabel>Examples</FormLabel>
+                       <FormLabel>Example</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -161,7 +172,7 @@ const form = useForm<z.infer<typeof formSchema>>({
                   )}
                 />
               ))}
-              <Button type="button" onClick={() => appendExample({value:""})}>Add Example</Button>
+              <Button type="button" onClick={() => appendExample({value:""})}  className="cursor-pointer">Add Example</Button>
 
 
                {synonymsFields.map((field, index) => (
@@ -171,7 +182,7 @@ const form = useForm<z.infer<typeof formSchema>>({
                   name={`synonyms.${index}.value`}
                   render={({ field }) => (
                     <FormItem className="">
-                       <FormLabel>Synonyms</FormLabel>
+                       <FormLabel>Synonym</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -181,22 +192,21 @@ const form = useForm<z.infer<typeof formSchema>>({
                   )}
                 />
               ))}
-              <Button type="button" onClick={() => appendSynonyms({value:""})}>Add Synonyms</Button>
+              <Button type="button" onClick={() => appendSynonyms({value:""})} className="cursor-pointer" >Add Synonyms</Button>
 
-               {addWord.isPending && <p>Adding word...</p>}
-              {addWord.isSuccess && <p>Word added!</p>}
-              {addWord.isError && <p>Error: {addWord.error.message}</p>}
+              
 
          </div>
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outline" className="cursor-pointer">Cancel</Button>
               </DialogClose>
-                <Button type="submit" disabled={addWord.isPending} >Save Changes</Button>
+                <Button type="submit" disabled={addWord.isPending}  className="cursor-pointer">Save Changes</Button>
             </DialogFooter>
         </form>
           </DialogContent>
       </Form>
+            <Toaster/>
      </Dialog>
   )
 }
