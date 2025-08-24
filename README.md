@@ -8,13 +8,11 @@
 - [ ]- users can add new words get all information about it 
 - [ ]- Users view their words lists 
 - [ ]- gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the calender.
-- [ ]- logout btn in sidebar>navuser 
-- [X]- for different routes (how do i get the same layout as dashboard , well can't update the layout as page.tsx is landing page so what to do, copying the same code for each route how do i make it reuseable )
+- [ ]- logout btn in sidebar>navuser (a proper user procedure to get every datail about the user)
 - [ ]- work on quiz/ practice functionlity 
 - [ ]- Create tRPC endpoints for generating quizzes (e.g., multiple-choice from user's vocab). Implement scoring and update progress.
 - [ ]- work on quiz page -> give options of words from db -> use that to info to create quizzes (send custom system input one from word input and other from quiz to separate their queries) -> questions range for quiz feature -> feedback on quiz 
-- [ ]- record a demo video
-- [ ]- update the landing page with demo video
+- [ ]- record a demo video and update the landing page with demo video
 
 - [ ]- work on user profile
 - [ ]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link 
