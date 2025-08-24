@@ -1,16 +1,16 @@
 'use client'
 import { ArrowUp } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import {useForm } from 'react-hook-form'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form'
 import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
-import { useCompletion } from '@ai-sdk/react';
 import { WordInfoModal } from './WordInfoModal'
+import { getWordInfo } from '~/server/wordInfo'
 
-interface workObjProps {
+interface wordObjProps {
      name:string,
     meaning:string,
     example:string[],
@@ -26,6 +26,9 @@ interface prop {
 export default function WordSearchInput({userId}:prop) {
 
     const [isPending,setIsPending] = useState(false)
+      const [generation, setGeneration] = useState("");
+      const [parsedWord,setParsedWord] = useState <wordObjProps | null>(null)
+
       
       const formSchema = z.object({
   prompt: z.string().min(2, {
@@ -43,27 +46,39 @@ const form = useForm<z.infer<typeof formSchema>>({
   
 const word = form.watch("prompt")
 
- const { completion, complete } = useCompletion({
-    api: '/api/completion',
-  });
 
-  //on getting completion -> pushh forward this data to modal 
+const userID = userId
+  
 
-  const userID = userId
-  const wordObj:workObjProps = completion && JSON.parse(completion)
-  console.log(wordObj)
 
 async function onSubmit(values: z.infer<typeof formSchema>) {
   try {
     setIsPending(true)
-    console.log(values)
-    await complete(values.prompt);
+    const text = await getWordInfo(values.prompt);
+    setGeneration(text)
     form.reset()
     setIsPending(false)
   } catch (error) {
     console.log(error)
+  }finally{
+    setIsPending(false)
   }
 }
+
+useEffect(() => {
+  if (generation && generation.trim() !== '') {
+    try {
+      const parsed: wordObjProps = JSON.parse(generation);
+      setParsedWord(parsed);
+    } catch (error) {
+      console.error('Error parsing generation JSON:', error);
+      setParsedWord(null); // reset on error
+    }
+  } else {
+    setParsedWord(null); // reset if generation is empty
+  }
+}, [generation]);
+
   return (
     <div className='flex flex-col'>
 
@@ -91,10 +106,18 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
     </div>
 
      <div className=' mt-10'>
-      {wordObj && userID ? 
-        <WordInfoModal wordInfo={{userId:userID,name:wordObj?.name,meaning:wordObj?.meaning,pronunciation:wordObj?.pronunciation,example:wordObj?.example,synonyms:wordObj?.synonyms,learned:false}}/>
-      : ""
-      }
+      {parsedWord && userID ? (
+    <WordInfoModal
+      wordInfo={{
+        userId: userID,
+        name: parsedWord.name,
+        meaning: parsedWord.meaning,
+        pronunciation: parsedWord.pronunciation,
+        example: parsedWord.example,
+        synonyms: parsedWord.synonyms,
+      }}
+    />
+  ) : null}
       </div>
 
     </div>

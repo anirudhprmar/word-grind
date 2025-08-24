@@ -4,10 +4,8 @@
 - [ ]- think of logo 
 
 ## Core functionalities 
- 
-- [ ]- users can add new words get all information about it 
+- [X]- users can add new words get all information about it 
 - [ ]- Users view their words lists 
-- [ ]- gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the calender.
 - [ ]- logout btn in sidebar>navuser (a proper user procedure to get every datail about the user)
 - [ ]- work on quiz/ practice functionlity 
 - [ ]- Create tRPC endpoints for generating quizzes (e.g., multiple-choice from user's vocab). Implement scoring and update progress.
@@ -15,6 +13,7 @@
 - [ ]- record a demo video and update the landing page with demo video
 
 - [ ]- work on user profile
+- [ ]- gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the calender.
 - [ ]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link 
 - [ ]- if user cookie is detected then no need to show landing page redirect back to dashboard
 - [ ]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones.

@@ -1,18 +1,13 @@
 "use client"
+import { useEffect, useState } from "react"
+import { toast } from "sonner"
 import { Button } from "~/components/ui/button"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "~/components/ui/alert-dialog"
-import { Input } from "~/components/ui/input"
+import InputBox from "~/components/ui/inputbox"
 import { Label } from "~/components/ui/label"
+import { Toaster } from "~/components/ui/sonner"
 import { api } from "~/lib/api"
+import { XIcon } from "lucide-react"
+
 
 interface wordInfoProps {
     wordInfo:{
@@ -22,100 +17,138 @@ interface wordInfoProps {
         example:string[],
         pronunciation:string,
         synonyms:string[],
-        learned: boolean
     }
+}
+
+interface wordProp{
+    userId: string,
+    name:string,
+    meaning:string,
+    example:string[],
+    pronunciation:string,
+    synonyms:string[],
 }
 
 export function WordInfoModal({wordInfo}:wordInfoProps) {
 
+  const [isOpen,setIsOpen] = useState(false)
+  const [word,setWord] = useState<wordProp | null>(null)
+
+  useEffect(()=>{
+    setIsOpen(true)
+  },[])
+  
+  useEffect(()=>{
+    if(wordInfo) setWord(wordInfo)
+    },[wordInfo])
+  
+  
     const addWord = api.word.addWord.useMutation()
 
     const handleAddToCollection = ()=>{
-        addWord.mutate(wordInfo)
+       try {
+         addWord.mutate(wordInfo)
+           if (addWord.isSuccess) {
+                 toast("Word added!")
+               }
+       } catch (error) {
+        console.log("error in adding word",error)
+      if (addWord.isError) {
+        toast(`${addWord.error.message}`)
+      }
+       }
     }
 
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger>
-        <Button variant="outline">Show the Word</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent className="sm:max-w-md">
-        <AlertDialogHeader>
-          <AlertDialogTitle>Your Word: {wordInfo.name}</AlertDialogTitle>
-        </AlertDialogHeader>
+    const handleIgnore = () =>( 
+      setIsOpen(!isOpen) 
+     )
 
-        <div className="flex items-center gap-2">
-            <div className="flex flex-col">
+  return (
+    <div>
+     { isOpen && <div className="fixed inset-0 z-50 bg-black/50">
+     <div className=" bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%]  gap-4 rounded-lg border p-6  shadow-lg duration-200 sm:max-w-lg max-h-full  overflow-auto ">
+       <div>
+          <h2 className=" font-serif text-center text-lg leading-none font-semibold">{word?.name.toUpperCase()}</h2>
+        </div>
+
+        <div className="items-center gap-2 grid grid-cols-1  ">
+
+            <div className="flex flex-col gap-1 items-start">
                 <Label>
                     Meaning
                 </Label>
-                <Input
-                defaultValue={wordInfo.meaning}
-                readOnly
+
+                <InputBox 
+                content={word?.meaning ?? ""}
+                className=" h-fit"
                 />
+                
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-start gap-1">
                 <Label>
-                    Example
+                    Examples
                 </Label>
-                { wordInfo?.example?.map(ex => (
-                     <Input
+                { word?.example?.map(ex => (
+                     <InputBox
                      key={ex}
-                    defaultValue={ex }
-                    readOnly
+                    content={ex }
+                    className="h-fit"
                     />
                   ))
                 }
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-start gap-1">
                 <Label>
                     Pronunciation
                 </Label>
-                <Input
-                defaultValue={wordInfo.pronunciation}
-                readOnly
+                <InputBox
+                content={word?.pronunciation ?? ""}
+                className="h-fit"
                 />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col items-start gap-1">
                 <Label>
                     Synonyms
                 </Label>
 
                 {
-                  wordInfo?.synonyms?.map(word => (
-                     <Input
+                  word?.synonyms?.map(word => (
+                 <InputBox
                      key={word}
-                    defaultValue={word }
-                    readOnly
+                    content={word }
+                    className="h-fit"
                     />
                   ))
                 }
             </div>
         </div>
 
-        {addWord.isPending && <p>Adding word...</p>}
-        {addWord.isSuccess && <p>Word added!</p>}
-        {addWord.isError && <p>Error: {addWord.error.message}</p>}
 
-
-        <AlertDialogFooter className="sm:justify-start">
-          <div className="flex flex-wrap">
-            <AlertDialogAction>
-
-              <Button type="button" disabled={addWord.isPending} onClick={handleAddToCollection} variant="secondary">
+        <div className="sm:justify-start">
+              <Button type="button" variant="secondary" onClick={handleIgnore}
+              className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4" 
+              >
+                <XIcon/> 
+              </Button>
+          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+            <div>
+              <Button type="button" disabled={addWord.isPending} onClick={handleAddToCollection} variant="secondary" className="cursor-pointer">
                 Add to Collection
               </Button>
-            </AlertDialogAction>
+            </div>
 
-            <AlertDialogCancel>
-              <Button type="button" variant="secondary">
-                Ignore
+            <div>
+              <Button type="button" variant="secondary" onClick={handleIgnore}
+              className="cursor-pointer"
+              >
+                Ignore 
               </Button>
-
-            </AlertDialogCancel>
+            </div>
           </div>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+        </div>
+      </div>
+  </div>}
+      <Toaster/>
+   </div>
   )
 }
