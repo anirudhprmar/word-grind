@@ -1,35 +1,41 @@
-import { columns, type Payment } from "../../_wordsCollection/columns"
+'use client'
+import { Loader2Icon } from "lucide-react"
+import { columns, type Words } from "../../_wordsCollection/columns"
 import { DataTable } from "../../_wordsCollection/data-table"
-import { headers } from "next/headers"
-import { redirect } from "next/navigation"
-import { auth } from "~/lib/auth"
-
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here. get word trpc
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ]
-}
+import { api } from "~/lib/api"
+import { toast } from "sonner"
+import { Toaster } from "~/components/ui/sonner"
+import SessionInfo from "~/app/_components/SessionInfo"
+import { useEffect, useState } from "react"
 
 
-export default async function Page() {
 
-      const session = await auth.api.getSession({
-        headers:await headers()
-      })
-    
-      if(!session) {
-            redirect("/")
+export default function Page() {
+      const[userId,setUserId] = useState<string>("")
+
+      useEffect(()=>{
+        async function fetchUserId() {
+          const id = await SessionInfo()
+          setUserId(id)
+        }
+         void fetchUserId()
+      },[])
+        
+         const { data, isLoading,error  } = api.word.listWords.useQuery({
+          userId: userId,
+        });
+        //cache the query ????
+
+        if (isLoading) {
+          return (<div>
+            <Loader2Icon className="animate-spin"/>
+          </div>)
+        }
+        if(error){
+          toast( `${error.message}`)
         }
 
-  const data = await getData()
-  const userId = session.user.id 
+        const words:Words[] = data ?? []
 
   return (
     
@@ -37,10 +43,10 @@ export default async function Page() {
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
         {/* rendered table will come here */}
         <div className="container mx-auto py-10">
-          <DataTable columns={columns} data={data} userId={userId} />
+          <DataTable columns={columns} data={words} userId={userId} />
         </div>
       </div>
-
+        <Toaster/>
       </div>
   )
 }

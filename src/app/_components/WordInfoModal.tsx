@@ -132,7 +132,7 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
               </Button>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <div>
-              <Button type="button" disabled={addWord.isPending} onClick={handleAddToCollection} variant="secondary" className="cursor-pointer">
+              <Button type="button" disabled={addWord.isSuccess || addWord.isPending} onClick={handleAddToCollection} variant="secondary" className="cursor-pointer">
                 Add to Collection
               </Button>
             </div>

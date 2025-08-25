@@ -4,8 +4,9 @@
 - [ ]- think of logo 
 
 ## Core functionalities 
-- [X]- users can add new words get all information about it 
-- [ ]- Users view their words lists 
+
+- [X]- Users view their words lists 
+- [ ]- Users can edit and make learned true (click on a word , open it on a modal , edit it and save it )
 - [ ]- logout btn in sidebar>navuser (a proper user procedure to get every datail about the user)
 - [ ]- work on quiz/ practice functionlity 
 - [ ]- Create tRPC endpoints for generating quizzes (e.g., multiple-choice from user's vocab). Implement scoring and update progress.
