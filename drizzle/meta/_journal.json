@@ -15,6 +15,20 @@
       "when": 1755942354517,
       "tag": "0001_orange_next_avengers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756222792953,
+      "tag": "0002_cooing_wolverine",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1756223308700,
+      "tag": "0003_fantastic_marvel_boy",
+      "breakpoints": true
     }
   ]
 }

@@ -2,6 +2,8 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { db } from '~/server/db';
+import { admin } from "better-auth/plugins"
+
 // import { magicLink } from "better-auth/plugins";
  
 export const auth = betterAuth({
@@ -19,5 +21,5 @@ export const auth = betterAuth({
             clientSecret:process.env.AUTH_GOOGLE_SECRET!
         }
     },
-    plugins:[nextCookies()]
+    plugins:[admin(), nextCookies()]
 });

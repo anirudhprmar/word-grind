@@ -1,0 +1,1 @@
+ALTER TABLE "wordgrind_user" DROP COLUMN "isAdmin";

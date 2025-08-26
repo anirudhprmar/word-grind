@@ -4,7 +4,6 @@ import {
   BadgeCheck,
   Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
   Sparkles,
 } from "lucide-react"
@@ -29,6 +28,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "~/components/ui/sidebar"
+import { LogoutButton } from "./LogoutBtn"
 
 export function NavUser({
   user,
@@ -40,6 +40,9 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+
+
+  // get user details 
 
   return (
     <SidebarMenu>
@@ -110,7 +113,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              Log out
+              <LogoutButton/>
               {/* logout */}
             </DropdownMenuItem>
           </DropdownMenuContent>

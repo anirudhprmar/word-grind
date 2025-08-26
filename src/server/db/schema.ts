@@ -29,7 +29,10 @@ export const user = createTable(
      updatedAt: d.timestamp("updated_at")
        .$defaultFn(() => new Date())
        .notNull(),
-    isAdmin:d.boolean("isAdmin").default(false).notNull()
+    role: d.text("role"),
+    banned: d.boolean("banned"),
+    banReason: d.text("ban_reason"),
+    banExpires: d.timestamp("ban_expires"),
   }),
   (t) => [index("email_idx").on(t.email)],
 ) 
@@ -87,6 +90,7 @@ export const session = createTable("session", (d)=>({
   userId: d.text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
+  impersonatedBy: d.text("impersonated_by"),
 }));
 
 export const account = createTable("account", (d)=>({
@@ -103,7 +107,7 @@ export const account = createTable("account", (d)=>({
   refreshTokenExpiresAt: d.timestamp("refresh_token_expires_at"),
   scope: d.text("scope"),
   password: d.text("password"),
-  createdAt: d.timestamp("created_at").notNull(),
+  createdAt: d.timestamp("created_at").notNull(), 
   updatedAt: d.timestamp("updated_at").notNull(),
 }));
 
