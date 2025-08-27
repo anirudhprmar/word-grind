@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form"
-import { signIn } from "~/server/users"
+import { signIn } from "~/server/usersInfo"
 import { authClient } from "~/lib/auth-client"
 import Link from "next/link"
 

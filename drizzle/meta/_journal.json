@@ -29,6 +29,20 @@
       "when": 1756223308700,
       "tag": "0003_fantastic_marvel_boy",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1756301674873,
+      "tag": "0004_serious_bastion",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1756311758163,
+      "tag": "0005_blue_luckman",
+      "breakpoints": true
     }
   ]
 }

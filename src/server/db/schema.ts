@@ -69,12 +69,31 @@ export const quizzes = createTable(
       .timestamp({ withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    completedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
-    result: d.text({enum:["success","failure"]}),
-    feedback:d.text().notNull(),
-    suggestion:d.text().notNull()
+      completedAt: d.timestamp({ withTimezone: true }).$onUpdate(() => new Date()),
+      result: d.text({enum:["success","failure","null"]}).default("null"),
+      feedback:d.text().default("").notNull(),
+      suggestion:d.text().default("").notNull(),
+      score:d.integer().default(0).notNull(),
+      totalQuestions: d.integer().default(0).notNull()
   }),
-  (t)=> [index("user_tests_idx").on(t.userId, t.wordId)]
+  (t)=> [index("quizzes_idx").on(t.userId, t.wordId)]
+)
+
+export const quizResponse = createTable(
+  "quiz_responses",
+  (d)=>({
+    id: d.integer().primaryKey().generatedByDefaultAsIdentity(),
+    quizId: d.integer().notNull().references(() => quizzes.id),
+    question: d.text().notNull(),
+    choices:d.text().array().notNull(),
+    userAnswer: d.text().notNull(),
+    createdAt: d
+      .timestamp({ withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    isCorrect:d.boolean().notNull()
+  }),
+  (t)=> [index("quiz_responses_quiz_idx").on(t.quizId)]
 )
 
 
