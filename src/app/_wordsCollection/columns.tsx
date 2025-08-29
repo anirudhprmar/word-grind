@@ -27,6 +27,13 @@ export const columns: ColumnDef<Words>[] = [
   {
     accessorKey: "meaning",
     header: "Meaning",
+    cell: ({ row }) => {
+        const content:string = row.getValue("meaning")
+        const truncatedContent = content.length > 10 
+          ? content.substring(0, 12) + "..." 
+          : content
+        return truncatedContent
+      }
   },
   {
     accessorKey: "pronunciation",
@@ -35,10 +42,24 @@ export const columns: ColumnDef<Words>[] = [
   {
     accessorKey: "example",
     header: "Examples",
+     cell: ({ row }) => {
+        const content:string[] = row.getValue("example")
+        const truncatedContent = content.length >= 1 
+          ? content.slice(0,1).join('').substring(0, 10) + "..." 
+          : content
+        return truncatedContent
+      }
   },
   {
     accessorKey: "synonyms",
     header: "Synonyms",
+     cell: ({ row }) => {
+        const content:string[] = row.getValue("synonyms")
+        const truncatedContent = content.length >= 1
+          ? content.slice(0,1).join('').substring(0, 10) + "..." 
+          : content
+        return truncatedContent
+      }
   },
   {
     accessorKey: "learned",

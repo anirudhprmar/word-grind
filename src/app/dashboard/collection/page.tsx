@@ -27,7 +27,7 @@ export default function Page() {
         //cache the query ????
 
         if (isLoading) {
-          return (<div>
+          return (<div className="text-center  w-full translate-x-[50%] translate-y-[70%]  mx-auto">
             <Loader2Icon className="animate-spin"/>
           </div>)
         }
@@ -40,7 +40,7 @@ export default function Page() {
   return (
     
       <div>
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0 items-center ">
+      <div className="p-4">
         {/* rendered table will come here */}
         <div className="container mx-auto py-10">
           <DataTable columns={columns} data={words} userId={userId} />

@@ -78,6 +78,7 @@ export function DataTable<TData, TValue>({
     <div>
 
        <div className="flex items-center py-4">
+
         <div className="flex gap-3 ">
           <Input
             placeholder="Filter words..."
@@ -129,7 +130,7 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                   return (
-                      <TableHead key={header.id}>
+                      <TableHead key={header.id} >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -184,8 +185,6 @@ export function DataTable<TData, TValue>({
         </Button>
       </div>
     </div>
-
-  
     
     <DataTablePagination table={table}/>
     </div>
