@@ -12,7 +12,7 @@ import { toast } from "sonner"
 
 interface wordInfoProps {
     wordInfo:{
-    wordId:number
+    id:number
     userId: string
     name:string
     meaning:string
@@ -25,7 +25,7 @@ interface wordInfoProps {
 }
 
 interface wordProp{ 
-    wordId:number
+    id:number
     userId: string
     name:string
     meaning:string
@@ -53,12 +53,14 @@ export function WordViewModal({wordInfo}:wordInfoProps) {
     const setLearned = api.word.markLearned.useMutation()
     const setDelete = api.word.deleteWord.useMutation()
 
-    console.log("word",word)
+    // console.log("word",word)
 
     const handleMarkAsLearned = ()=>{
-      if(!word?.wordId) return;
-       try {
-         setLearned.mutate({wordId:word?.wordId})
+      try {
+         if(!word?.id) return;
+         console.log("before")
+         setLearned.mutate({id:word?.id})
+         console.log("after")
            if (setLearned.isSuccess) {
                  toast("Congratulation 🎉🎉")
                  setWord(null)
@@ -71,10 +73,11 @@ export function WordViewModal({wordInfo}:wordInfoProps) {
       }
        }
     }
+
     const handleWordDelete = ()=>{
-      if(!word?.wordId) return;
-       try {
-         setDelete.mutate({wordId:word?.wordId})
+      try {
+         if(!word?.id) return;
+         setDelete.mutate({id:word?.id})
            if (setLearned.isSuccess) {
                  toast("Word Deleted ")
                  setWord(null)

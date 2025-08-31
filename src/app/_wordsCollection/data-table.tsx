@@ -42,7 +42,7 @@ interface DataTableProps<TData, TValue> {
 }
 
 interface RowData{ 
-    wordId:number
+    id:number
     userId: string
     name:string
     meaning:string
@@ -186,10 +186,10 @@ export function DataTable<TData extends RowData, TValue>({
       <div className="mt-10">
         {selectedWord ?     
         <WordViewModal
-        key={selectedWord.wordId}
+        key={selectedWord.id}
         wordInfo={{
             name:selectedWord.name ,
-            wordId:selectedWord.wordId,
+            id:selectedWord.id,
             userId:userId,
             pronunciation:selectedWord.pronunciation ?? "",
             meaning:selectedWord.meaning,

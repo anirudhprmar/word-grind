@@ -44,10 +44,10 @@ export const wordRouter = createTRPCRouter({
 
     deleteWord:publicProcedure
     .input(z.object({
-        wordId:z.number()
+        id:z.number()
     }))
     .mutation(async({input,ctx})=>{
-        await ctx.db.delete(words).where(eq(words.id,input.wordId))
+        await ctx.db.delete(words).where(eq(words.id,input.id))
         return {
             message:"word deleted"
         }
@@ -55,10 +55,10 @@ export const wordRouter = createTRPCRouter({
 
     markLearned:publicProcedure
     .input(z.object({
-    wordId:z.number()
+    id:z.number()
     }))
     .mutation(async({input,ctx})=>{
-        await ctx.db.update(words).set({learned:true}).where(eq(words.id,input.wordId))
+        await ctx.db.update(words).set({learned:true}).where(eq(words.id,input.id))
         return {
             message:"marked as learned"
         }
