@@ -100,113 +100,116 @@ const form = useForm<z.infer<typeof formSchema>>({
   }
 
   return (
-    <Dialog>
-      <Form {...form}> 
-          <DialogTrigger asChild>
-            <Button variant="outline">Add a Word</Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <DialogHeader>
-              <DialogTitle>Add a Word of Choice</DialogTitle>
-              <DialogDescription>
-                If you want to add your own word of choice to the collection. Input the details and click on save changes
-              </DialogDescription>
-            </DialogHeader>
-                <div className="flex flex-col gap-4">
-              
-                <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="greatness" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-                <FormField
-                control={form.control}
-                name="meaning"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Meaning</FormLabel>
-                    <FormControl>
-                      <Input placeholder="capability to do something great" {...field} />
-                    </FormControl>       
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-                      <FormField
-                control={form.control}
-                name="pronunciation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Pronunciation</FormLabel>
-                    <FormControl>
-                      <Input placeholder="grayt nuhs" {...field} />
-                    </FormControl>            
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-                {exampleFields.map((field, index) => (
-                <FormField
-                  key={field.id}
-                  control={control}
-                  name={`example.${index}.value`}
+    <div>
+      <Dialog>
+        <Form {...form}> 
+            <DialogTrigger asChild>
+              <Button variant="outline">Add a Word</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <DialogHeader>
+                <DialogTitle>Add a Word of Choice</DialogTitle>
+                <DialogDescription>
+                  If you want to add your own word of choice to the collection. Input the details and click on save changes
+                </DialogDescription>
+              </DialogHeader>
+                  <div className="flex flex-col gap-4">
+                
+                  <FormField
+                  control={form.control}
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
-                       <FormLabel>Example</FormLabel>
+                      <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input placeholder="greatness" {...field} />
                       </FormControl>
-                      <Button type="button" onClick={() => removeExample(index)}>Remove</Button>
-                       <FormMessage />
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
-              ))}
-              <Button type="button" onClick={() => appendExample({value:""})}  className="cursor-pointer">Add Example</Button>
-
-
-               {synonymsFields.map((field, index) => (
-                <FormField
-                  key={field.id}
-                  control={control}
-                  name={`synonyms.${index}.value`}
+                  <FormField
+                  control={form.control}
+                  name="meaning"
                   render={({ field }) => (
-                    <FormItem className="">
-                       <FormLabel>Synonym</FormLabel>
+                    <FormItem>
+                      <FormLabel>Meaning</FormLabel>
                       <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <Button type="button" onClick={() => removeSynonyms(index)}>Remove</Button>
-                       <FormMessage />
+                        <Input placeholder="capability to do something great" {...field} />
+                      </FormControl>       
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
-              ))}
-              <Button type="button" onClick={() => appendSynonyms({value:""})} className="cursor-pointer" >Add Synonyms</Button>
+                        <FormField
+                  control={form.control}
+                  name="pronunciation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Pronunciation</FormLabel>
+                      <FormControl>
+                        <Input placeholder="grayt nuhs" {...field} />
+                      </FormControl>            
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              
+                  {exampleFields.map((field, index) => (
+                  <FormField
+                    key={field.id}
+                    control={control}
+                    name={`example.${index}.value`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Example</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <Button type="button" onClick={() => removeExample(index)}>Remove</Button>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ))}
+                <Button type="button" onClick={() => appendExample({value:""})}  className="cursor-pointer">Add Example</Button>
 
-         </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline" className="cursor-pointer">Cancel</Button>
-              </DialogClose>
-                <Button type="submit" disabled={addWord.isPending}  className="cursor-pointer">Save Changes</Button>
-            </DialogFooter>
-        </form>
-          </DialogContent>
-      </Form>
-            <Toaster/>
-     </Dialog>
+
+                {synonymsFields.map((field, index) => (
+                  <FormField
+                    key={field.id}
+                    control={control}
+                    name={`synonyms.${index}.value`}
+                    render={({ field }) => (
+                      <FormItem className="">
+                        <FormLabel>Synonym</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <Button type="button" onClick={() => removeSynonyms(index)}>Remove</Button>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ))}
+                <Button type="button" onClick={() => appendSynonyms({value:""})} className="cursor-pointer" >Add Synonyms</Button>
+
+                
+
+          </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline" className="cursor-pointer">Cancel</Button>
+                </DialogClose>
+                  <Button type="submit" disabled={addWord.isPending}  className="cursor-pointer">Save Changes</Button>
+              </DialogFooter>
+          </form>
+            </DialogContent>
+        </Form>
+      </Dialog>
+
+      <Toaster/>
+    </div>
   )
 }

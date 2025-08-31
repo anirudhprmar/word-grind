@@ -4,8 +4,7 @@
 - [ ]- think of logo 
 
 ## Core functionalities (10.5 hr to build the app)
-- [X]- Users view their words lists but style it proper to within the viewport (data table) - 15 min
-- [ ]- Users can edit and make learned true (click on a word , open it on a modal , edit it and save it ) - 30min
+- [X]- Users can edit and make learned true (click on a word , open it on a modal , edit it and save it ) - 30min
 
 - [ ]- work on quiz page -> give options of words from db -> use that to info to create quizzes (send custom system input one from word input and other from quiz to separate their queries to ai ) -> questions range for quiz feature -> feedback on quiz - 3hr (build the entire feature)
 

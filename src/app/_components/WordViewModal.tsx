@@ -12,52 +12,78 @@ import { toast } from "sonner"
 
 interface wordInfoProps {
     wordInfo:{
-        userId: string,
-        name:string,
-        meaning:string,
-        example:string[],
-        pronunciation:string,
-        synonyms:string[],
+    wordId:number
+    userId: string
+    name:string
+    meaning:string
+    example:string[]
+    pronunciation:string
+    synonyms:string[]
+    createdAt:Date
+    learned:boolean
     }
 }
 
-interface wordProp{
-    userId: string,
-    name:string,
-    meaning:string,
-    example:string[],
-    pronunciation:string,
-    synonyms:string[],
+interface wordProp{ 
+    wordId:number
+    userId: string
+    name:string
+    meaning:string
+    example:string[]
+    pronunciation:string
+    synonyms:string[]
+    createdAt:Date
+    learned:boolean
 }
 
-export function WordInfoModal({wordInfo}:wordInfoProps) {
+export function WordViewModal({wordInfo}:wordInfoProps) {
 
   const [isOpen,setIsOpen] = useState(false)
   const [word,setWord] = useState<wordProp | null>(null)
 
   useEffect(()=>{
     setIsOpen(true)
-  },[])
+  },[word])
   
   useEffect(()=>{
     if(wordInfo) setWord(wordInfo)
     },[wordInfo])
   
   
-    const addWord = api.word.addWord.useMutation()
+    const setLearned = api.word.markLearned.useMutation()
+    const setDelete = api.word.deleteWord.useMutation()
 
-    const handleAddToCollection = ()=>{
+    console.log("word",word)
+
+    const handleMarkAsLearned = ()=>{
+      if(!word?.wordId) return;
        try {
-         addWord.mutate(wordInfo)
-           if (addWord.isSuccess) {
-                 toast("Word added ✅")
+         setLearned.mutate({wordId:word?.wordId})
+           if (setLearned.isSuccess) {
+                 toast("Congratulation 🎉🎉")
                  setWord(null)
                  setIsOpen(!isOpen)
                }
        } catch (error) {
         console.log("error in adding word",error)
-      if (addWord.isError) {
-        toast(`${addWord.error.message}`)
+      if (setLearned.isError) {
+        toast(`${setLearned.error.message}`)
+      }
+       }
+    }
+    const handleWordDelete = ()=>{
+      if(!word?.wordId) return;
+       try {
+         setDelete.mutate({wordId:word?.wordId})
+           if (setLearned.isSuccess) {
+                 toast("Word Deleted ")
+                 setWord(null)
+                 setIsOpen(!isOpen)
+               }
+       } catch (error) {
+        console.log("error in adding word",error)
+      if (setLearned.isError) {
+        toast(`${setLearned.error.message}`)
       }
        }
     }
@@ -87,6 +113,16 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
                 />
                 
             </div>
+                   <div className="flex flex-col items-start gap-1">
+                <Label>
+                    Pronunciation
+                </Label>
+                <InputBox
+                content={word?.pronunciation ?? "null"}
+                className="h-fit"
+                />
+            </div>
+
             <div className="flex flex-col items-start gap-1">
                 <Label>
                     Examples
@@ -100,15 +136,7 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
                   ))
                 }
             </div>
-            <div className="flex flex-col items-start gap-1">
-                <Label>
-                    Pronunciation
-                </Label>
-                <InputBox
-                content={word?.pronunciation ?? ""}
-                className="h-fit"
-                />
-            </div>
+
             <div className="flex flex-col items-start gap-1">
                 <Label>
                     Synonyms
@@ -124,6 +152,16 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
                   ))
                 }
             </div>
+
+            <div className="flex flex-col items-start gap-1">
+              <Label>
+                Learned 
+              </Label>
+              <InputBox
+                content={word?.learned === false ? "In Progress": "Mastered" }
+                className="h-fit"
+                />
+            </div>
         </div>
 
 
@@ -135,10 +173,16 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
               </Button>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <div>
-              <Button type="button" disabled={addWord.isSuccess || addWord.isPending} onClick={handleAddToCollection} variant="secondary" className="cursor-pointer">
-                Add to Collection
+              <Button type="button" disabled={setDelete.isSuccess || setDelete.isPending} onClick={handleWordDelete} variant="destructive" className="cursor-pointer">
+                Delete Word
               </Button>
             </div>
+            
+           { word?.learned === false ? <div>
+              <Button type="button" disabled={setLearned.isSuccess || setLearned.isPending} onClick={handleMarkAsLearned} variant="secondary" className="cursor-pointer">
+                Mark as Mastered 
+              </Button>
+            </div> : null}
 
             <div>
               <Button type="button" variant="secondary" onClick={handleIgnore}

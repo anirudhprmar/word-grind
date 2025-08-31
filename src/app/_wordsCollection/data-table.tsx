@@ -13,7 +13,7 @@ import {
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import React from "react"
+import React, { useState } from "react"
 
 import {
   DropdownMenu,
@@ -32,6 +32,7 @@ import {
 } from "~/components/ui/table"
 import { DataTablePagination } from "./DataTablePagination"
 import { AddWordDialogBox } from "~/components/AddWordDialogBox"
+import { WordViewModal } from "../_components/WordViewModal"
 
 
 interface DataTableProps<TData, TValue> {
@@ -40,8 +41,20 @@ interface DataTableProps<TData, TValue> {
   userId:string
 }
 
+interface RowData{ 
+    wordId:number
+    userId: string
+    name:string
+    meaning:string
+    example:string[]
+    pronunciation:string
+    synonyms:string[]
+    createdAt:Date
+    learned:boolean
+}
 
-export function DataTable<TData, TValue>({
+
+export function DataTable<TData extends RowData, TValue>({
   columns,
   data,
   userId
@@ -52,7 +65,8 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
 
-      const [rowSelection, setRowSelection] = React.useState({})
+  const [rowSelection, setRowSelection] = React.useState({})
+  const [selectedWord,setSelectedWord] = useState<TData | null>(null)
 
 
   const table = useReactTable({
@@ -72,7 +86,7 @@ export function DataTable<TData, TValue>({
     }
   })
 
-  
+ 
 
   return (
     <div>
@@ -149,6 +163,8 @@ export function DataTable<TData, TValue>({
                   <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => setSelectedWord(row.original)}
+                  className="cursor-pointer"
                   >
                 {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -166,6 +182,25 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+
+      <div className="mt-10">
+        {selectedWord ?     
+        <WordViewModal
+        key={selectedWord.wordId}
+        wordInfo={{
+            name:selectedWord.name ,
+            wordId:selectedWord.wordId,
+            userId:userId,
+            pronunciation:selectedWord.pronunciation ?? "",
+            meaning:selectedWord.meaning,
+            synonyms:selectedWord.synonyms ?? [],
+            example:selectedWord.example ?? [],
+            createdAt:selectedWord.createdAt,
+            learned:selectedWord.learned
+          }}
+        /> : null}
+      </div>
+
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outline"
