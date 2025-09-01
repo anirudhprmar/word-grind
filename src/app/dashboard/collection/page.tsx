@@ -10,7 +10,7 @@ import { useEffect, useState } from "react"
 
 
 
-export default function Page() {
+export default function Collection() {
       const[userId,setUserId] = useState<string>("")
 
       useEffect(()=>{

@@ -5,9 +5,7 @@
 
 ## Core functionalities
 
-- [X]- get delete and mark learned working
-- [X]- fix the pagination 
-- [ ]- work on quiz page -> give options of words from db -> use that to info to create quizzes (send custom system input one from word input and other from quiz to separate their queries to ai ) -> questions range for quiz feature -> feedback on quiz - 3hr (build the entire feature)
+- [ ]- use that to info to create quizzes (send custom system input one from word input and other from quiz to separate their queries to ai ) -> questions range for quiz feature -> feedback on quiz - 3hr (build the entire feature)
 
 - [ ]- record a demo video and update the landing page with demo video - 20 min
 - [ ]- Use tools like Google Forms for quick feedback. -5min
