@@ -5,6 +5,8 @@ import { toast } from "sonner"
 import SessionInfo from "~/app/_components/SessionInfo"
 import type { Words } from "~/app/_wordsCollection/columns"
 import DisplayWord from "~/components/DisplayWord"
+import SearchWordsModal from "~/components/SearchWordsModal"
+import { Button } from "~/components/ui/button"
 import { Toaster } from "~/components/ui/sonner"
 import { api } from "~/lib/api"
 
@@ -56,6 +58,19 @@ export default function Quiz() {
             id={word.id} userId={word.userId} name={word.name } learned={false}        />
         </div>
       ))}
+
+      <div>
+      <Button
+      size={'sm'}
+      onClick={handleMoreWords}
+      >
+        More..
+        </Button>  
+
+        {/* same as we implemented modal for word inform. we are going to do the same thing here , a state which will be changed with button click on more and that will open a modal with a data table which will have only the filter search and if check on a item just start the quiz with that word immediately with a loader  */}
+
+        {/* {isOpen && <SearchWordsModal words={filteredWords} />} */}
+      </div>
 
       </section>
 
