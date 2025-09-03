@@ -14,6 +14,7 @@ import { api } from "~/lib/api"
 export default function Quiz() {
 
     const[userId,setUserId] = useState<string>("")
+    const[isOpen,setIsOpen] = useState(false)
   
         useEffect(()=>{
           async function fetchUserId() {
@@ -62,14 +63,17 @@ export default function Quiz() {
       <div>
       <Button
       size={'sm'}
-      onClick={handleMoreWords}
+      onClick={()=>setIsOpen(!isOpen)}
       >
         More..
         </Button>  
 
-        {/* same as we implemented modal for word inform. we are going to do the same thing here , a state which will be changed with button click on more and that will open a modal with a data table which will have only the filter search and if check on a item just start the quiz with that word immediately with a loader  */}
+        {/* same as we implemented modal for word inform. we are going to do the same thing here , 
+         open a modal with a data table which will have only the filter search and if click on a item, give another modal to confirm the request, just start the quiz with that word immediately with a loader  */}
 
-        {/* {isOpen && <SearchWordsModal words={filteredWords} />} */}
+        {isOpen && 
+        <SearchWordsModal filteredWords={filteredWords}/>
+        }
       </div>
 
       </section>
