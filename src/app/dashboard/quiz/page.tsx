@@ -9,12 +9,15 @@ import SearchWordsModal from "~/components/SearchWordsModal"
 import { Button } from "~/components/ui/button"
 import { Toaster } from "~/components/ui/sonner"
 import { api } from "~/lib/api"
+import { Slider } from "~/components/ui/slider"
 
 
 export default function Quiz() {
 
     const[userId,setUserId] = useState<string>("")
-    const[isOpen,setIsOpen] = useState(false)
+    const[isOpen,setIsOpen] = useState<boolean>(false)
+    const [sliderValue,setSliderValues] = useState<number[]>([2])
+    const [finalNumQuestions,setFinalNumQuestions] = useState<number>(2)
   
         useEffect(()=>{
           async function fetchUserId() {
@@ -40,7 +43,17 @@ export default function Quiz() {
   
           const words:Words[] = data ?? []
           const filteredWords = words.filter(w => w.learned !== true)
-          const fewWords = filteredWords.splice(0,5) 
+          const newWords = [...filteredWords]
+          const fewWords = filteredWords.splice(0,5)
+          
+          const handleValueChange = (newValue:number[])=>{
+            setSliderValues(newValue)
+          }
+
+          if (sliderValue) {
+            const value:number | undefined = sliderValue.pop()
+            setFinalNumQuestions(value ?? 2)
+          }
 
   return (
     <main className="container mx-auto flex flex-col justify-between gap-10">
@@ -51,10 +64,17 @@ export default function Quiz() {
       </section>
 
       <section className="flex flex-wrap gap-3  items-center justify-center"> 
+    
+      <div>
+        choose the number of questions
+        <div>
+          <Slider defaultValue={[2]} max={10} step={1} onValueChange={handleValueChange} />
+        </div>
+      </div>
 
       {fewWords?.map(word =>(
         <div key={word.id} >
-        {/* render the words in displayword component */}
+        {/* render the words in displayword component also give this compoenet function to start quiz also send num of questions here too*/}
         <DisplayWord
             id={word.id} userId={word.userId} name={word.name } learned={false}        />
         </div>
@@ -68,11 +88,14 @@ export default function Quiz() {
         More..
         </Button>  
 
-        {/* same as we implemented modal for word inform. we are going to do the same thing here , 
-         open a modal with a data table which will have only the filter search and if click on a item, give another modal to confirm the request, just start the quiz with that word immediately with a loader  */}
+         {/* this page will contain all info about the word */}
+
+         {/* give user to customise the quiz : by no. of quiz this can be done in quiz page itself selete the no. of word then the word then move to /quiz/quizId/feedback*/}
+      
+        {/* just start the quiz with that word immediately with a loader  */}
 
         {isOpen && 
-        <SearchWordsModal filteredWords={filteredWords}/>
+        <SearchWordsModal filteredWords={newWords} NumOfQuestion={finalNumQuestions}/>
         }
       </div>
 

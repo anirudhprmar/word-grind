@@ -31,14 +31,14 @@ import {
   TableRow,
 } from "~/components/ui/table"
 import { DataTablePagination } from "../_wordsCollection/DataTablePagination"
-import { AddWordDialogBox } from "~/components/AddWordDialogBox"
-import { WordViewModal } from "../_components/WordViewModal"
+import { QuizStartModal } from "./QuizStartModal"
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   userId:string
+  totalQuestions:number
 }
 
 interface RowData{ 
@@ -57,7 +57,8 @@ interface RowData{
 export function SearchWordsDataTable<TData extends RowData, TValue>({
   columns,
   data,
-  userId
+  userId,
+  totalQuestions
 }: DataTableProps<TData, TValue>) {
      const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -102,8 +103,6 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
           }
           className="max-w-sm"
           />
-        
-          <AddWordDialogBox userId={userId} />
 
         </div>
 
@@ -185,8 +184,9 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
 
       <div className="mt-10">
         {selectedWord ?     
-        <WordViewModal
+        <QuizStartModal
         key={selectedWord.id}
+        totalQuestions={totalQuestions}
         wordInfo={{
             name:selectedWord.name ,
             id:selectedWord.id,

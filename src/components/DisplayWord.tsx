@@ -7,7 +7,7 @@ interface WordProp{
     learned: boolean; 
 }
 
-//click on the word, quiz will start (gemini setup to get the output, server action)
+//click on the word, quiz will start 
 
 export default function DisplayWord(info:WordProp) {
   return (
@@ -15,6 +15,9 @@ export default function DisplayWord(info:WordProp) {
       {info.learned === false ? <div>
         <p className='font-bold cursor-pointer'>{info.name}</p>
       </div> : null}
+      <div>
+        {}
+      </div>
     </div>
   )
 }
