@@ -112,24 +112,28 @@ export const quizRouter = createTRPCRouter({
         .input(
             z.object({
                 quizId:z.number(),
-                result:z.enum(["success","failure","null"]),
+                totalQuestions:z.number()
             })
         )
-        .query(async({input,ctx})=>{
+        .mutation(async({input,ctx})=>{
             try {
                 const result = await ctx.db.select().from(quizResponse).where(eq(quizResponse.quizId,input.quizId))
 
-                const totalQuestions:number = result.length
+                // const totalQuestions:number = result.length
                 const correctAnswers:number = result.filter(q => q.isCorrect === true).length
-                const totalScore:number = (correctAnswers/totalQuestions)*100
+                const totalScore:number = (correctAnswers/input.totalQuestions)*100
                 
+                let res:"success" | "failure" | "null";               
                 if(totalScore === 100){
-                    input.result = "success"
+                    res = "success"
+                }else if(totalScore < 100){
+                    res = "failure"
                 }else{
-                    input.result = "failure"
+                    res = "null"
                 }
+                
 
-                 const final = await ctx.db.update(quizzes).set({score:totalScore,result:input.result}).where(eq(quizzes.id,input.quizId)).returning() 
+                 const final = await ctx.db.update(quizzes).set({score:totalScore,result:res}).where(eq(quizzes.id,input.quizId)).returning() 
 
                  return {
                     message:"result curated",

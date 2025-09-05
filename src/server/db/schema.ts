@@ -58,6 +58,7 @@ export const words = createTable(
   (t) => [index("word_idx").on(t.name)],
 )
 
+//change quiz id to text just like user table
 
 export const quizzes = createTable(
   "quizzes",

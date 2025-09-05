@@ -7,7 +7,6 @@ import { api } from "~/lib/api"
 import { XIcon } from "lucide-react"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
-import { on } from "events"
 
 
 interface wordInfoProps {
@@ -53,13 +52,15 @@ export function QuizStartModal({wordInfo,totalQuestions,onClose}:wordInfoProps &
     },[wordInfo])
   
   
-    const handleStartingQuiz = ()=>{
+    const handleStartingQuiz = async()=>{
       try {
          if(!word?.id) return;
-        startQuiz.mutate({userId:word?.userId,wordId:word?.id,totalQuestion:totalQuestions})
 
-           if (startQuiz.isSuccess && startQuiz.data?.quiz[0]) {
-                  router.push(`/dashboard/quiz/${startQuiz.data.quiz[0].id}`)
+        const result = await startQuiz.mutateAsync({userId:word?.userId,wordId:word?.id,totalQuestion:totalQuestions})
+
+           if (result?.quiz ?? result?.quiz[0]?.id) {
+               const url = `/dashboard/quiz/${result?.quiz[0]?.id}?totalQuestions=${encodeURIComponent(totalQuestions.toString())}&name=${encodeURIComponent(word?.name ?? '')}`;
+                  router.push(url);
                  toast("Quiz started! 🎉")
                  setWord(null)
                  setIsOpen(false)
@@ -100,8 +101,8 @@ export function QuizStartModal({wordInfo,totalQuestions,onClose}:wordInfoProps &
               </Button>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <div>
-              <Button type="button" disabled={startQuiz.isSuccess || startQuiz.isPending} onClick={handleStartingQuiz} variant="secondary" className="cursor-pointer">
-                Start the Quiz
+              <Button type="button" disabled={startQuiz.isPending} onClick={handleStartingQuiz} variant="secondary" className="cursor-pointer">
+                {startQuiz.isPending ? "Starting..." : "Start the Quiz"}
               </Button>
             </div>
 

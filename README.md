@@ -5,8 +5,9 @@
 
 ## Core functionalities
 
-- [ ]- /quiz/quizId and /quiz/feedback
-- [ ]- record a demo video and update the landing page with demo video - 20 min , fix ui colors
+- [X]- /quiz/quizId and /quiz/feedback
+- [ ]-  fix ui colors also fix rerender of dialog box in collection just like i solved in quiz page in disaply words
+- [ ]- record a demo video and update the landing page with demo video - 20 min
 - [ ]- if user cookie is detected then no need to show landing page redirect back to dashboard - 10min
 - [ ]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link - 30 min
 - [ ]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones. - 15-20min
