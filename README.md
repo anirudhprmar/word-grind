@@ -5,13 +5,13 @@
 
 ## Core functionalities
 
-- [X]- Quiz
+- [ ]- /quiz/quizId and /quiz/feedback
 - [ ]- record a demo video and update the landing page with demo video - 20 min , fix ui colors
 - [ ]- if user cookie is detected then no need to show landing page redirect back to dashboard - 10min
 - [ ]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link - 30 min
 - [ ]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones. - 15-20min
 - [ ]- Integrate Polar. Set up webhooks and tRPC for subscription checks also all the legal shit - 30-45 min
-- [ ]- Manual tests for auth, quizzes, and emails. Fix bugs. - 30min
+- [ ]- Manual tests for auth, quizzes, and emails. Fix bugs. - 30min also messages if session expired or just redirect to /
 - [ ]- work on user profile -20min
 - [ ]- error mangement - sentry -30min
 - [ ]- quick  analytics - posthog setup -20min

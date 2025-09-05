@@ -15,8 +15,7 @@ import { Slider } from "~/components/ui/slider"
 export default function Quiz() {
 
     const[userId,setUserId] = useState<string>("")
-    const[isOpen,setIsOpen] = useState<boolean>(false)
-    const [sliderValue,setSliderValues] = useState<number[]>([2])
+    const[isClicked,setisClicked] = useState<boolean>(false)
     const [finalNumQuestions,setFinalNumQuestions] = useState<number>(2)
   
         useEffect(()=>{
@@ -30,7 +29,7 @@ export default function Quiz() {
            const { data, isLoading,error  } = api.word.listWords.useQuery({
             userId: userId,
           });
-          //cache the query ????
+          // cache the query ????
   
           if (isLoading) {
             return (<div className="text-center  w-full translate-x-[50%] translate-y-[70%]  mx-auto">
@@ -46,14 +45,11 @@ export default function Quiz() {
           const newWords = [...filteredWords]
           const fewWords = filteredWords.splice(0,5)
           
-          const handleValueChange = (newValue:number[])=>{
-            setSliderValues(newValue)
-          }
-
-          if (sliderValue) {
-            const value:number | undefined = sliderValue.pop()
-            setFinalNumQuestions(value ?? 2)
-          }
+         const handleValueChange = (newValue: number[]) => {
+          const value:number = newValue[0] ?? 2
+            setFinalNumQuestions(value)
+    }
+          
 
   return (
     <main className="container mx-auto flex flex-col justify-between gap-10">
@@ -74,29 +70,40 @@ export default function Quiz() {
 
       {fewWords?.map(word =>(
         <div key={word.id} >
-        {/* render the words in displayword component also give this compoenet function to start quiz also send num of questions here too*/}
         <DisplayWord
-            id={word.id} userId={word.userId} name={word.name } learned={false}        />
+        info={{
+          id:word.id,
+          userId:word.userId,
+          name:word.name,
+          meaning:word.meaning,
+          pronunciation:word.pronunciation ?? "null",
+          synonyms:word.synonyms ?? ["null"],
+          example:word.example ?? ["null"],
+          createdAt:word.createdAt,
+          learned:word.learned
+        }}
+        total={finalNumQuestions}  />
         </div>
       ))}
 
       <div>
       <Button
       size={'sm'}
-      onClick={()=>setIsOpen(!isOpen)}
+      onClick={()=>setisClicked(!isClicked)}
       >
         More..
-        </Button>  
+      </Button>  
 
+         {isClicked && 
+        <SearchWordsModal filteredWords={newWords} NumOfQuestion={finalNumQuestions}/>
+        }
+        
          {/* this page will contain all info about the word */}
 
          {/* give user to customise the quiz : by no. of quiz this can be done in quiz page itself selete the no. of word then the word then move to /quiz/quizId/feedback*/}
       
         {/* just start the quiz with that word immediately with a loader  */}
 
-        {isOpen && 
-        <SearchWordsModal filteredWords={newWords} NumOfQuestion={finalNumQuestions}/>
-        }
       </div>
 
       </section>

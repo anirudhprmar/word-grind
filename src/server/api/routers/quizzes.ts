@@ -3,7 +3,6 @@ import { createTRPCRouter, publicProcedure, } from '../trpc';
 import { z } from 'zod';
 import { eq } from 'drizzle-orm';
 
-
 export const quizRouter = createTRPCRouter({
     createQuiz:publicProcedure
     .input(

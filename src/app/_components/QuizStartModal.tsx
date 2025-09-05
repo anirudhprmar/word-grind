@@ -7,6 +7,7 @@ import { api } from "~/lib/api"
 import { XIcon } from "lucide-react"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { on } from "events"
 
 
 interface wordInfoProps {
@@ -36,33 +37,35 @@ interface wordProp{
     learned:boolean
 }
 
-export function QuizStartModal({wordInfo,totalQuestions}:wordInfoProps) {
+export function QuizStartModal({wordInfo,totalQuestions,onClose}:wordInfoProps & {onClose?:()=>void}) {
 
   const [isOpen,setIsOpen] = useState(false)
   const [word,setWord] = useState<wordProp | null>(null)
+  const startQuiz = api.quiz.createQuiz.useMutation()
+  const router = useRouter()
 
-  useEffect(()=>{
-    setIsOpen(true)
-  },[word])
-  
-  useEffect(()=>{
-    if(wordInfo) setWord(wordInfo)
+    
+    useEffect(()=>{
+      if(wordInfo) {
+        setWord(wordInfo)
+        setIsOpen(true)
+    }
     },[wordInfo])
   
   
-    const startQuiz = api.quiz.createQuiz.useMutation()
-    const router = useRouter()
-
-    // router.push('/dashboard/quiz/${quizId}')
     const handleStartingQuiz = ()=>{
       try {
          if(!word?.id) return;
-         startQuiz.mutate({userId:word?.userId,wordId:word?.id,totalQuestion:totalQuestions})
-           if (startQuiz.isSuccess) {
-                 toast("Congratulation 🎉🎉")
+        startQuiz.mutate({userId:word?.userId,wordId:word?.id,totalQuestion:totalQuestions})
+
+           if (startQuiz.isSuccess && startQuiz.data?.quiz[0]) {
+                  router.push(`/dashboard/quiz/${startQuiz.data.quiz[0].id}`)
+                 toast("Quiz started! 🎉")
                  setWord(null)
-                 setIsOpen(!isOpen)
-                //  router.push(`/dashboard/quiz/${newQuiz}`)
+                 setIsOpen(false)
+                  if (onClose) {
+                    onClose();
+                  }
                }
        } catch (error) {
         console.log("error in adding word",error)
@@ -73,9 +76,12 @@ export function QuizStartModal({wordInfo,totalQuestions}:wordInfoProps) {
     }
 
 
-    const handleIgnore = () =>( 
-      setIsOpen(!isOpen) 
-     )
+    const handleIgnore = () => { 
+      setIsOpen(false);
+      if (onClose) {
+        onClose();
+      }
+    }
 
   return (
     <div>
