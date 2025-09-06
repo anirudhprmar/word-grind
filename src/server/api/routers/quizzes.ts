@@ -42,6 +42,21 @@ export const quizRouter = createTRPCRouter({
                 console.log("Error in list quizzes",error)
             }
         }),
+    getQuizDetails:publicProcedure
+        .input(
+            z.object({
+                quizId:z.number()
+            })
+        )
+        .query(async({input,ctx})=>{
+            try {
+                const quizDetails = await ctx.db.select().from(quizzes).where(eq(quizzes.id,input.quizId))
+                return quizDetails
+            } catch (error) {
+                console.log("Error in getting quiz details",error)   
+            }
+        })
+        ,
     deleteQuiz:publicProcedure
         .input(
             z.object({

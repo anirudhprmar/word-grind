@@ -5,7 +5,7 @@
 
 ## Core functionalities
 
-- [X]- /quiz/quizId and /quiz/feedback
+- [x]- /quiz/feedback
 - [ ]-  fix ui colors also fix rerender of dialog box in collection just like i solved in quiz page in disaply words
 - [ ]- record a demo video and update the landing page with demo video - 20 min
 - [ ]- if user cookie is detected then no need to show landing page redirect back to dashboard - 10min

@@ -84,7 +84,7 @@ export default function QuizPage({ params }: { params: { quizId: string } }) {
       if (currentIndex === quizData.length - 1) { // last question 
         // update quizzes table
         await updateQuiz.mutateAsync({quizId:parseInt(quizId,10),totalQuestions:quizData.length})
-         router.push(`/dashboard/quiz/${quizId}/feedback?total=${total}`);
+         router.push(`/dashboard/quiz/${quizId}/feedback?word=${wordName}&total=${total}`);
       }else{
         setTimeout(() => {
           setCurrentIndex(prev => prev + 1)
@@ -147,8 +147,6 @@ export default function QuizPage({ params }: { params: { quizId: string } }) {
                 <div className="flex items-center">
                   <Input
                     type="radio"
-                    id={`choice${cindex}`}
-                    name="quiz-answer"
                     value={choice}
                     checked={questionStates[currentIndex]?.selectedAnswer === choice}
                     onChange={() => handleAnswerSelect(choice)}
