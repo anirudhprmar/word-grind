@@ -12,6 +12,7 @@ import { api } from "~/lib/api"
 import { Slider } from "~/components/ui/slider"
 
 
+
 export default function Quiz() {
 
     const[userId,setUserId] = useState<string>("")
@@ -59,37 +60,42 @@ export default function Quiz() {
         <p className="font-regular text-md">Do you acutally understand word ??</p>
       </section>
 
-      <section className="flex flex-wrap gap-3  items-center justify-center"> 
+      <section className="flex flex-col gap-10  items-center justify-center"> 
     
-      <div>
+      <div className="flex flex-col gap-2">
         choose the number of questions
-        <div>
+        <div className="flex items-center justify-center gap-3">
           <Slider defaultValue={[2]} max={10} step={1} onValueChange={handleValueChange} />
+          <span>{finalNumQuestions}</span>
         </div>
       </div>
 
-      {fewWords?.map(word =>(
-        <div key={word.id} >
-        <DisplayWord
-        info={{
-          id:word.id,
-          userId:word.userId,
-          name:word.name,
-          meaning:word.meaning,
-          pronunciation:word.pronunciation ?? "null",
-          synonyms:word.synonyms ?? ["null"],
-          example:word.example ?? ["null"],
-          createdAt:word.createdAt,
-          learned:word.learned
-        }}
-        total={finalNumQuestions}  />
-        </div>
-      ))}
+      <div className="flex gap-3 flex-wrap mx-10 md:mx-auto px-10">
+            {fewWords?.map(word =>(
+              <div key={word.id} >
+              <DisplayWord
+              info={{
+                id:word.id,
+                userId:word.userId,
+                name:word.name,
+                meaning:word.meaning,
+                pronunciation:word.pronunciation ?? "null",
+                synonyms:word.synonyms ?? ["null"],
+                example:word.example ?? ["null"],
+                createdAt:word.createdAt,
+                learned:word.learned
+              }}
+              total={finalNumQuestions}  />
+              </div>
+            ))}
+
+      </div>
 
       <div>
       <Button
-      size={'sm'}
+      size={'lg'}
       onClick={()=>setisClicked(!isClicked)}
+      className=" hover:transition-shadow hover:shadow-xl cursor-pointer shadow-md"
       >
         More..
       </Button>  
@@ -97,12 +103,6 @@ export default function Quiz() {
          {isClicked && 
         <SearchWordsModal filteredWords={newWords} NumOfQuestion={finalNumQuestions}/>
         }
-        
-         {/* this page will contain all info about the word */}
-
-         {/* give user to customise the quiz : by no. of quiz this can be done in quiz page itself selete the no. of word then the word then move to /quiz/quizId/feedback*/}
-      
-        {/* just start the quiz with that word immediately with a loader  */}
 
       </div>
 

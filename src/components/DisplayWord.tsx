@@ -23,9 +23,9 @@ export default function DisplayWord({info,total}:WordProp) {
   const[wordClicked,setWordClicked] = useState<boolean>(false)
 
   return (
-    <div className='bg-primary text-primary-foreground border p-2 rounded-2xl'>
+    <div>
       {info.learned === false ? <div>
-        <Button className='font-bold cursor-pointer' size={'sm'}
+        <Button className='font-bold hover:transition-shadow hover:shadow-xl cursor-pointer shadow-md' size={'lg'}
       onClick={()=>setWordClicked(true)}
       >{info.name}</Button>
 

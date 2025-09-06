@@ -1,9 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { Button } from "~/components/ui/button"
-import { Toaster } from "~/components/ui/sonner"
 import { XIcon } from "lucide-react"
-// import { toast } from "sonner"
 import { SearchWordsDataTable } from "~/app/_components/SearchWordsDataTable"
 
 interface filteredWordsProp{
@@ -52,7 +50,7 @@ export default function WordInfoModal({filteredWords,NumOfQuestion}:WordInfoModa
   return (
     <div>
      { isOpen && <div className="fixed inset-0 z-50 bg-black/50">
-     <div className=" bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%]  gap-4 rounded-lg border p-6  shadow-lg duration-200 sm:max-w-lg max-h-full  overflow-auto ">
+     <div className="bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%]  gap-4 rounded-lg border p-6  shadow-lg duration-200 sm:max-w-lg max-h-full  overflow-auto ">
        <div>
          <div className="container mx-auto py-10">
                 <SearchWordsDataTable columns={columns}  data={AllWords} userId={AllWords[0]?.userId ?? ""}  totalQuestions={NumOfQuestion}/>
@@ -68,7 +66,6 @@ export default function WordInfoModal({filteredWords,NumOfQuestion}:WordInfoModa
         </div>
       </div>
   </div>}
-      <Toaster/>
    </div>
   )
 }

@@ -8,13 +8,12 @@ const google = createGoogleGenerativeAI({
   apiKey:process.env.GEMINI_API_KEY
 });
 
-
 export async function getQuizInfo(prompt:string, totalQuestions:number){
      const {text} = await generateText({
        model: google('gemini-2.5-flash-lite'),
        system: `Generate a quiz of ${totalQuestions} multiple-choice questions for the word. Each question must have:
       "question": a string
-      "choices": 4 options (one correct)
+      "choices": 4 options (all are randomized in any order, one correct)
       "correct": the correct choice
       optional "explanation"
 

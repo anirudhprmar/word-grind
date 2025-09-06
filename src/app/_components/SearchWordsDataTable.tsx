@@ -42,15 +42,16 @@ interface DataTableProps<TData, TValue> {
 }
 
 interface RowData{ 
-    id:number
-    userId: string
-    name:string
-    meaning:string
-    example:string[]
-    pronunciation:string
-    synonyms:string[]
-    createdAt:Date
-    learned:boolean
+        id: number;
+    userId: string;
+    name: string;
+    meaning: string;
+    pronunciation: string | null;
+    example: string[] | null;
+    synonyms: string[] | null;
+    createdAt: Date;
+    updatedAt: Date | null;
+    learned: boolean;
 }
 
 

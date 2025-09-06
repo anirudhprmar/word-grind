@@ -1,8 +1,7 @@
 "use client"
 import {useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { api } from "~/lib/api";
 import { cn } from "~/lib/utils";
@@ -22,10 +21,12 @@ interface questionState{
   isSubmitted?:boolean
 }
 
-export default function QuizPage({ params }: { params: { quizId: string } }) {
+export default function QuizPage({ params }: { params: Promise<{ quizId: string }> }) {
   //get the quiz id from the url
   const router = useRouter()
-  const { quizId } = params;
+  const unwrappedParams = React.use(params);
+  const quizId = unwrappedParams.quizId;
+
   const searchParams = useSearchParams()
   const totalProblems = searchParams.get("totalQuestions")
   const total = totalProblems ? parseInt(totalProblems,10) : 2;
@@ -119,10 +120,10 @@ export default function QuizPage({ params }: { params: { quizId: string } }) {
   const currentQuestion = quizData[currentIndex]
   
   return (
-    <div>
-       <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-2">Quiz: {wordName}</h1>
-        <h2 className="text-xl">Question {currentIndex + 1} of {total}</h2>
+    <div className="container mx-auto p-5">
+       <div className="mb-8 flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold mb-2 ">Quiz: {wordName}</h1>
+        <h2 className="text-xl ">Question {currentIndex + 1} of {total}</h2>
         {/* <div className="text-sm text-gray-600">Score: {score}/{currentIndex}</div> */}
       </div>
 
@@ -144,8 +145,8 @@ export default function QuizPage({ params }: { params: { quizId: string } }) {
                 )}
                 onClick={() => handleAnswerSelect(choice)}
               >
-                <div className="flex items-center">
-                  <Input
+                <div className="flex items-center gap-4">
+                  <input
                     type="radio"
                     value={choice}
                     checked={questionStates[currentIndex]?.selectedAnswer === choice}
@@ -153,7 +154,7 @@ export default function QuizPage({ params }: { params: { quizId: string } }) {
                     disabled={questionStates[currentIndex]?.isSubmitted}
                     className="mr-3"
                   />
-                  <Label htmlFor={`choice${cindex}`}>{choice}</Label>
+                  <Label>{choice}</Label>
                 </div>
               </div>
             ))}
@@ -163,7 +164,7 @@ export default function QuizPage({ params }: { params: { quizId: string } }) {
       <Button
       onClick={handleSubmitAnswer}
       disabled={(!questionStates[currentIndex]?.selectedAnswer || questionStates[currentIndex]?.isSubmitted ) ?? saveProgress.isPending}
-      className="w-full"
+      className="w-full mt-5"
       >
         {
           saveProgress.isPending ? "Saving..." : questionStates[currentIndex]?.isSubmitted ? "Answer Submitted" : currentIndex === quizData.length - 1 ? "Finish Quiz" : "Submit Answer"

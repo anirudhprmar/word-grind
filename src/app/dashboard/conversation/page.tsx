@@ -3,8 +3,8 @@
 export default function Conversation() {
 
   return (
-    <div>
-      hi from conversation
+    <div className=" blur-2xl">
+      <h1 className="text-center pt-5 mt-10">🔒 Coming Soon</h1>
     </div>
   )
 }

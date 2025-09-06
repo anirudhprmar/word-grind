@@ -1,6 +1,6 @@
 'use client'
 import { ArrowLeft, Loader2Icon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
 import { toast } from 'sonner';
 import { Button } from '~/components/ui/button';
@@ -8,8 +8,7 @@ import { Toaster } from '~/components/ui/sonner';
 import { api } from '~/lib/api';
 
 interface FeedbackPageProps {
- params: { quizId: string };
- searchParams: { word?: string };
+ params: Promise<{ quizId: string }>
 }
 
 interface QuizProp{
@@ -25,9 +24,13 @@ interface QuizProp{
     totalQuestions: number;
 }
 
-export default function FeedbackPage({ params, searchParams }: FeedbackPageProps) {
-  const { quizId } = params;
-  const { word } = searchParams;
+export default function FeedbackPage({ params }: FeedbackPageProps) {
+   const unwrappedParams = React.use(params);
+  const quizId = unwrappedParams.quizId;
+
+    const searchParams = useSearchParams()
+    const word = searchParams.get("word") 
+
   const router = useRouter();
 
   const { data, isLoading,error  } = api.quiz.getQuizDetails.useQuery({
@@ -45,7 +48,6 @@ export default function FeedbackPage({ params, searchParams }: FeedbackPageProps
       }
 
       const result:QuizProp[] = data  ?? []
-      console.log(result)
       const report: QuizProp | undefined = result[0];
 
 
@@ -67,29 +69,37 @@ export default function FeedbackPage({ params, searchParams }: FeedbackPageProps
   };
 
   return (
-    <div>
-      <div>
-        <h1>Quiz Complete!</h1>
-        <h2>{word}</h2>
+    <main className='container mx-auto p-5 relative min-h-full'>
+      <section className='flex flex-col items-center justify-center gap-4'>
+        
+        <div className='flex flex-col items-center justify-center'>
+          <h1 className='font-bold text-2xl'>Quiz Complete!</h1>
+          <h2 className='underline text-lg font-medium'>{word}</h2>
+      </div>
 
         <div>
-          <p>Completed Quiz in : {minutes ? minutes+":": null}{seconds}</p>
+          <p className='text-xl'>Completed Quiz in : {minutes ? minutes+" min :": null}{seconds} sec</p>
         </div>
-      </div>
+      </section>
       
-      <div>
-        <div>Total Questions: {report?.totalQuestions}</div>
-        <div>Your Score: {report?.score}</div>
+      <section className='flex items-center flex-col justify-center pt-5 h-fit mt-10 font-serif'>
+        <div className='font-medium text-2xl'>Total Questions: {report?.totalQuestions}</div>
+        <div className='font-medium text-2xl '>Your Score: {report?.score}</div>
 
-        <div>{report?.result}</div>
+        <div className='text-2xl'>{report?.result === "failure" ? "Needs Improvement📈" : "Good Job🎉"}</div>
+      </section>
+
+      <div className='absolute bottom-10 right-10'>
+            <Button onClick={handleBackToQuizzes}
+            size={'lg'}
+            className='font-bold hover:transition-shadow hover:shadow-xl cursor-pointer shadow-md'
+            >
+            <ArrowLeft/> Back to Quizzes
+            </Button>
       </div>
-
-      <Button onClick={handleBackToQuizzes}>
-       <ArrowLeft/> Back to Quizzes
-      </Button>
 
       <Toaster/>
-    </div>
+    </main>
   );
 }
 

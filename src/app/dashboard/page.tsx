@@ -30,7 +30,7 @@ const userId = session.user.id
           </div>
 
           <div className=" flex-1 rounded-xl min-h-min p-5 ">
-            <p className="text-left pb-2">Your Learning Streak</p>
+            {/* <p className="text-left pb-2">Your Learning Streak</p> */}
             {/* <Calendar01/> */}
           </div>
         </div>
