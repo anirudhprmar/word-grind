@@ -15,7 +15,7 @@ export async function getQuizInfo(prompt:string, totalQuestions:number){
       "question": a string
       "choices": 4 options (all are randomized in any order, one correct)
       "correct": the correct choice
-      optional "explanation"
+      "explanation": short and sweet
 
       Output ONLY a JSON array of objects like:
         [

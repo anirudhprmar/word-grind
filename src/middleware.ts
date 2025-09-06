@@ -4,6 +4,7 @@ import { getSessionCookie } from "better-auth/cookies";
  
 export async function middleware(request: NextRequest) {
 	const sessionCookie = getSessionCookie(request);
+	const pathname = request.nextUrl.pathname
     
     // THIS IS NOT SECURE!
     // This is the recommended approach to optimistically redirect users
@@ -13,10 +14,15 @@ export async function middleware(request: NextRequest) {
 	if (!sessionCookie) {
 		return NextResponse.redirect(new URL("/", request.url));
 	}
+
+	  if (pathname === '/' && sessionCookie) {
+    const redirectUrl = new URL('/dashboard', request.url);
+    return NextResponse.redirect(redirectUrl);
+  }
  
 	return NextResponse.next();
 }
  
 export const config = {
-	matcher: ["/dashboard","/collection"], // Specify the routes the middleware applies to
+	matcher: ["/","/dashboard/:path*"]
 };
