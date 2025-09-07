@@ -19,6 +19,7 @@ interface wordInfoProps {
         pronunciation:string,
         synonyms:string[],
     }
+    onClose:()=>void
 }
 
 interface wordProp{
@@ -30,7 +31,7 @@ interface wordProp{
     synonyms:string[],
 }
 
-export function WordInfoModal({wordInfo}:wordInfoProps) {
+export function WordInfoModal({wordInfo,onClose}:wordInfoProps) {
 
   const [isOpen,setIsOpen] = useState(false)
   const [word,setWord] = useState<wordProp | null>(null)
@@ -56,7 +57,9 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
            if (addingWord) {
                  toast("Word added ✅")
                  setWord(null)
-                 setIsOpen(!isOpen)
+                 if(onClose){
+                  onClose()
+                 }
                }
        } catch (error) {
         console.log("error in adding word",error)
@@ -66,9 +69,12 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
        }
     }
 
-    const handleIgnore = () =>( 
-      setIsOpen(!isOpen) 
-     )
+    const handleIgnore = () => {
+      setIsOpen(false)
+      if(onClose){
+        onClose()
+      } 
+    }
 
   return (
     <div>

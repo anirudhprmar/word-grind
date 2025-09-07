@@ -49,7 +49,7 @@ const word = form.watch("prompt")
 
 const userID = userId
   
-
+const [isModalOpen,setIsModelOpen]= useState<boolean>(false)
 
 async function onSubmit(values: z.infer<typeof formSchema>) {
   try {
@@ -79,6 +79,12 @@ useEffect(() => {
   }
 }, [generation]);
 
+useEffect(()=>{
+  if(parsedWord){
+    setIsModelOpen(true)
+  }
+},[parsedWord])
+
   return (
     <div className='flex flex-col'>
 
@@ -106,8 +112,9 @@ useEffect(() => {
     </div>
 
      <div className=' mt-10'>
-      {parsedWord && userID ? (
+      {parsedWord && isModalOpen ? (
     <WordInfoModal
+      onClose={()=>setIsModelOpen(false)}
       wordInfo={{
         userId: userID,
         name: parsedWord.name,
