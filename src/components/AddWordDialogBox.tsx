@@ -68,8 +68,12 @@ const form = useForm<z.infer<typeof formSchema>>({
     name:"synonyms"
   })
 
-  
-  const addWord = api.word.addWord.useMutation()
+  const trpc = api.useUtils()
+  const addWord = api.word.addWord.useMutation({
+    onSuccess:async()=>{
+      await trpc.word.invalidate()
+    }
+  })
 
 
   async function onSubmit(values: z.infer<typeof formSchema>) { 

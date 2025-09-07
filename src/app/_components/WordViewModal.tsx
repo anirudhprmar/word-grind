@@ -49,11 +49,20 @@ export function WordViewModal({wordInfo, onClose}: wordInfoProps) {
     }
     },[wordInfo])
   
-  
-    const setLearned = api.word.markLearned.useMutation()
-    const setDelete = api.word.deleteWord.useMutation()
+    const trpc = api.useUtils()
 
-    // console.log("word",word)
+    const setLearned = api.word.markLearned.useMutation({
+      onSuccess:async()=>{
+        await trpc.word.invalidate()
+      }
+    })
+
+    const setDelete = api.word.deleteWord.useMutation({
+      onSuccess:async()=>{
+        await trpc.word.invalidate()
+      }
+    })
+
 
     const handleMarkAsLearned = async()=>{
       try {

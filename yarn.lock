@@ -29,6 +29,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ai-sdk/mistral@npm:^2.0.13":
+  version: 2.0.13
+  resolution: "@ai-sdk/mistral@npm:2.0.13"
+  dependencies:
+    "@ai-sdk/provider": "npm:2.0.0"
+    "@ai-sdk/provider-utils": "npm:3.0.8"
+  peerDependencies:
+    zod: ^3.25.76 || ^4
+  checksum: 10c0/afa3d5322ae0555759a4ab7ebc85671fdba1bc45522f31c3bc58e8e9a619d5e351ae700372bd9b213f4d82a62b370c829277db195708b717bb250400611a6d7a
+  languageName: node
+  linkType: hard
+
 "@ai-sdk/provider-utils@npm:3.0.3":
   version: 3.0.3
   resolution: "@ai-sdk/provider-utils@npm:3.0.3"
@@ -40,6 +52,19 @@ __metadata:
   peerDependencies:
     zod: ^3.25.76 || ^4
   checksum: 10c0/f02e26a6b85ef728862505b150475ef2e52d60130ca64b23316ff7b952f1817b01f959b9e48819dad64d82a96ba4ad538610d69dbbfe5be4b4b38469c16a6ccf
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/provider-utils@npm:3.0.8":
+  version: 3.0.8
+  resolution: "@ai-sdk/provider-utils@npm:3.0.8"
+  dependencies:
+    "@ai-sdk/provider": "npm:2.0.0"
+    "@standard-schema/spec": "npm:^1.0.0"
+    eventsource-parser: "npm:^3.0.5"
+  peerDependencies:
+    zod: ^3.25.76 || ^4
+  checksum: 10c0/f466657c886cbb9f7ecbcd2dd1abc51a88af9d3f1cff030f7e97e70a4790a99f3338ad886e9c0dccf04dacdcc84522c7d57119b9a4e8e1d84f2dae9c893c397e
   languageName: node
   linkType: hard
 
@@ -4449,6 +4474,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventsource-parser@npm:^3.0.5":
+  version: 3.0.6
+  resolution: "eventsource-parser@npm:3.0.6"
+  checksum: 10c0/70b8ccec7dac767ef2eca43f355e0979e70415701691382a042a2df8d6a68da6c2fca35363669821f3da876d29c02abe9b232964637c1b6635c940df05ada78a
+  languageName: node
+  linkType: hard
+
 "fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
@@ -7224,6 +7256,7 @@ __metadata:
   resolution: "wordgrind@workspace:."
   dependencies:
     "@ai-sdk/google": "npm:^2.0.6"
+    "@ai-sdk/mistral": "npm:^2.0.13"
     "@ai-sdk/react": "npm:^2.0.15"
     "@auth/drizzle-adapter": "npm:^1.10.0"
     "@dnd-kit/core": "npm:^6.3.1"

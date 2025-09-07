@@ -2,9 +2,7 @@
 
 ## Core functionalities
 
-- [X]-  fix rerender of dialog box in collection just like i solved in quiz page in disaply words
-- [X]-  make the pagination fix and , add word no toaster
-- [ ]-  refetching on any changes and setup mistral api
+- [X]-  refetching on any changes and setup mistral api
 - [ ]- record a demo video and update the landing page with demo video - 20 min
 - [ ]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link - 30 min Also google oauth settings update
 - [ ]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones. - 15-20min

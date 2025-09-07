@@ -2,15 +2,20 @@
 
 import { generateText } from 'ai';
 
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
+// import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { createMistral } from '@ai-sdk/mistral';
 
-const google = createGoogleGenerativeAI({
-  apiKey:process.env.GEMINI_API_KEY
+// const google = createGoogleGenerativeAI({
+//   apiKey:process.env.GEMINI_API_KEY
+// });
+const mistral = createMistral({
+  apiKey:process.env.MISTRAL_API_KEY
 });
 
 export async function getWordInfo(prompt:string){
      const {text} = await generateText({
-       model: google('gemini-2.5-flash-lite'),
+      //  model:google('gemini-2.5-flash-lite',
+       model: mistral("mistral-small-latest"),
        system: `For any user word (even with typos), reply with only a plain JavaScript object, nothing else, and do NOT use markdown or backticks. Your response must be exactly:
    {
      "name": "corrected word if typo, else as given",

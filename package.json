@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.6",
+    "@ai-sdk/mistral": "^2.0.13",
     "@ai-sdk/react": "^2.0.15",
     "@auth/drizzle-adapter": "^1.10.0",
     "@dnd-kit/core": "^6.3.1",

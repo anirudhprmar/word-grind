@@ -2,15 +2,19 @@
 
 import { generateText } from 'ai';
 
-import { createGoogleGenerativeAI } from '@ai-sdk/google';
+// import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { createMistral } from '@ai-sdk/mistral';
 
-const google = createGoogleGenerativeAI({
-  apiKey:process.env.GEMINI_API_KEY
+// const google = createGoogleGenerativeAI({
+//   apiKey:process.env.GEMINI_API_KEY
+// });
+const mistral = createMistral({
+  apiKey:process.env.MISTRAL_API_KEY
 });
 
 export async function getQuizInfo(prompt:string, totalQuestions:number){
      const {text} = await generateText({
-       model: google('gemini-2.5-flash-lite'),
+       model: mistral('mistral-large-latest'),
        system: `Generate a quiz of ${totalQuestions} multiple-choice questions for the word. Each question must have:
       "question": a string
       "choices": 4 options (all are randomized in any order, one correct)

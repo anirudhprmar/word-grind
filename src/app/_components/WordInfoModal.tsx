@@ -34,22 +34,26 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
 
   const [isOpen,setIsOpen] = useState(false)
   const [word,setWord] = useState<wordProp | null>(null)
-
-  useEffect(()=>{
-    setIsOpen(true)
-  },[])
   
   useEffect(()=>{
-    if(wordInfo) setWord(wordInfo)
+    if(wordInfo) {
+      setWord(wordInfo)
+      setIsOpen(true)
+    }
     },[wordInfo])
   
-  
-    const addWord = api.word.addWord.useMutation()
+    const trpc = api.useUtils()
+    const addWord = api.word.addWord.useMutation({
+      onSuccess:async()=>{
+        await trpc.word.invalidate()
+      }
+    }) 
 
-    const handleAddToCollection = ()=>{
+    const handleAddToCollection = async()=>{
        try {
-         addWord.mutate(wordInfo)
-           if (addWord.isSuccess) {
+        if(!wordInfo) return;
+         const addingWord = await addWord.mutateAsync(wordInfo)
+           if (addingWord) {
                  toast("Word added ✅")
                  setWord(null)
                  setIsOpen(!isOpen)
@@ -135,7 +139,7 @@ export function WordInfoModal({wordInfo}:wordInfoProps) {
               </Button>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <div>
-              <Button type="button" disabled={addWord.isSuccess || addWord.isPending} onClick={handleAddToCollection} variant="secondary" className="cursor-pointer">
+              <Button type="button" disabled={addWord.isPending} onClick={handleAddToCollection} variant="secondary" className="cursor-pointer">
                 Add to Collection
               </Button>
             </div>
