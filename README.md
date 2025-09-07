@@ -2,10 +2,11 @@
 
 ## Core functionalities
 
-- [ ]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link - 30 min Also google oauth settings update
-- [ ]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones. - 15-20min
+- [X]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link - 30 min 
+- [X]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones. - 15-20min
 - [ ]- Integrate Polar. Set up webhooks and tRPC for subscription checks also all the legal shit - 30-45 min
 - [ ]- Manual tests for auth, quizzes, and emails. Fix bugs. - 30min also messages if session expired or just redirect to /
+- [ ]- Also google oauth settings update
 - [ ]- work on user profile -20min
 - [ ]- error mangement - sentry -30min
 - [ ]- quick  analytics - posthog setup -20min

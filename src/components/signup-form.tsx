@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form"
-import { signIn } from "~/server/betterAuth"
+import { signUp } from "~/server/betterAuth"
 import { authClient } from "~/lib/auth-client"
 import Link from "next/link"
 import { toast } from "sonner"
@@ -25,13 +25,14 @@ import { Loader2 } from "lucide-react"
 import { Toaster } from "./ui/sonner"
 
 const formSchema = z.object({
+  name:z.string().min(2),
   email:z.email(),
   password:z.string().min(8)
 })
 
 
 
-export function LoginForm({
+export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -41,6 +42,7 @@ export function LoginForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+        name:"",
       email: "",
       password: "",
     },
@@ -50,10 +52,10 @@ export function LoginForm({
   async function onSubmit(values: z.infer<typeof formSchema>) {
    try {
     setLoading(true)
-    const {success,message} = await signIn(values)
+    const {success,message} = await signUp(values)
 
     if (success) {
-      toast.success(message )
+      toast.success(message)
       router.push('/dashboard')
     }else{
       toast.error(message)
@@ -72,11 +74,10 @@ export function LoginForm({
       })
   }
 
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Form {...form}>
-
-      
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2">
@@ -88,14 +89,27 @@ export function LoginForm({
             </Link>
             <h1 className="text-xl font-bold">Welcome to WordGrind</h1>
             <div className="text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <Link href={'/signup'} className="underline underline-offset-4">
-                Sign up 
-              </Link>
+              Already have an account?{" "}
+                 <Link href={'/login'} className="underline underline-offset-4">
+                Login 
+                </Link>
             </div>
           </div>
           <div className="flex flex-col gap-6">
             <div className="grid gap-3 grid-rows-2">
+                    <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="John Doe" type="text" required {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
                     <FormField
                 control={form.control}
                 name="email"
@@ -125,15 +139,15 @@ export function LoginForm({
               
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? <Loader2 className="size-4 animate-spin"/> : "Login"}
+              {loading ? <Loader2 className="size-4 animate-spin"/> : "Sign Up"}
             </Button>
           </div>
           <div className="text-right text-sm">
-                      Try logging in with email?{" "}
-                      <Link href={'/signup/email-signup'} className="underline underline-offset-4">
-                      Login with email
-                      </Link>
-                    </div>
+            Try signing up with email?{" "}
+            <Link href={'/login/email-login'} className="underline underline-offset-4">
+            Sign up with email
+            </Link>
+          </div>
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
             <span className="bg-background text-muted-foreground relative z-10 px-2">
               Or

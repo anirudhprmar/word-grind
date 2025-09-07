@@ -3,8 +3,10 @@ import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { db } from '~/server/db';
 import { admin } from "better-auth/plugins"
+import { magicLink } from "better-auth/plugins";
+import { Resend } from 'resend';
 
-// import { magicLink } from "better-auth/plugins";
+const resend = new Resend(process.env.RESEND_API_KEY)
  
 export const auth = betterAuth({
     emailAndPassword:{
@@ -21,5 +23,17 @@ export const auth = betterAuth({
             clientSecret:process.env.AUTH_GOOGLE_SECRET!
         }
     },
-    plugins:[admin(), nextCookies()]
+    plugins:[magicLink({
+        sendMagicLink:async({email,url},request) =>{
+
+         const { data, error } = await resend.emails.send({
+            from: "Wordgrind <onboarding@resend.wordgrind.top>",
+            to: email,
+            subject: "Your Magic Sign-In Link",
+            html: `Click <a href="${url}">here</a> to sign in. This link will expire within 5 min.`,
+            });
+        }
+    }),
+    admin(), 
+    nextCookies()]
 });
