@@ -1,7 +1,7 @@
-import { words } from '~/server/db/schema';
+import { quizResponse, quizzes, words } from '~/server/db/schema';
 import { createTRPCRouter, publicProcedure } from '../trpc';
 import { z } from 'zod';
-import { eq } from 'drizzle-orm';
+import { and, eq, inArray } from 'drizzle-orm';
 
 export const wordRouter = createTRPCRouter({
     addWord:publicProcedure
@@ -42,16 +42,42 @@ export const wordRouter = createTRPCRouter({
         return userWords
     }),
 
-    deleteWord:publicProcedure
-    .input(z.object({
-        id:z.number()
-    }))
-    .mutation(async({input,ctx})=>{
-        await ctx.db.delete(words).where(eq(words.id,input.id))
-        return {
-            message:"word deleted"
-        }
-    }),
+ deleteWord: publicProcedure
+  .input(z.object({
+    id: z.number(),
+    userId: z.string()
+  }))
+  .mutation(async ({ input, ctx }) => {
+    await ctx.db.transaction(async (tx) => {
+      
+      // 1. Get all quiz IDs related to word and user
+      const relatedQuizzes = await tx
+        .select({ id: quizzes.id })
+        .from(quizzes)
+        .where(and(eq(quizzes.wordId, input.id), eq(quizzes.userId, input.userId)));
+
+      const quizIds = relatedQuizzes.map(q => q.id);
+
+      if (quizIds.length > 0) {
+        // 2. Delete all related quiz responses by quiz IDs
+        await tx.delete(quizResponse).where(inArray(quizResponse.quizId,quizIds))
+
+        // 3. Delete quizzes themselves
+        await tx.delete(quizzes).where(and(
+          eq(quizzes.wordId, input.id),
+          eq(quizzes.userId, input.userId)
+        ));
+      }
+
+      // 4. Delete the word owned by user
+      await tx.delete(words).where(and(
+        eq(words.id, input.id),
+        eq(words.userId, input.userId)
+      ));
+    });
+
+    return { message: "word deleted" };
+  }),
 
     markLearned:publicProcedure
     .input(z.object({

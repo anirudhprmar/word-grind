@@ -72,7 +72,7 @@ const form = useForm<z.infer<typeof formSchema>>({
   const addWord = api.word.addWord.useMutation()
 
 
-  function onSubmit(values: z.infer<typeof formSchema>) { 
+  async function onSubmit(values: z.infer<typeof formSchema>) { 
 
     try {
       const exampleArray = Array.isArray(values.example) ? values.example : []
@@ -86,8 +86,8 @@ const form = useForm<z.infer<typeof formSchema>>({
         synonyms: synonymsArray.map((item) => item.value),
         userId:userId
       }
-      addWord.mutate(payload)
-      if (addWord.isSuccess) {
+      const addingWord = await addWord.mutateAsync(payload)
+      if (addingWord) {
         toast("Word added!")
       }
       form.reset()
@@ -96,7 +96,7 @@ const form = useForm<z.infer<typeof formSchema>>({
       if (addWord.isError) {
         toast(`${addWord.error.message}`)
       }
-    }
+    } 
   }
 
   return (

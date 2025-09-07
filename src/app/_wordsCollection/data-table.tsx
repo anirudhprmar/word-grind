@@ -8,12 +8,13 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  getPaginationRowModel
+  getPaginationRowModel,
+
 } from "@tanstack/react-table"
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import {
   DropdownMenu,
@@ -68,6 +69,17 @@ export function DataTable<TData extends RowData, TValue>({
 
   const [rowSelection, setRowSelection] = React.useState({})
   const [selectedWord,setSelectedWord] = useState<TData | null>(null)
+  const [isModalOpen,setIsModelOpen] = useState<boolean>(false)
+  const [pagination, setPagination] = React.useState({
+  pageIndex: 0,
+  pageSize: 3, // default page size example
+});
+
+useEffect(()=>{
+  if(selectedWord){
+    setIsModelOpen(true)
+  }
+},[selectedWord])
 
 
   const table = useReactTable({
@@ -78,13 +90,14 @@ export function DataTable<TData extends RowData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
-
+    onRowSelectionChange: setRowSelection,
     state:{
       columnFilters,
       columnVisibility,
-      rowSelection
-    }
+      rowSelection,
+      pagination:pagination
+    },
+    onPaginationChange:setPagination
   })
 
  
@@ -185,9 +198,10 @@ export function DataTable<TData extends RowData, TValue>({
       </Table>
 
       <div className="mt-10">
-        {selectedWord ?     
+        {selectedWord && isModalOpen ?     
         <WordViewModal
-        key={selectedWord.id}
+        key={selectedWord.name}
+        onClose={()=>setIsModelOpen(false)}
         wordInfo={{
             name:selectedWord.name ,
             id:selectedWord.id,
@@ -199,7 +213,7 @@ export function DataTable<TData extends RowData, TValue>({
             createdAt:selectedWord.createdAt,
             learned:selectedWord.learned
           }}
-        /> : null}
+        /> : null }
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">

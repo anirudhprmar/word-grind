@@ -69,6 +69,10 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
 
   const [rowSelection, setRowSelection] = React.useState({})
   const [selectedWord,setSelectedWord] = useState<TData | null>(null)
+  const [pagination, setPagination] = React.useState({
+  pageIndex: 0,
+  pageSize: 3, // default page size example
+});
 
 
   const table = useReactTable({
@@ -79,13 +83,14 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
-
+    onRowSelectionChange: setRowSelection,
     state:{
       columnFilters,
       columnVisibility,
-      rowSelection
-    }
+      rowSelection,
+      pagination
+    },
+    onPaginationChange:setPagination
   })
 
  

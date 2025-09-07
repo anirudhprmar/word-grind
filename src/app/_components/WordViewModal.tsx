@@ -12,16 +12,17 @@ import { toast } from "sonner"
 
 interface wordInfoProps {
     wordInfo:{
-    id:number
-    userId: string
-    name:string
-    meaning:string
-    example:string[]
-    pronunciation:string
-    synonyms:string[]
-    createdAt:Date
-    learned:boolean
+      id:number
+      userId: string
+      name:string
+      meaning:string
+      example:string[]
+      pronunciation:string
+      synonyms:string[]
+      createdAt:Date
+      learned:boolean
     }
+    onClose: () => void
 }
 
 interface wordProp{ 
@@ -36,17 +37,16 @@ interface wordProp{
     learned:boolean
 }
 
-export function WordViewModal({wordInfo}:wordInfoProps) {
+export function WordViewModal({wordInfo, onClose}: wordInfoProps) {
 
   const [isOpen,setIsOpen] = useState(false)
   const [word,setWord] = useState<wordProp | null>(null)
-
-  useEffect(()=>{
-    setIsOpen(true)
-  },[word])
   
   useEffect(()=>{
-    if(wordInfo) setWord(wordInfo)
+    if(wordInfo) {
+      setWord(wordInfo)
+      setIsOpen(true)
+    }
     },[wordInfo])
   
   
@@ -55,16 +55,16 @@ export function WordViewModal({wordInfo}:wordInfoProps) {
 
     // console.log("word",word)
 
-    const handleMarkAsLearned = ()=>{
+    const handleMarkAsLearned = async()=>{
       try {
          if(!word?.id) return;
-         console.log("before")
-         setLearned.mutate({id:word?.id})
-         console.log("after")
-           if (setLearned.isSuccess) {
+         const wordUpdate = await setLearned.mutateAsync({id:word?.id})
+           if (wordUpdate.message) {
                  toast("Congratulation 🎉🎉")
                  setWord(null)
-                 setIsOpen(!isOpen)
+                 if(onClose){
+                  onClose()
+                 }
                }
        } catch (error) {
         console.log("error in adding word",error)
@@ -74,14 +74,16 @@ export function WordViewModal({wordInfo}:wordInfoProps) {
        }
     }
 
-    const handleWordDelete = ()=>{
+    const handleWordDelete = async()=>{
       try {
          if(!word?.id) return;
-         setDelete.mutate({id:word?.id})
-           if (setLearned.isSuccess) {
+         const wordDelete = await setDelete.mutateAsync({id:word?.id,userId:word?.userId})
+           if (wordDelete.message) {
                  toast("Word Deleted ")
                  setWord(null)
-                 setIsOpen(!isOpen)
+                if(onClose){
+                  onClose()
+                }
                }
        } catch (error) {
         console.log("error in adding word",error)
@@ -91,9 +93,12 @@ export function WordViewModal({wordInfo}:wordInfoProps) {
        }
     }
 
-    const handleIgnore = () =>( 
-      setIsOpen(!isOpen) 
-     )
+    const handleIgnore = () => {
+      setIsOpen(false)
+      if(onClose){
+        onClose()
+      } 
+    }
 
   return (
     <div>
@@ -176,13 +181,13 @@ export function WordViewModal({wordInfo}:wordInfoProps) {
               </Button>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <div>
-              <Button type="button" disabled={setDelete.isSuccess || setDelete.isPending} onClick={handleWordDelete} variant="destructive" className="cursor-pointer">
+              <Button type="button" disabled={setDelete.isPending} onClick={handleWordDelete} variant="destructive" className="cursor-pointer">
                 Delete Word
               </Button>
             </div>
             
            { word?.learned === false ? <div>
-              <Button type="button" disabled={setLearned.isSuccess || setLearned.isPending} onClick={handleMarkAsLearned} variant="secondary" className="cursor-pointer">
+              <Button type="button" disabled={setLearned.isPending} onClick={handleMarkAsLearned} variant="secondary" className="cursor-pointer">
                 Mark as Mastered 
               </Button>
             </div> : null}
