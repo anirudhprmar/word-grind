@@ -1,5 +1,4 @@
 'use client'
-import { cn } from "~/lib/utils"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import {z} from 'zod'
@@ -36,7 +35,6 @@ export function EmailLoginForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-        name:"",
       email: "",
     },
   })
@@ -47,7 +45,7 @@ export function EmailLoginForm({
     setLoading(true)
     const { data, error } = await authClient.signIn.magicLink({
     email: values.email, 
-    name: values.name,
+    name: "",
     callbackURL: "/dashboard",
     newUserCallbackURL: "/dashboard",
     errorCallbackURL: "/error",
@@ -70,30 +68,11 @@ export function EmailLoginForm({
     
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div {...props}>
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col items-center gap-2">
-           
-            <h1 className="text-xl font-bold">Login with email</h1>
-          </div>
 
-          <div className="flex flex-col gap-6">
             <div className="grid gap-3 grid-rows-2">
-                    <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="John Doe" type="text" required {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
                     <FormField
                 control={form.control}
                 name="email"
@@ -107,13 +86,11 @@ export function EmailLoginForm({
                   </FormItem>
                 )}
               />
-              
-            </div>
+
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? <Loader2 className="size-4 animate-spin"/> : "Login with email"}
             </Button>
-          </div>
-        </div>
+            </div>
       </form>
       </Form>
       <Toaster/>

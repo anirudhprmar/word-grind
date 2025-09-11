@@ -130,7 +130,7 @@ export function LoginForm({
           </div>
           <div className="text-right text-sm">
                       Try logging in with email?{" "}
-                      <Link href={'/signup/email-signup'} className="underline underline-offset-4">
+                      <Link href={'/sign-in/email-login'} className="underline underline-offset-4">
                       Login with email
                       </Link>
                     </div>

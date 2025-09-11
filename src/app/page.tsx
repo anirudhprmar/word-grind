@@ -8,8 +8,12 @@ import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
 import FAQ from "~/components/FAQ";
 import { useRef, type RefObject } from "react";
+// import { getSubscriptionDetails } from "~/lib/subscription";
 
 export default function Home() {
+
+  // const subscriptionDetails = await getSubscriptionDetails()
+
  const featuresRef = useRef<HTMLElement>(null)
   const demoRef = useRef<HTMLElement>(null)
   const pricingRef = useRef<HTMLElement>(null)
@@ -21,6 +25,8 @@ export default function Home() {
       block:"start"
     })
   }
+
+
   return (
     <div className=" min-h-screen">
       
@@ -38,7 +44,8 @@ export default function Home() {
     <Hero/>
     <Features ref={featuresRef}/>
     {/* <Demo ref={demoRef}/> */}
-    <Pricing ref={pricingRef}/>
+    <Pricing ref={pricingRef}/> 
+    {/* change this pricing with the one i just created */}
     <FAQ/>
     <CTA/>
       </main>

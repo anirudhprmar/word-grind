@@ -4,6 +4,7 @@ import {
   BadgeCheck,
   Bell,
   ChevronsUpDown,
+  CreditCard,
   LogOut,
   Sparkles,
 } from "lucide-react"
@@ -29,6 +30,9 @@ import {
   useSidebar,
 } from "~/components/ui/sidebar"
 import { LogoutButton } from "./LogoutBtn"
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { getUserSubscriptionStatus } from "~/lib/subscription"
 
 export function NavUser({
   user,
@@ -41,8 +45,14 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar()
 
-
-  // get user details 
+const [userInfo,setUserInfo] = useState<"none" | "active" | "canceled" | "expired" |  null>(null)
+     useEffect(()=>{
+          async function fetchUser() {
+             const data = await getUserSubscriptionStatus()
+            setUserInfo(data)
+          }
+           void fetchUser()
+        },[])
 
   return (
     <SidebarMenu>
@@ -87,9 +97,9 @@ export function NavUser({
 
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro 
-                {/* user active plan */}
+                
+                {userInfo === "active" ? <div className="flex items-center"><Sparkles /> Starter Plan Active</div> :"No Active Plan"}
+
               </DropdownMenuItem>
             </DropdownMenuGroup>
 
@@ -98,12 +108,16 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
-                Account
+                <Link href={'/dashboard/profile'}>
+                  Account
+                </Link>
               </DropdownMenuItem>
-              {/* <DropdownMenuItem>
+              <DropdownMenuItem>
                 <CreditCard />
-                Billing
-              </DropdownMenuItem> */}
+                <Link href={'/dashboard/payment'}>
+                  Billing
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />
                 Notifications
@@ -114,7 +128,6 @@ export function NavUser({
             <DropdownMenuItem>
               <LogOut />
               <LogoutButton/>
-              {/* logout */}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

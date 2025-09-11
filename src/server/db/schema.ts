@@ -142,3 +142,29 @@ export const verification = createTable("verification", (d)=>({
     () => /* @__PURE__ */ new Date(),
   ),
 }));
+
+export const subscription = createTable("subscription",(d) =>({
+  id: d.text("id").primaryKey(),
+  createdAt: d.timestamp("createdAt").notNull(),
+  modifiedAt: d.timestamp("modifiedAt"),
+  amount: d.integer("amount").notNull(),
+  currency: d.text("currency").notNull(),
+  recurringInterval: d.text("recurringInterval").notNull(),
+  status: d.text("status").notNull(),
+  currentPeriodStart: d.timestamp("currentPeriodStart").notNull(),
+  currentPeriodEnd: d.timestamp("currentPeriodEnd").notNull(),
+  cancelAtPeriodEnd: d.boolean("cancelAtPeriodEnd").notNull().default(false),
+  canceledAt: d.timestamp("canceledAt"),
+  startedAt: d.timestamp("startedAt").notNull(),
+  endsAt: d.timestamp("endsAt"),
+  endedAt: d.timestamp("endedAt"),
+  customerId: d.text("customerId").notNull(),
+  productId: d.text("productId").notNull(),
+  discountId: d.text("discountId"),
+  checkoutId: d.text("checkoutId").notNull(),
+  customerCancellationReason: d.text("customerCancellationReason"),
+  customerCancellationComment: d.text("customerCancellationComment"),
+  metadata: d.text("metadata"), // JSON string
+  customFieldData: d.text("customFieldData"), // JSON string
+  userId: d.text("userId").references(() => user.id),
+}));

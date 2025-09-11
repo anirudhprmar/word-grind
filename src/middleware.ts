@@ -1,28 +1,26 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
- 
 export async function middleware(request: NextRequest) {
-	const sessionCookie = getSessionCookie(request);
-	const pathname = request.nextUrl.pathname
-    
-    // THIS IS NOT SECURE!
-    // This is the recommended approach to optimistically redirect users
-    // We recommend handling auth checks in each page/route
-    
-	
-	if (!sessionCookie) {
-		return NextResponse.redirect(new URL("/", request.url));
-	}
+  const sessionCookie = getSessionCookie(request);
+  const { pathname } = request.nextUrl;
 
-	  if (pathname === '/' && sessionCookie) {
-    const redirectUrl = new URL('/dashboard', request.url);
-    return NextResponse.redirect(redirectUrl);
+  // /api/payments/webhooks is a webhook endpoint that should be accessible without authentication
+  if (pathname.startsWith("/api/polar/webhooks")) {
+    return NextResponse.next();
   }
- 
-	return NextResponse.next();
+
+  if (sessionCookie && ["/sign-in", "/sign-up"].includes(pathname)) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
+  if (!sessionCookie && pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+
+  return NextResponse.next();
 }
- 
+
 export const config = {
-	matcher: ["/","/dashboard/:path*"]
+  matcher: ["/dashboard/:path*", "/sign-in", "/sign-up"],
 };

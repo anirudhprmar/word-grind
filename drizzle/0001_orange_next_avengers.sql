@@ -1,1 +1,0 @@
-ALTER TABLE "wordgrind_words" ALTER COLUMN "example" SET DATA TYPE varchar(256)[];

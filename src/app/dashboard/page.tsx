@@ -1,6 +1,5 @@
 import Welcome from "../_components/Welcome"
 import WordSearchInput from "../_components/WordSearchInput"
-// import Calendar01 from "~/components/calendar-01"
 import { auth } from "~/lib/auth"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"

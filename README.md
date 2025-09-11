@@ -2,24 +2,30 @@
 
 ## Core functionalities
 
-- [X]- proper authenticaiton with better auth with polar integration (VERIFY PAYMENT OF BACKEND) also login with email using magic link - 30 min 
-- [X]- Set up Resend for daily vocab reminders or quiz prompts. Trigger emails on events like signup or streak milestones. - 15-20min
-- [ ]- Integrate Polar. Set up webhooks and tRPC for subscription checks also all the legal shit - 30-45 min
+
+if not paid then pop up to pay
+landing page buy now -> login -> pay or buy now landing page -> polar -> /dashboard
+
+thru
+- [X]- Integrate Polar.- 1hr 
+- [X]- work on user profile -20min
 - [ ]- Manual tests for auth, quizzes, and emails. Fix bugs. - 30min also messages if session expired or just redirect to /
+fri
 - [ ]- Also google oauth settings update
-- [ ]- work on user profile -20min
 - [ ]- error mangement - sentry -30min
 - [ ]- quick  analytics - posthog setup -20min
 - [ ]- redis, upstash (rate limitting). Add rate limiting, input validation in tRPC, and basic CORS. Test for common vulnerabilities (e.g., SQL injection via Drizzle).- 1-2hr
-- [ ]- Check safety and security -1.5hr
+- [ ]- Check safety and security -1.5hr (server vs client component check with ai , don't query the db on client components, i've done that which i need to fix like getting list of words on client componenet, do all these on server side, rate limitter)
 - [ ]- set up schema.org - 20min
 - [ ]- get landing page links working -> get wordgrind and login -> update the content on hero page (check my history of perplexity) -20min
-
+sat
+- [ ]- clean ui button , bg etc, i think use tweak cn and generate a new theme and use that
+- [ ]- set up dark mode: 10min
 - [ ]- record a demo video and update the landing page with demo video - 20 min
 
-- [ ]- clean ui button , bg etc
-- [ ]- set up dark mode: 10min
-
+send email when purchase 
+maybe remove login with email and password and go with google or magic link
+Sun
 - [ ]- Launch the APP - 30 min
 - [ ]- Use tools like Google Forms for quick feedback. -5min
 - [ ]- start marketting the app: reddit , x , linkedIn, hacker news distribution is the key - 1.5 hr

@@ -3,7 +3,6 @@
 import * as React from "react"
 
 import { NavMain } from "~/components/nav-main"
-// import { NavSecondary } from "~/components/nav-secondary"
 import { NavUser } from "~/components/nav-user"
 import {
   Sidebar,
@@ -15,6 +14,8 @@ import {
   SidebarMenuItem,
 } from "~/components/ui/sidebar"
 import { CheckCheck, LayoutIcon, MessageCircle, SquareLibrary } from "lucide-react"
+import { NavSecondary } from "./nav-secondary"
+import { IconSettings } from "@tabler/icons-react"
 
 interface userProps{
   userInfo:{
@@ -49,24 +50,20 @@ const data = {
       icon: MessageCircle,
     }
   ],
-  // navSecondary: [
-  //   {
-  //     title: "Settings",
-  //     url: "#",
-  //     icon: IconSettings,
-  //   },
-  //   {
-  //     title: "Get Help",
-  //     url: "#",
-  //     icon: IconHelp,
-  //   },
-  // ],
+  navSecondary: [
+    {
+      title: "Settings",
+      url: "/dashboard/settings",
+      icon: IconSettings,
+    },
+  ],
 
 }
 
 
 
 export function AppSidebar({userInfo, ...props }:AppSidebarProps) {
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -85,7 +82,7 @@ export function AppSidebar({userInfo, ...props }:AppSidebarProps) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain}  />
-        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={userInfo}  />

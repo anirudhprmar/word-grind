@@ -4,12 +4,13 @@ import { generateText } from 'ai';
 
 // import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { createMistral } from '@ai-sdk/mistral';
+import { env } from '~/env';
 
 // const google = createGoogleGenerativeAI({
 //   apiKey:process.env.GEMINI_API_KEY
 // });
 const mistral = createMistral({
-  apiKey:process.env.MISTRAL_API_KEY
+  apiKey:env.MISTRAL_API_KEY
 });
 
 export async function getWordInfo(prompt:string){
