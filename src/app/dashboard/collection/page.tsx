@@ -32,7 +32,7 @@ export default function Collection() {
           </div>)
         }
         if(error){
-          toast( `${error.message}`)
+          toast.error( `${error.message}`)
         }
 
         const words:Words[] = data ?? []

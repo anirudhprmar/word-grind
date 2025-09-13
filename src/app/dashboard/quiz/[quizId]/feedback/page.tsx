@@ -44,7 +44,7 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
       }
          
       if(error){
-        toast( `${error.message}`)
+        toast.error( `${error.message}`)
       }
 
       const result:QuizProp[] = data  ?? []

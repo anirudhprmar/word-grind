@@ -1,5 +1,5 @@
-import Welcome from "../_components/Welcome"
-import WordSearchInput from "../_components/WordSearchInput"
+import Welcome from "./_components/Welcome"
+import WordSearchInput from "./_components/WordSearchInput"
 import { auth } from "~/lib/auth"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"

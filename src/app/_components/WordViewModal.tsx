@@ -69,7 +69,7 @@ export function WordViewModal({wordInfo, onClose}: wordInfoProps) {
          if(!word?.id) return;
          const wordUpdate = await setLearned.mutateAsync({id:word?.id})
            if (wordUpdate.message) {
-                 toast("Congratulation 🎉🎉")
+                 toast.success("Congratulation 🎉🎉")
                  setWord(null)
                  if(onClose){
                   onClose()
@@ -78,7 +78,7 @@ export function WordViewModal({wordInfo, onClose}: wordInfoProps) {
        } catch (error) {
         console.log("error in adding word",error)
       if (setLearned.isError) {
-        toast(`${setLearned.error.message}`)
+        toast.error(`${setLearned.error.message}`)
       }
        }
     }
@@ -88,7 +88,7 @@ export function WordViewModal({wordInfo, onClose}: wordInfoProps) {
          if(!word?.id) return;
          const wordDelete = await setDelete.mutateAsync({id:word?.id,userId:word?.userId})
            if (wordDelete.message) {
-                 toast("Word Deleted ")
+                 toast.success("Word Deleted ")
                  setWord(null)
                 if(onClose){
                   onClose()
@@ -97,7 +97,7 @@ export function WordViewModal({wordInfo, onClose}: wordInfoProps) {
        } catch (error) {
         console.log("error in adding word",error)
       if (setLearned.isError) {
-        toast(`${setLearned.error.message}`)
+        toast.error(`${setLearned.error.message}`)
       }
        }
     }

@@ -61,7 +61,7 @@ export function QuizStartModal({wordInfo,totalQuestions,onClose}:wordInfoProps &
            if (result?.quiz ?? result?.quiz[0]?.id) {
                const url = `/dashboard/quiz/${result?.quiz[0]?.id}?totalQuestions=${encodeURIComponent(totalQuestions.toString())}&name=${encodeURIComponent(word?.name ?? '')}`;
                   router.push(url);
-                 toast("Quiz started! 🎉")
+                 toast.success("Quiz started! 🎉")
                  setWord(null)
                  setIsOpen(false)
                   if (onClose) {
@@ -71,7 +71,7 @@ export function QuizStartModal({wordInfo,totalQuestions,onClose}:wordInfoProps &
        } catch (error) {
         console.log("error in adding word",error)
       if (startQuiz.isError) {
-        toast(`${startQuiz.error.message}`)
+        toast.error(`${startQuiz.error.message}`)
       }
        }
     }
