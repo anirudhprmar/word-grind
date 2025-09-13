@@ -7,12 +7,44 @@ import Demo from "~/components/Demo";
 import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
 import FAQ from "~/components/FAQ";
-import { useRef, type RefObject } from "react";
-// import { getSubscriptionDetails } from "~/lib/subscription";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import PricingTable from "./pricing/_component/pricing-table";
+import { getSubscriptionDetails } from "~/lib/subscription";
+
+type SubscriptionDetails = {
+  id: string;
+  productId: string;
+  status: string;
+  amount: number;
+  currency: string;
+  recurringInterval: string;
+  currentPeriodStart: Date;
+  currentPeriodEnd: Date;
+  cancelAtPeriodEnd: boolean;
+  canceledAt: Date | null;
+  organizationId: string | null;
+};
+
+interface subDetailsProps{
+    hasSubscription: boolean;
+  subscription?: SubscriptionDetails;
+  error?: string;
+  errorType?: "CANCELED" | "EXPIRED" | "GENERAL";
+}
 
 export default function Home() {
 
-  // const subscriptionDetails = await getSubscriptionDetails()
+  const [subDetails,SetSubDetails] = useState<subDetailsProps | null>(null)
+
+  useEffect(()=>{
+    let isActive = true
+    async function fetchData(){
+      const subscriptionDetails = await getSubscriptionDetails()
+      if (isActive) SetSubDetails(subscriptionDetails)
+    }
+    void fetchData()
+    return ()=> {isActive = false}
+  },[])
 
  const featuresRef = useRef<HTMLElement>(null)
   const demoRef = useRef<HTMLElement>(null)
@@ -25,7 +57,6 @@ export default function Home() {
       block:"start"
     })
   }
-
 
   return (
     <div className=" min-h-screen">
@@ -44,7 +75,10 @@ export default function Home() {
     <Hero/>
     <Features ref={featuresRef}/>
     {/* <Demo ref={demoRef}/> */}
-    <Pricing ref={pricingRef}/> 
+    {/* <Pricing ref={pricingRef}/>  */}
+    {subDetails &&
+    <PricingTable subscriptionDetails={subDetails}/>
+    }
     {/* change this pricing with the one i just created */}
     <FAQ/>
     <CTA/>

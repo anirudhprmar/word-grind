@@ -1,3 +1,4 @@
+"use server"
 import { auth } from "~/lib/auth";
 import { subscription } from '~/server/db/schema';
 import { eq } from "drizzle-orm";

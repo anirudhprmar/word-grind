@@ -36,6 +36,7 @@ export function EmailLoginForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      name:" "
     },
   })
  
@@ -73,6 +74,19 @@ export function EmailLoginForm({
       <form onSubmit={form.handleSubmit(onSubmit)}>
 
             <div className="grid gap-3 grid-rows-2">
+                    <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="m@example.com" type="text" required {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
                     <FormField
                 control={form.control}
                 name="email"

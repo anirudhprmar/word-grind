@@ -72,7 +72,6 @@ export default function PricingTable({
       });
     } catch (error) {
       console.error("Checkout failed:", error);
-      // TODO: Add user-facing error notification
       toast.error("Oops, something went wrong");
     }
   };
@@ -110,7 +109,7 @@ export default function PricingTable({
   };
 
   return (
-    <section className="flex flex-col items-center justify-center px-4 mb-24 w-full">
+    <section className="flex flex-col items-center justify-center px-4  w-full min-h-screen">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-medium tracking-tight mb-4">
           Subscription
@@ -120,7 +119,7 @@ export default function PricingTable({
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-4xl w-full">
+      <div className="flex items-center justify-center gap-8 max-w-4xl w-full">
         {/* Starter Tier */}
         <Card className="relative h-fit">
           {isCurrentPlan(STARTER_TIER) && (
@@ -137,7 +136,7 @@ export default function PricingTable({
             <CardTitle className="text-2xl">Starter</CardTitle>
             <CardDescription>Perfect for getting started</CardDescription>
             <div className="mt-4">
-              <span className="text-4xl font-bold flex items-center">$ <span>9.99</span></span>
+              <span className="text-4xl font-bold flex items-center gap-1">$ <span>9.99</span></span>
               <span className="text-muted-foreground">/month</span>
             </div>
           </CardHeader>
@@ -204,5 +203,5 @@ export default function PricingTable({
         </p>
       </div>
     </section>
-  );
+  )
 }

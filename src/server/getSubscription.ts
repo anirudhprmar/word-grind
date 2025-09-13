@@ -5,6 +5,8 @@ import { getSubscriptionDetails } from "~/lib/subscription";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
+// this will be called in api/polar/webhook
+
 export async function getSubscription() {
   try {
     const result = await auth.api.getSession({

@@ -98,7 +98,7 @@ const [userInfo,setUserInfo] = useState<"none" | "active" | "canceled" | "expire
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 
-                {userInfo === "active" ? <div className="flex items-center"><Sparkles /> Starter Plan Active</div> :"No Active Plan"}
+                {userInfo === "active" ? <div className="flex items-center gap-2 "><Sparkles /> Starter Plan Active</div> :"No Active Plan"}
 
               </DropdownMenuItem>
             </DropdownMenuGroup>
