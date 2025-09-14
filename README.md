@@ -2,14 +2,13 @@
 
 ## Core functionalities
 
-- [ ]- if not paid then pop up to pay , just like /pricing page put up subscribe now and block access to dashboard pages and on sign up link them to payment not dashboard if already paid then redirect to dashboard
+- [X]- if not paid then pop up to pay , just like /pricing page put up subscribe now and block access to dashboard pages and on sign up link them to payment not dashboard if already paid then redirect to dashboard
 - [ ]- save correct amount of money rn in db its 999 instead of 9.99
 - [ ]- show all the quizes that were created
-- [X]- no toast on adding new word
-- [ ]- if duplicate words are added then handle that with toast
-- [ ]- trpc for change name in setttings page
+- [ ]- if duplicate words are added then handle that with toast (gives a trpc error)
+- [ ]- trpc for change name in setttings page and invalidate it (check the need for usertrpc)
 - [ ]- loading states also fix loaders make them center
-- [ ]- / conv can be made like pricing page blur
+- [ ]- / conv can be made like pricing page blur also make the quiz page look good when there are no words also on dashboard input settimout and run a list of words as suggestions
 - [ ]- Also google oauth settings update
 - [ ]- quick  analytics - posthog setup -20min
 - [ ]- redis, upstash (rate limitting). Add rate limiting, input validation in tRPC, and basic CORS. Test for common vulnerabilities (e.g., SQL injection via Drizzle).- 1-2hr

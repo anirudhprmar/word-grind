@@ -8,7 +8,6 @@ import {
   SidebarProvider,
 } from "~/components/ui/sidebar"
 import { auth } from "~/lib/auth"
-import { Toaster } from "~/components/ui/sonner"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
       const session = await auth.api.getSession({
@@ -21,11 +20,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
     const username = session.user.name;
     const email = session.user.email;
     const avatar = session.user.image ?? "/default-avatar.png" 
-    // const userId = session.user.id 
 
   return (
     <div>
-        <Toaster />
         <SidebarProvider
       style={
         {
