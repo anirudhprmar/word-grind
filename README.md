@@ -1,8 +1,7 @@
 # WordGrind
-
+for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
-- [X]- if not paid then pop up to pay , just like /pricing page put up subscribe now and block access to dashboard pages and on sign up link them to payment not dashboard if already paid then redirect to dashboard
 - [ ]- save correct amount of money rn in db its 999 instead of 9.99
 - [ ]- show all the quizes that were created
 - [ ]- if duplicate words are added then handle that with toast (gives a trpc error)

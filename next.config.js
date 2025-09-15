@@ -6,9 +6,9 @@ import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
 const config = {
-    allowedDevOrigins:[
-        "https://2a5a260dd217.ngrok-free.app"
-    ]
+    // allowedDevOrigins:[
+    //     "https://11dd4857a44b.ngrok-free.app"
+    // ]
 };
 
 export default config;
