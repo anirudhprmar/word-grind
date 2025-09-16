@@ -1,4 +1,5 @@
 "use client"
+import { LoaderCircle } from "lucide-react";
 import {useRouter, useSearchParams } from "next/navigation"
 import React, { use, useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -115,7 +116,9 @@ export default function QuizPage({ params }: { params: Promise<{ quizId: string 
     )
   }
 
-  if (!quizData) return <div>Loading...</div>
+  if (!quizData) return( <div className="flex items-center justify-center h-screen">
+        <LoaderCircle className="size-10 animate-spin" />
+      </div>)
 
   const currentQuestion = quizData[currentIndex]
   

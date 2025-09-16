@@ -1,5 +1,5 @@
 'use client'
-import { ArrowLeft, Loader2Icon } from 'lucide-react';
+import { ArrowLeft, LoaderCircle } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react'
 import { toast } from 'sonner';
@@ -38,9 +38,9 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
   })
 
       if (isLoading) {
-        return (<div className="text-center  w-full translate-x-[50%] translate-y-[70%]  mx-auto">
-          <Loader2Icon className="animate-spin"/>
-        </div>)
+        return (  <div className="flex items-center justify-center h-screen">
+        <LoaderCircle className="size-10 animate-spin" />
+      </div>)
       }
          
       if(error){

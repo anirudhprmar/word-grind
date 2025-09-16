@@ -1,5 +1,5 @@
 'use client'
-import { Loader2Icon } from "lucide-react"
+import { LoaderCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import SessionInfo from "~/app/_components/SessionInfo"
@@ -67,9 +67,9 @@ export default function Quiz() {
           // cache the query ????
   
           if (isLoading) {
-            return (<div className="text-center  w-full translate-x-[50%] translate-y-[70%]  mx-auto">
-              <Loader2Icon className="animate-spin"/>
-            </div>)
+            return (  <div className="flex items-center justify-center h-screen">
+        <LoaderCircle className="size-10 animate-spin" />
+      </div>)
           }
           if(error){
             toast( `${error.message}`)
