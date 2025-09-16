@@ -41,7 +41,7 @@ export async function getSubscriptionDetails(): Promise<SubscriptionDetailsResul
       .from(subscription)
       .where(eq(subscription.userId, session.user.id));
 
-    console.log("Found user subscriptions:", userSubscriptions);
+    // console.log("Found user subscriptions:", userSubscriptions);
 
     if (!userSubscriptions.length) {
       console.log("No subscriptions found for user");

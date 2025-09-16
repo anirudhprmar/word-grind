@@ -35,6 +35,7 @@ interface subDetailsProps{
 }
 
 
+
 export default function Quiz() {
 
     const[userId,setUserId] = useState<string>("")
@@ -64,7 +65,7 @@ export default function Quiz() {
            const { data, isLoading,error  } = api.word.listWords.useQuery({
             userId: userId,
           });
-          // cache the query ????
+          
   
           if (isLoading) {
             return (  <div className="flex items-center justify-center h-screen">
@@ -72,9 +73,9 @@ export default function Quiz() {
       </div>)
           }
           if(error){
-            toast( `${error.message}`)
+            toast.error( `${error.message}`)
           }
-  
+
           const words:Words[] = data ?? []
           const filteredWords = words.filter(w => w.learned !== true)
           const newWords = [...filteredWords]
@@ -116,16 +117,16 @@ export default function Quiz() {
 
         <section className="flex flex-col gap-10  items-center justify-center"> 
       
-        <div className="flex flex-col gap-2">
+       {fewWords.length >= 1 && <div className="flex flex-col gap-2">
           choose the number of questions
           <div className="flex items-center justify-center gap-3">
             <Slider defaultValue={[2]} max={10} step={1} onValueChange={handleValueChange} />
             <span>{finalNumQuestions}</span>
           </div>
-        </div>
+        </div>}
 
         <div className="flex gap-3 flex-wrap mx-10 md:mx-auto px-10">
-              {fewWords?.map(word =>(
+              {fewWords.length >= 1 ? fewWords?.map(word =>(
                 <div key={word.id} >
                 <DisplayWord
                 info={{
@@ -141,18 +142,22 @@ export default function Quiz() {
                 }}
                 total={finalNumQuestions}  />
                 </div>
-              ))}
+              )): <div >
+                <Link href={'/dashboard'} className="font-bold cursor-pointer ">
+                  No new words found! Add some new words to start quiz.
+                </Link>
+                </div>}
 
         </div>
 
         <div>
-        <Button
+        {fewWords.length > 5 && <Button
         size={'lg'}
         onClick={()=>setisClicked(!isClicked)}
         className=" hover:transition-shadow hover:shadow-xl cursor-pointer shadow-md"
         >
           More..
-        </Button>  
+        </Button>  }
 
           {isClicked && 
           <SearchWordsModal filteredWords={newWords} NumOfQuestion={finalNumQuestions}/>

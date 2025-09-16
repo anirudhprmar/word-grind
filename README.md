@@ -2,8 +2,9 @@
 for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
-- [X]- loading states also fix loaders make them center, check collection for data table working fine or not
-- [ ]- show all the quizes that were created
+- [X]- show all the quizes that were created
+- [ ]- User profile 
+- [ ]- Make quiz smooth (too much loading, questions change , transitition to next question is not smooth)
 - [ ]- if duplicate words are added then handle that with toast (gives a trpc error)
 - [ ]- trpc for change name in setttings page and invalidate it (check the need for usertrpc)
 - [ ]- / conv can be made like pricing page blur also make the quiz page look good when there are no words also on dashboard input settimout and run a list of words as suggestions
