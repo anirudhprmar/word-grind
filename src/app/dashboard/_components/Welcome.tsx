@@ -6,9 +6,9 @@ interface props{
 
 export default function Welcome({name}:props) {
   return (
-    <div className='max-w-full'>
+    <div className='max-w-full pt-10'>
       <div className='text-center'>
-        <p className='text-4xl font-bold font-serif'>Hello, {name}</p>
+        <p className='text-4xl  font-serif'>Hello, {name}</p>
       </div>
     </div>
   )

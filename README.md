@@ -2,9 +2,8 @@
 for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
-- [X]- quick  analytics vercel -20min
-- [X]- redis, upstash (rate limitting) and 
-- [ ]- clean ui button , bg etc, i think use tweak cn and generate a new theme and use that
+
+- [X]- clean ui button , bg etc, i think use tweak cn and generate a new theme and use that
 - [ ]- / conv can be made like pricing page blur also make the quiz page look good when there are no words also on dashboard input settimout and run a list of words as suggestions
 - [ ]- if duplicate words are added then handle that with toast (gives a trpc error)
 - [ ]- trpc for change name in setttings page and invalidate it (check the need for usertrpc)
