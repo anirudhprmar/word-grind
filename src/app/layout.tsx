@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/next"
 // two different fonts
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -70,12 +71,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${playfair.className}`}>
+    <html lang="en" className={`${playfair.className}`} suppressHydrationWarning>
       <body>
+          <Providers>
         <TRPCReactProvider>
-          {children}
+            {children}
           <Analytics />
         </TRPCReactProvider>
+          </Providers>
       </body>
     </html>
   );

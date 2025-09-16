@@ -3,7 +3,8 @@ for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
 
-- [X]- clean ui button , bg etc, i think use tweak cn and generate a new theme and use that
+- [X]- set up dark mode: 10min
+breadcrumb
 - [ ]- / conv can be made like pricing page blur also make the quiz page look good when there are no words also on dashboard input settimout and run a list of words as suggestions
 - [ ]- if duplicate words are added then handle that with toast (gives a trpc error)
 - [ ]- trpc for change name in setttings page and invalidate it (check the need for usertrpc)
@@ -15,7 +16,6 @@ for dev: user ngrok to properly go through the app flow (webhooks to work)
 - [ ]- set up schema.org - 20min
 - [ ]- get landing page links working -> get wordgrind and login -> update the content on hero page (check my history of perplexity) -20mi
 - [ ]- send email when purchase 
-- [ ]- set up dark mode: 10min
 
 - [ ]- record a demo video and update the landing page with demo video - 20 min
 - [ ]- Use tools like Google Forms for quick feedback. -5min

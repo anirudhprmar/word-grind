@@ -15,7 +15,7 @@ import {
 } from "~/components/ui/sidebar"
 import { CheckCheck, LayoutIcon, MessageCircle, SquareLibrary } from "lucide-react"
 import { NavSecondary } from "./nav-secondary"
-import { IconSettings } from "@tabler/icons-react"
+import { IconSettings} from "@tabler/icons-react"
 
 interface userProps{
   userInfo:{
@@ -55,7 +55,7 @@ const data = {
       title: "Settings",
       url: "/dashboard/settings",
       icon: IconSettings,
-    },
+    }
   ],
 
 }

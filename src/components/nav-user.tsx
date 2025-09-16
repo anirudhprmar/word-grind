@@ -7,6 +7,7 @@ import {
   CreditCard,
   LogOut,
   Sparkles,
+  SunIcon,
 } from "lucide-react"
 
 import {
@@ -33,6 +34,7 @@ import { LogoutButton } from "./LogoutBtn"
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { getUserSubscriptionStatus } from "~/lib/subscription"
+import ThemeSwitch from "./ThemeSwitch"
 
 export function NavUser({
   user,
@@ -44,6 +46,7 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  
 
 const [userInfo,setUserInfo] = useState<"none" | "active" | "canceled" | "expired" |  null>(null)
      useEffect(()=>{
@@ -119,9 +122,7 @@ const [userInfo,setUserInfo] = useState<"none" | "active" | "canceled" | "expire
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Bell />
-                Notifications
-                {/* feature updates */}
+                <ThemeSwitch/>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
