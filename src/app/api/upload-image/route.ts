@@ -1,5 +1,6 @@
 import { uploadImageAssets } from "~/lib/upload-image";
 import {type NextRequest, NextResponse } from "next/server";
+import { rlUpload,getClientIP } from "~/lib/ratelimit";
 
 export const config = {
   api: { bodyParser: false }, // Disable default body parsing
@@ -7,6 +8,14 @@ export const config = {
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = getClientIP(req);
+    const { success, reset } = await rlUpload.limit(`upload:${ip}`);
+    if (!success) {
+      return new NextResponse("Too many uploads", {
+        status: 429,
+        headers: reset ? { "Retry-After": Math.max(0, Math.ceil((reset - Date.now()) / 1000)).toString() } : {},
+      });
+    }
     // Parse the form data
     const formData = await req.formData();
     const file = formData.get("file") as File | null;

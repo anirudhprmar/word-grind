@@ -11,8 +11,8 @@ import { headers } from "next/headers";
 import superjson from "superjson";
 import { ZodError } from "zod";
 import { auth } from "~/lib/auth";
-
 import { db } from "~/server/db";
+// import { getClientIP, rlTRPC } from "~/lib/ratelimit";
 
 /**
  * 1. CONTEXT
@@ -36,6 +36,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
     db,
     session,
     ...opts,
+    // ip: getClientIP(opts.headers as unknown as Request | { headers: Headers; ip?: string | undefined; }),
   };
 };
 
@@ -123,6 +124,19 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
   return result;
 });
 
+// TRPC rate limit middleware
+
+// const rateLimitMiddleware = t.middleware(async ({ ctx, path, next }) => {
+//   // Prefer userId; fallback to IP from ctx if you have it in context
+//   const key = `trpc:${ctx.session?.user?.id ?? ctx.ip ?? "anon"}:${path}`;
+//   const { success } = await rlTRPC.limit(key);
+//   if (!success) {
+//     throw new TRPCError({ code: "TOO_MANY_REQUESTS", message: "Rate limit exceeded" });
+//   }
+//   return next();
+// });
+
+
 /**
  * Public (unauthenticated) procedure
  *
@@ -130,4 +144,4 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  * guarantee that a user querying is authorized, but you can still access user session data if they
  * are logged in.
  */
-export const publicProcedure = t.procedure.use(timingMiddleware);
+export const publicProcedure = t.procedure.use(timingMiddleware)

@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import {Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 
 // two different fonts
 
@@ -71,7 +72,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.className}`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          {children}
+          <Analytics />
+        </TRPCReactProvider>
       </body>
     </html>
   );
