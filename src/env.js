@@ -20,7 +20,7 @@ export const env = createEnv({
       MISTRAL_API_KEY:z.string().optional(),
       // OPENAI_API_KEY:z.string(),
       // REPLICATE_API_KEY:z.string(),
-      RESEND_API_KEY:z.string(),
+      RESEND_API_KEY: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
       POLAR_ACCESS_TOKEN:z.string().optional(),
       POLAR_WEBHOOK_SECRET:z.string().optional(),
       UPSTASH_REDIS_REST_URL: z.string().optional(),
