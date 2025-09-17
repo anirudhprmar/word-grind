@@ -23,6 +23,12 @@ export const env = createEnv({
       RESEND_API_KEY:z.string().optional(),
       POLAR_ACCESS_TOKEN:z.string().optional(),
       POLAR_WEBHOOK_SECRET:z.string().optional(),
+      UPSTASH_REDIS_REST_URL: z.string().optional(),
+      UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
+      R2_UPLOAD_IMAGE_ACCESS_KEY_ID:z.string().optional(),
+      R2_UPLOAD_IMAGE_SECRET_ACCESS_KEY:z.string().optional(),
+      CLOUDFLARE_ACCOUNT_ID:z.string().optional(),
+      R2_UPLOAD_IMAGE_BUCKET_NAME:z.string().optional(),
   },
 
   /**
@@ -57,6 +63,12 @@ export const env = createEnv({
     // REPLICATE_API_KEY:process.env.REPLICATE_API_KEY,
     GEMINI_API_KEY:process.env.GEMINI_API_KEY,
     MISTRAL_API_KEY:process.env.MISTRAL_API_KEY,
+    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
+    R2_UPLOAD_IMAGE_ACCESS_KEY_ID: process.env.R2_UPLOAD_IMAGE_ACCESS_KEY_ID,
+    R2_UPLOAD_IMAGE_SECRET_ACCESS_KEY: process.env.R2_UPLOAD_IMAGE_SECRET_ACCESS_KEY,
+    CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
+    R2_UPLOAD_IMAGE_BUCKET_NAME: process.env.R2_UPLOAD_IMAGE_BUCKET_NAME,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
