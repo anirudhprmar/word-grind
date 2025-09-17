@@ -1,14 +1,12 @@
 # WordGrind
-for dev: user ngrok to properly go through the app flow (webhooks to work)
+Master English vocabulary with WordGrind—AI-powered, personalized learning for fluency, confidence, and smarter language skills.
+
 ## Core functionalities
-
-
 - [ ]- typography change for the app
-- [ ]- breadcumbs
-- [X]- set up schema.org - 20min
+- [X]- breadcumbs
 - [ ]- update the content on hero page (check my history of perplexity) -20mi
 - [ ]- send email when purchase and also benefit to share?
-
+- [ ]- make dark mode based styling
 - [ ]- Make quiz smooth (too much loading, questions change , transitition to next question is not smooth)
 - [ ]- User profile with quiz data and profile analysis
 - [ ]- gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the calender (simple way to do it is by small boxes fill with color if learned a new word on that day each box is day and have months something like that , everything based on user data) - 30min

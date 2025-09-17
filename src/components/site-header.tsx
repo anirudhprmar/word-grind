@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation"
 import { Separator } from "~/components/ui/separator"
 import { SidebarTrigger } from "~/components/ui/sidebar"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "./ui/breadcrumb"
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -13,7 +14,47 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{pathname === '/dashboard' ? pathname.replace("/",""): pathname.replace("/dashboard/","")}</h1>
+         <Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem className="hidden md:block">
+      <BreadcrumbLink href="/dashboard">
+        dashboard
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+
+    <BreadcrumbSeparator className="hidden md:block" />
+
+    <BreadcrumbItem>
+      {/* Show 'quiz' for /dashboard/quiz or any quiz subpage */}
+      {(pathname === '/dashboard/quiz' || pathname.startsWith('/dashboard/quiz/')) ? (
+        <BreadcrumbPage>quiz</BreadcrumbPage>
+      ) : (
+        // Show other paths by removing /dashboard/ prefix
+        <BreadcrumbPage>{pathname.replace('/dashboard/', '')}</BreadcrumbPage>
+      )}
+    </BreadcrumbItem>
+
+    {/* Conditionally render quiz ID breadcrumb if inside a specific quiz page */}
+    {pathname.startsWith('/dashboard/quiz/') && (
+      <>
+        <BreadcrumbSeparator className="hidden md:block" />
+        <BreadcrumbItem>
+          <BreadcrumbPage>{pathname.endsWith('feedback') ? pathname.replace('/dashboard/quiz/',"").replace('/feedback',"")  : pathname.replace('/dashboard/quiz/', '')}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </>
+    )}
+
+    {pathname.endsWith('feedback') && (
+      <>
+        <BreadcrumbSeparator className="hidden md:block" />
+        <BreadcrumbItem>
+          <BreadcrumbPage>feedback</BreadcrumbPage>
+        </BreadcrumbItem>
+      </>
+    )}
+  </BreadcrumbList>
+</Breadcrumb>
+
       </div>
     </header>
   )
