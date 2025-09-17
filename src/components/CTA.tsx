@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "./ui/button"
 
 
@@ -14,7 +15,7 @@ export default function CTA() {
 
         <div
         >
-        <Button variant={'default'} size={'lg'} className="p-2 md:p-3 text-lg cursor-pointer  bg-foreground text-primary-foreground w-fit rounded-lg">Get WordGrind</Button>
+        <Link href={'/pricing'} className="p-2 md:p-3 text-lg cursor-pointer  bg-foreground text-primary-foreground w-fit rounded-lg">Get WordGrind</Link>
         </div>
       </div>
     </section>

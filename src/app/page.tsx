@@ -4,7 +4,6 @@ import Hero from "~/components/Hero";
 import Navbar from "../components/Navbar";
 import Features from "~/components/Features";
 import Demo from "~/components/Demo";
-import Pricing from "~/components/Pricing";
 import CTA from "~/components/CTA";
 import FAQ from "~/components/FAQ";
 import { useEffect, useRef, useState, type RefObject } from "react";
@@ -75,11 +74,9 @@ export default function Home() {
     <Hero/>
     <Features ref={featuresRef}/>
     {/* <Demo ref={demoRef}/> */}
-    {/* <Pricing ref={pricingRef}/>  */}
     {subDetails &&
-    <PricingTable subscriptionDetails={subDetails}/>
+    <PricingTable subscriptionDetails={subDetails} ref={pricingRef}/>
     }
-    {/* change this pricing with the one i just created */}
     <FAQ/>
     <CTA/>
       </main>

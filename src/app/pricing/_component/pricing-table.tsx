@@ -13,7 +13,7 @@ import { authClient } from "~/lib/auth-client";
 import { Check } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import { env } from "~/env";
 
 type SubscriptionDetails = {
@@ -41,9 +41,14 @@ interface PricingTableProps {
   subscriptionDetails: SubscriptionDetailsResult;
 }
 
+interface props{
+    ref?: RefObject<HTMLElement | null>;
+}
+
 export default function PricingTable({
-  subscriptionDetails,
-}: PricingTableProps) {
+  ref,
+  subscriptionDetails
+}: props & PricingTableProps ) {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
@@ -109,7 +114,7 @@ export default function PricingTable({
   };
 
   return (
-    <section className="flex flex-col items-center justify-center px-4  w-full min-h-screen">
+    <section className="flex flex-col items-center justify-center px-4  w-full min-h-screen" ref={ref}>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-medium tracking-tight mb-4">
           Subscription

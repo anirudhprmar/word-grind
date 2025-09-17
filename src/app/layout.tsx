@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: 'WordGrind - Unlock Your Ultimate Vocabulary ',
     template: '%s | WordGrind'
   },
-  description: "Tired of fumbling for the right words? WordGrind turns every page into a vocabulary victory with smart, personalized AI-powered learning. Master English fluency and boost your confidence.",
+  description: "Master English vocabulary with WordGrind—AI-powered, personalized learning for fluency, confidence, and smarter language skills.",
    keywords: [
     'vocabulary app','vocabulary builder','English vocabulary','AI tutor','language learning app','learn new words','English fluency',
     'English learning','personalized learning','smart vocabulary practice','AI language coach','word mastery','grow your vocabulary','interactive learning','education app','English quiz','practice English conversation','advanced vocabulary','effective language learning','AI-powered education','English speaking app','AI learning platform'
@@ -23,12 +23,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  //   icons: {
-    //   icon: '/favicon.ico',
-    //   shortcut: '/favicon-16x16.png',
-    //   apple: '/apple-touch-icon.png',
-    // },
-    icons: [{ rel: "icon", url: "/favicon.ico" }],
+    icons: {
+      icon: '/favicon/favicon.ico',
+      shortcut: '/favicon/favicon-16x16.png',
+      apple: '/favicon/apple-touch-icon.png',
+    },
     openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -36,14 +35,14 @@ export const metadata: Metadata = {
     title: 'WordGrind - Unlock Your Ultimate Vocabulary',
     description: 'Tired of fumbling for the right words? WordGrind turns every page into a vocabulary victory with smart, personalized AI-powered learning. Master English fluency and boost your confidence.',
     siteName: 'WordGrind',
-    // images: [
-    //   {
-    //     url: '/images/careerLogo.png',
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Careerspring Solutions HR Services',
-    //   },
-    // ],
+    images: [
+      {
+        url: '/wordgrindLogo.png',
+        width: 1200,
+        height: 630,
+        alt: 'wordgrind logo, a cartoon with pencil in one hand and surrounded by a letter A',
+      },
+    ],
   },
   robots: {
     index: true,
@@ -56,9 +55,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  // verification: {
-  //   google: 'your-google-verification-code',
-  // },
+  verification: {
+    google:"RhnCnxHUunw9s6ILoA43GjIy2yesLXm6ScL79s3-c4A",
+  },
 };
 
 

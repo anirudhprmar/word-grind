@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: ['/'],
-      disallow: ['/signin','/dashboard'],
+      disallow: ['/sign-in','/sign-up','/dashboard'],
     },
     sitemap: 'https://wordgrind.top/sitemap.xml',
   }

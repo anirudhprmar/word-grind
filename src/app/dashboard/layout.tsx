@@ -7,7 +7,6 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "~/components/ui/sidebar"
-import { api } from "~/lib/api"
 import { auth } from "~/lib/auth"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {

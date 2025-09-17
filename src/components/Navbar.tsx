@@ -1,5 +1,6 @@
 'use client'
 import { ChevronRight, Menu, X } from "lucide-react"
+import Image from "next/image"
 // import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -62,8 +63,9 @@ function Navbar({scrollFunction,refs}:AboutProps) {
     <header  >
       <nav className="top-5 fixed rounded-full bg-primary-foreground bg-opacity-30   z-10  left-0 right-0 flex items-center justify-between max-w-96 md:max-w-200 mx-5 md:mx-auto p-2 px-4 sm:px-6 text-black shadow-md  transition-all duration-200">
         <Link href={'/'}>
-            <div>
-                {/* <Image src={''} width={''} height={''}/> */}
+            <div className="flex items-center justify-center gap-2">
+                <Image src={'/wordgrindLogo.png'} width={'30'} height={'30'} alt="wordgrind logo, a cartoon with pencil in one hand and surrounded by a letter A" className="rounded-md"/>
+
                 <span className="text-xl font-bold ">WordGrind</span>
             </div>
         </Link>
@@ -92,8 +94,8 @@ function Navbar({scrollFunction,refs}:AboutProps) {
           </div>
 
         <div className="hidden md:flex gap-5 items-center">
-            <button className="text-xl cursor-pointer">Login</button>
-            <Button variant={'default'} size={'sm'} className="bg-foreground text-primary-foreground p-2 rounded-lg cursor-pointer">Get WordGrind</Button>
+            <Link className="text-xl cursor-pointer" href={'/sign-in'}>Sign In</Link>
+            <Link className="bg-foreground text-primary-foreground p-2 rounded-lg cursor-pointer" href={'/pricing'} >Get WordGrind</Link>
         </div>
 
       {/* Mobile Menu Button */}
@@ -130,22 +132,21 @@ function Navbar({scrollFunction,refs}:AboutProps) {
               ))}
             </ul>
             <div className='mt-6 pt-4 border-t border-gray-200'>
-              <Button
-                size='sm'
-                variant='default'
+              <Link
+                href={'/pricing'}
                 className='w-full flex items-center  gap-1 text-sm bg-foreground text-primary-foreground  '
                 onClick={() => setisOpen(false)}
               >
-                <a 
+                {/* <a 
                 onClick={(e) =>{
                       setisOpen(false)
                       handleNavClick(e, navItems[2] ?? { label: 'Pricing', href: '',section:refs.pricing })
                     }}
                 >
+              </a> */}
                 Get WordGrind
-              </a>
                 <ChevronRight className='size-5' />
-              </Button>
+              </Link>
             </div>
           </div>
         </div>

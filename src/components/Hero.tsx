@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 
 function Hero() {
@@ -39,7 +40,7 @@ function Hero() {
         transition={{ duration: 0.8,delay:0.7 }}
         className="flex justify-center items-center w-full px-10"
         >
-          <Button variant={'default'} size={'lg'} className="bg-foreground text-primary-foreground  rounded-lg text-xl cursor-pointer">Get WordGrind</Button>
+          <Link href={'/pricing'} className="bg-foreground p-2 text-primary-foreground  rounded-lg text-xl cursor-pointer">Get WordGrind</Link>
         </motion.div>
       </div>
 
