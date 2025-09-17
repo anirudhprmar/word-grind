@@ -8,7 +8,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string(),
+    DATABASE_URL: z.string().optional(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -20,9 +20,9 @@ export const env = createEnv({
       MISTRAL_API_KEY:z.string(),
       // OPENAI_API_KEY:z.string(),
       // REPLICATE_API_KEY:z.string(),
-      RESEND_API_KEY:z.string(),
-      POLAR_ACCESS_TOKEN:z.string(),
-      POLAR_WEBHOOK_SECRET:z.string(),
+      RESEND_API_KEY:z.string().optional(),
+      POLAR_ACCESS_TOKEN:z.string().optional(),
+      POLAR_WEBHOOK_SECRET:z.string().optional(),
   },
 
   /**
@@ -31,8 +31,8 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_STARTER_TIER: z.string(),
-    NEXT_PUBLIC_STARTER_SLUG: z.string()
+    NEXT_PUBLIC_STARTER_TIER: z.string().optional(),
+    NEXT_PUBLIC_STARTER_SLUG: z.string().optional()
   },
 
   /**
@@ -57,7 +57,6 @@ export const env = createEnv({
     // REPLICATE_API_KEY:process.env.REPLICATE_API_KEY,
     GEMINI_API_KEY:process.env.GEMINI_API_KEY,
     MISTRAL_API_KEY:process.env.MISTRAL_API_KEY,
-
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
