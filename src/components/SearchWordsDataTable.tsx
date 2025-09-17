@@ -8,13 +8,12 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  getPaginationRowModel,
-
+  getPaginationRowModel
 } from "@tanstack/react-table"
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 import {
   DropdownMenu,
@@ -31,19 +30,19 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
-import { DataTablePagination } from "./DataTablePagination"
-import { AddWordDialogBox } from "~/components/AddWordDialogBox"
-import { WordViewModal } from "../_components/WordViewModal"
+import { DataTablePagination } from "../app/dashboard/collection/_components/DataTablePagination"
+import { QuizStartModal } from "./QuizStartModal"
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   userId:string
+  totalQuestions:number
 }
 
 interface RowData{ 
-       id: number;
+        id: number;
     userId: string;
     name: string;
     meaning: string;
@@ -56,10 +55,11 @@ interface RowData{
 }
 
 
-export function DataTable<TData extends RowData, TValue>({
+export function SearchWordsDataTable<TData extends RowData, TValue>({
   columns,
   data,
-  userId
+  userId,
+  totalQuestions
 }: DataTableProps<TData, TValue>) {
      const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -69,17 +69,10 @@ export function DataTable<TData extends RowData, TValue>({
 
   const [rowSelection, setRowSelection] = React.useState({})
   const [selectedWord,setSelectedWord] = useState<TData | null>(null)
-  const [isModalOpen,setIsModelOpen] = useState<boolean>(false)
   const [pagination, setPagination] = React.useState({
   pageIndex: 0,
   pageSize: 3, // default page size example
 });
-
-useEffect(()=>{
-  if(selectedWord){
-    setIsModelOpen(true)
-  }
-},[selectedWord])
 
 
   const table = useReactTable({
@@ -95,7 +88,7 @@ useEffect(()=>{
       columnFilters,
       columnVisibility,
       rowSelection,
-      pagination:pagination
+      pagination
     },
     onPaginationChange:setPagination
   })
@@ -116,8 +109,6 @@ useEffect(()=>{
           }
           className="max-w-sm"
           />
-        
-          <AddWordDialogBox userId={userId} />
 
         </div>
 
@@ -198,10 +189,10 @@ useEffect(()=>{
       </Table>
 
       <div className="mt-10">
-        {selectedWord && isModalOpen ?     
-        <WordViewModal
-        key={selectedWord.name}
-        onClose={()=>setIsModelOpen(false)}
+        {selectedWord ?     
+        <QuizStartModal
+        key={selectedWord.id}
+        totalQuestions={totalQuestions}
         wordInfo={{
             name:selectedWord.name ,
             id:selectedWord.id,
@@ -213,7 +204,7 @@ useEffect(()=>{
             createdAt:selectedWord.createdAt,
             learned:selectedWord.learned
           }}
-        /> : null }
+        /> : null}
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { Button } from "~/components/ui/button"
 import { XIcon } from "lucide-react"
-import { SearchWordsDataTable } from "~/app/_components/SearchWordsDataTable"
+import { SearchWordsDataTable } from "~/components/SearchWordsDataTable"
 
 interface filteredWordsProp{
       id: number;
@@ -22,7 +22,7 @@ interface WordInfoModalProps {
   NumOfQuestion:number
 }
 
-import { columns} from "../app/_components/SearchWordsColumns"
+import { columns} from "./SearchWordsColumns"
 
 
 export default function WordInfoModal({filteredWords,NumOfQuestion}:WordInfoModalProps) {

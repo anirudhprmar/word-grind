@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react'
 import { Button } from './ui/button'
-import { QuizStartModal } from '~/app/_components/QuizStartModal'
+import { QuizStartModal } from '~/components/QuizStartModal'
 
 interface WordProp{
   info:{

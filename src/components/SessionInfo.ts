@@ -12,7 +12,7 @@ export default async function SessionInfo() {
             redirect("/")
         }
 
-        const userId:string = session?.user?.id ;
+    const userId:string = session?.user?.id ;
 
-        return userId
+    return userId
 }

@@ -1,9 +1,7 @@
 # WordGrind
 for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
-make bg tansparent for that input box
-- [X]- / conv can be made like pricing page blur also make the quiz page look good when there are no words also on dashboard input settimout 
-- [X]- run a list of words as suggestions
+
 - [ ]- if duplicate words are added then handle that with toast (gives a trpc error)
 - [ ]- trpc for change name in setttings page and invalidate it (check the need for usertrpc)
 - [ ]- Make quiz smooth (too much loading, questions change , transitition to next question is not smooth)

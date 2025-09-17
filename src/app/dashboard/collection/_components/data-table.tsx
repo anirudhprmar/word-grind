@@ -8,12 +8,13 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-  getPaginationRowModel
+  getPaginationRowModel,
+
 } from "@tanstack/react-table"
 
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import {
   DropdownMenu,
@@ -30,19 +31,19 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
-import { DataTablePagination } from "../_wordsCollection/DataTablePagination"
-import { QuizStartModal } from "./QuizStartModal"
+import { DataTablePagination } from "./DataTablePagination"
+import { AddWordDialogBox } from "~/components/AddWordDialogBox"
+import { WordViewModal } from "../../../../components/WordViewModal"
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   userId:string
-  totalQuestions:number
 }
 
 interface RowData{ 
-        id: number;
+       id: number;
     userId: string;
     name: string;
     meaning: string;
@@ -55,11 +56,10 @@ interface RowData{
 }
 
 
-export function SearchWordsDataTable<TData extends RowData, TValue>({
+export function DataTable<TData extends RowData, TValue>({
   columns,
   data,
-  userId,
-  totalQuestions
+  userId
 }: DataTableProps<TData, TValue>) {
      const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -69,10 +69,17 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
 
   const [rowSelection, setRowSelection] = React.useState({})
   const [selectedWord,setSelectedWord] = useState<TData | null>(null)
+  const [isModalOpen,setIsModelOpen] = useState<boolean>(false)
   const [pagination, setPagination] = React.useState({
   pageIndex: 0,
   pageSize: 3, // default page size example
 });
+
+useEffect(()=>{
+  if(selectedWord){
+    setIsModelOpen(true)
+  }
+},[selectedWord])
 
 
   const table = useReactTable({
@@ -88,7 +95,7 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
       columnFilters,
       columnVisibility,
       rowSelection,
-      pagination
+      pagination:pagination
     },
     onPaginationChange:setPagination
   })
@@ -109,6 +116,8 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
           }
           className="max-w-sm"
           />
+        
+          <AddWordDialogBox userId={userId} />
 
         </div>
 
@@ -189,10 +198,10 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
       </Table>
 
       <div className="mt-10">
-        {selectedWord ?     
-        <QuizStartModal
-        key={selectedWord.id}
-        totalQuestions={totalQuestions}
+        {selectedWord && isModalOpen ?     
+        <WordViewModal
+        key={selectedWord.name}
+        onClose={()=>setIsModelOpen(false)}
         wordInfo={{
             name:selectedWord.name ,
             id:selectedWord.id,
@@ -204,7 +213,7 @@ export function SearchWordsDataTable<TData extends RowData, TValue>({
             createdAt:selectedWord.createdAt,
             learned:selectedWord.learned
           }}
-        /> : null}
+        /> : null }
       </div>
 
       <div className="flex items-center justify-end space-x-2 py-4">
