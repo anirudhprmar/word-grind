@@ -18,7 +18,7 @@ function safeParseDate(value: string | Date | null | undefined): Date | null {
   return new Date(value);
 }
 
-const resend = env.RESEND_API_KEY ? new Resend(env.RESEND_API_KEY) : ""
+const resend = new Resend(env.RESEND_API_KEY) 
 
 
 const polarClient = new Polar({
@@ -27,8 +27,8 @@ const polarClient = new Polar({
 });
  
 export const auth = betterAuth({
-    trustedOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
-    allowedDevOrigins: [`${process.env.NEXT_PUBLIC_APP_URL}`],
+    trustedOrigins: [`${env.NEXT_PUBLIC_APP_URL}`],
+    allowedDevOrigins: [`${env.NEXT_PUBLIC_APP_URL}`],
     cookieCache: {
         enabled: true,
         maxAge: 5 * 60, // Cache duration in seconds
@@ -46,8 +46,8 @@ export const auth = betterAuth({
     socialProviders:{
         google:{
             prompt:"select_account",
-            clientId:process.env.AUTH_GOOGLE_ID!,
-            clientSecret:process.env.AUTH_GOOGLE_SECRET!
+            clientId:env.AUTH_GOOGLE_ID,
+            clientSecret:env.AUTH_GOOGLE_SECRET
         }
     },
     plugins:[
@@ -59,7 +59,7 @@ export const auth = betterAuth({
                     products: [
                         {
                         productId:
-                            env.NEXT_PUBLIC_STARTER_TIER ??
+                            env.NEXT_PUBLIC_STARTER_TIER  ??
                             (() => {
                             throw new Error(
                                 "NEXT_PUBLIC_STARTER_TIER environment variable is required",
@@ -74,7 +74,7 @@ export const auth = betterAuth({
                             })(),
                         }
                     ],
-                    successUrl:  `${process.env.NEXT_PUBLIC_APP_URL}/${process.env.POLAR_SUCCESS_URL}`,
+                    successUrl:  `${env.NEXT_PUBLIC_APP_URL}/${env.POLAR_SUCCESS_URL}`,
                     authenticatedUsersOnly: true
                 }),
                 portal(),
@@ -192,13 +192,7 @@ export const auth = betterAuth({
         }),
     magicLink({
     sendMagicLink:async({email,url},_request) =>{
-      if (!resend) {
-        if (process.env.NODE_ENV === "production") {
-          throw new Error("RESEND_API_KEY is required in production to send emails");
-        }
-        console.warn("RESEND_API_KEY missing; skipping email send. Magic link:", url);
-        return;
-      }
+  
       await resend.emails.send({
         from: "Wordgrind <onboarding@resend.wordgrind.top>",
         to: email,

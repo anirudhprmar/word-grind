@@ -7,7 +7,7 @@ import { createMistral } from '@ai-sdk/mistral';
 import { env } from '~/env';
 
 // const google = createGoogleGenerativeAI({
-//   apiKey:process.env.GEMINI_API_KEY
+//   apiKey:env.GEMINI_API_KEY
 // });
 const mistral = createMistral({
   apiKey:env.MISTRAL_API_KEY
