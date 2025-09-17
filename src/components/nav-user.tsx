@@ -2,12 +2,10 @@
 
 import {
   BadgeCheck,
-  Bell,
   ChevronsUpDown,
   CreditCard,
   LogOut,
   Sparkles,
-  SunIcon,
 } from "lucide-react"
 
 import {

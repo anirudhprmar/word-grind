@@ -9,6 +9,7 @@ import {z} from 'zod'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { WordInfoModal } from './WordInfoModal'
 import { getWordInfo } from '~/server/wordInfo'
+import TypingEffect from './TypingEffect'
 
 interface wordObjProps {
      name:string,
@@ -85,6 +86,15 @@ useEffect(()=>{
   }
 },[parsedWord])
 
+const suggestions = [
+  "what does Euphoria mean",
+  "what is Serendipity",
+  "I would like to know about Ephemeral",
+]
+
+const displayedText = TypingEffect({ arrOfText: suggestions, typingSpeed: 100,eraseSpeed:20, pauseDelay: 1000 });
+
+
   return (
     <div className='flex flex-col'>
 
@@ -97,8 +107,10 @@ useEffect(()=>{
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="What's the word you'd like to explore" {...field} 
-                  className='text-left px-5 pt-7 pb-15 bg-background text-foreground' />
+                  <Input
+                  placeholder={`Ask me about any word... e.g ${displayedText}`}
+                  {...field} 
+                  className='text-left px-5 pt-7 pb-15  text-foreground inset-0 backdrop-blur-lg bg-transparent rounded-xl  shadow-md ' />
                 </FormControl>
                 <FormMessage />
               </FormItem>
