@@ -2,6 +2,7 @@ import { quizResponse, quizzes, words } from '~/server/db/schema';
 import { createTRPCRouter, publicProcedure } from '../trpc';
 import { z } from 'zod';
 import { and, eq, inArray } from 'drizzle-orm';
+import { TRPCError } from '@trpc/server';
 
 export const wordRouter = createTRPCRouter({
     addWord:publicProcedure
@@ -16,17 +17,39 @@ export const wordRouter = createTRPCRouter({
         })
         ).mutation(async ({input,ctx})=>{
 
-            await ctx.db.insert(words).values({
-                userId:input.userId,
-                name:input.name,
-                meaning:input.meaning,
-                example:input.example,
-                synonyms:input.synonyms,
-                pronunciation:input.pronunciation,
-            })
-            return {
-                message:"word added"
-            }
+        try {
+              
+              await ctx.db.insert(words).values({
+                  userId:input.userId,
+                  name:input.name,
+                  meaning:input.meaning,
+                  example:input.example,
+                  synonyms:input.synonyms,
+                  pronunciation:input.pronunciation,
+              })
+              return {
+                  message:"word added"
+              }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error:any) {
+
+          const existing = await ctx.db.query.words.findFirst({
+          where: (w, { eq, and }) =>
+            and(eq(w.userId, input.userId), eq(w.name, input.name)),
+        });
+
+          if (existing) {
+          throw new TRPCError({
+            code: "CONFLICT",
+            message: `Word already exists.`,
+          });
+        }
+
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Something went wrong while adding word.",
+        });
+        }
         }),
 
     listWords:publicProcedure

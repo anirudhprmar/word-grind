@@ -2,7 +2,7 @@
 for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
-- [ ]- if duplicate words are added then handle that with toast (gives a trpc error)
+- [X]- if duplicate words are added then handle that with toast (gives a trpc error)
 - [ ]- trpc for change name in setttings page and invalidate it (check the need for usertrpc)
 - [ ]- Make quiz smooth (too much loading, questions change , transitition to next question is not smooth)
 - [ ]- User profile with quiz data and profile analysis

@@ -7,6 +7,7 @@ import { Label } from "~/components/ui/label"
 import { api } from "~/lib/api"
 import { XIcon } from "lucide-react"
 import { toast } from "sonner"
+import { Toaster } from "~/components/ui/sonner"
 
 
 interface wordInfoProps {
@@ -70,20 +71,24 @@ export function WordInfoModal({wordInfo,onClose}:wordInfoProps) {
       if (onClose) {
         onClose();
       }
-    } else {
-      console.log("Unexpected response:", addingWord);
-      toast.error("Failed to add word");
-    }
+    } 
 
   } catch (error) {
     console.error("Error adding word:", error);
-    // Handle mutation error specifically
-    if (addWord.isError && addWord.error?.message) {
-      toast.error(addWord.error.message);
-    } else {
-      // Generic error fallback
-      toast.error("Failed to add word to collection");
-    }
+
+  // tRPC error with custom message
+  if (
+    addWord.isError &&
+    addWord.error?.message === "Word already exists"
+  ) {
+    
+    toast.error("Word already exists ❌");
+  } else if (addWord.isError && addWord.error?.message) {
+    toast.error(addWord.error.message);
+
+  } else {
+    toast.error("Failed to add word to collection");
+  }
   }
 }
 
@@ -180,7 +185,7 @@ export function WordInfoModal({wordInfo,onClose}:wordInfoProps) {
           </div>
         </div>
     </div>)}
-
+    <Toaster/>
   </div>
     
   )
