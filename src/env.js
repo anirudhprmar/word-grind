@@ -8,16 +8,16 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string().optional(),
+    DATABASE_URL: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-      BETTER_AUTH_SECRET: z.string(),
+      BETTER_AUTH_SECRET: z.string().optional(),
       BETTER_AUTH_URL: z.string().optional(),
-      AUTH_GOOGLE_ID: z.string(),
-      AUTH_GOOGLE_SECRET: z.string(),
-      GEMINI_API_KEY:z.string(),
-      MISTRAL_API_KEY:z.string(),
+      AUTH_GOOGLE_ID: z.string().optional(),
+      AUTH_GOOGLE_SECRET: z.string().optional(),
+      GEMINI_API_KEY:z.string().optional(),
+      MISTRAL_API_KEY:z.string().optional(),
       // OPENAI_API_KEY:z.string(),
       // REPLICATE_API_KEY:z.string(),
       RESEND_API_KEY:z.string().optional(),
