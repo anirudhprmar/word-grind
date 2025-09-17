@@ -1,7 +1,7 @@
 "use client"
 import { LoaderCircle } from "lucide-react";
 import {useRouter, useSearchParams } from "next/navigation"
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Label } from "~/components/ui/label";
 import { api } from "~/lib/api";

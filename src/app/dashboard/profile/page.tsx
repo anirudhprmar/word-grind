@@ -2,7 +2,7 @@
 import { LoaderCircle, Settings2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
-import SessionInfo from "~/components/SessionInfo"
+// import SessionInfo from "~/components/SessionInfo"
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card"
 import { api } from "~/lib/api"
