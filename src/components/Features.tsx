@@ -8,7 +8,7 @@ interface props{
 
 function Features({ref}:props) {
   return (
-    <section ref={ref} className=" flex flex-col items-center justify-center md:justify-around gap-5    rounded-2xl  transition-shadow duration-300  min-h-screen max md:w-full">
+    <section ref={ref} className=" flex flex-col items-center justify-center md:justify-around gap-5    rounded-2xl  transition-shadow duration-300  min-h-screen max md:w-full pt-30">
       
       <div     
       className="flex gap-4 flex-col max-w-90 md:max-w-full">

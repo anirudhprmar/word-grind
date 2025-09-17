@@ -5,8 +5,7 @@ for dev: user ngrok to properly go through the app flow (webhooks to work)
 custom plan remove, ref for pricing give it pt,typography change for the app,breadcumbs
 
 - [ ]- set up schema.org - 20min
-- [X]- get landing page links working -> get wordgrind and login 
--[ ]- update the content on hero page (check my history of perplexity) -20mi
+- [ ]- update the content on hero page (check my history of perplexity) -20mi
 - [ ]- send email when purchase and also benefit to share?
 
 - [ ]- Make quiz smooth (too much loading, questions change , transitition to next question is not smooth)
