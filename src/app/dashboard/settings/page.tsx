@@ -76,9 +76,9 @@ function SettingsContent() {
   })
 
   // Profile picture upload states
-  // const [profileImage, setProfileImage] = useState<File | null>(null);
-  // const [imagePreview, setImagePreview] = useState<string | null>(null);
-  // const [uploadingImage, setUploadingImage] = useState(false);
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const { data: organizations } = authClient.useListOrganizations();
 
@@ -156,54 +156,54 @@ function SettingsContent() {
     }
   };
 
-  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     setProfileImage(file);
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setImagePreview(reader.result as string);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setProfileImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-  // const handleUploadProfilePicture = async () => {
-  //   if (!profileImage) return;
+  const handleUploadProfilePicture = async () => {
+    if (!profileImage) return;
 
-  //   setUploadingImage(true);
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("file", profileImage);
+    setUploadingImage(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", profileImage);
 
-  //     // Upload to your R2 storage endpoint
-  //     const response = await fetch("/api/upload-image", {
-  //       method: "POST",
-  //       body: formData,
-  //     });
+      // Upload to your R2 storage endpoint
+      const response = await fetch("/api/upload-image", {
+        method: "POST",
+        body: formData,
+      });
 
-  //     if (response.ok) {
-  //       const { url } = await response.json();
+      if (response.ok) {
+        const { url } = await response.json();
 
-  //       // Update user profile with new image URL
-  //       await authClient.updateUser({
-  //         name,
-  //         image: url,
-  //       });
+        // Update user profile with new image URL
+        await authClient.updateUser({
+          name,
+          image: url,
+        });
 
-  //       setUser((prev) => (prev ? { ...prev, image: url } : null));
-  //       setImagePreview(null);
-  //       setProfileImage(null);
-  //       toast.success("Profile picture updated successfully");
-  //     } else {
-  //       throw new Error("Upload failed");
-  //     }
-  //   } catch {
-  //     toast.error("Failed to upload profile picture");
-  //   } finally {
-  //     setUploadingImage(false);
-  //   }
-  // };
+        setUser((prev) => (prev ? { ...prev, image: url } : null));
+        setImagePreview(null);
+        setProfileImage(null);
+        toast.success("Profile picture updated successfully");
+      } else {
+        throw new Error("Upload failed");
+      }
+    } catch {
+      toast.error("Failed to upload profile picture");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -260,28 +260,7 @@ function SettingsContent() {
               </CardContent>
             </Card>
 
-            {/* Change Password Card Skeleton */}
-            {/* <Card>
-              <CardHeader>
-                <Skeleton className="h-6 w-36 bg-gray-200 dark:bg-gray-800" />
-                <Skeleton className="h-4 w-64 bg-gray-200 dark:bg-gray-800" />
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-32 bg-gray-200 dark:bg-gray-800" />
-                  <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-800" />
-                </div>
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-28 bg-gray-200 dark:bg-gray-800" />
-                  <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-800" />
-                </div>
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-40 bg-gray-200 dark:bg-gray-800" />
-                  <Skeleton className="h-10 w-full bg-gray-200 dark:bg-gray-800" />
-                </div>
-                <Skeleton className="h-10 w-32 bg-gray-200 dark:bg-gray-800" />
-              </CardContent>
-            </Card> */}
+            
           </div>
         </div>
       </div>
@@ -333,7 +312,7 @@ function SettingsContent() {
                   </AvatarFallback>
                 </Avatar>
                 {/* profile photo change */}
-                {/* <div className="space-y-2">
+                <div className="space-y-2">
                   <div className="flex gap-2">
                     <Button
                       variant="outline"
@@ -377,7 +356,7 @@ function SettingsContent() {
                   <p className="text-sm text-muted-foreground">
                     JPG, GIF or PNG. 1MB max.
                   </p>
-                </div> */}
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
