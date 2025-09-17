@@ -18,7 +18,7 @@ function safeParseDate(value: string | Date | null | undefined): Date | null {
   return new Date(value);
 }
 
-const resend = new Resend(env.RESEND_API_KEY)
+const resend = env.RESEND_API_KEY ? new Resend(env.RESEND_API_KEY) : null
 
 
 const polarClient = new Polar({
@@ -192,7 +192,14 @@ export const auth = betterAuth({
         }),
     magicLink({
     sendMagicLink:async({email,url},_request) =>{
-
+        if (!resend) {
+            if (process.env.NODE_ENV === "production") {
+                throw new Error("RESEND_API_KEY is required in production to send emails");
+            }
+            console.warn("RESEND_API_KEY missing; skipping email send. Magic link:", url);
+            return;
+        }
+        
         const { data, error } = await resend.emails.send({
         from: "Wordgrind <onboarding@resend.wordgrind.top>",
         to: email,
