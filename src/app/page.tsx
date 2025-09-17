@@ -3,7 +3,7 @@
 import Hero from "~/components/Hero";
 import Navbar from "../components/Navbar";
 import Features from "~/components/Features";
-import Demo from "~/components/Demo";
+// import Demo from "~/components/Demo";
 import CTA from "~/components/CTA";
 import FAQ from "~/components/FAQ";
 import { useEffect, useRef, useState, type RefObject } from "react";

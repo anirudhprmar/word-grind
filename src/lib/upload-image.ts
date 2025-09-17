@@ -13,7 +13,6 @@ const r2 = new S3Client({
 });
 
 export const uploadImageAssets = async (buffer: Buffer, key: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   await r2.send(
     new PutObjectCommand({
       Bucket: process.env.R2_UPLOAD_IMAGE_BUCKET_NAME!,

@@ -2,7 +2,7 @@
 for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
-custom plan remove, ref for pricing give it pt,typography change for the app
+custom plan remove, ref for pricing give it pt,typography change for the app,breadcumbs
 
 - [ ]- set up schema.org - 20min
 - [X]- get landing page links working -> get wordgrind and login 
