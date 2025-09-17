@@ -69,12 +69,43 @@ const playfair = Playfair_Display({
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+
+   const jsonLd = 
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Wordgrind",
+  "url": "https://wordgrind.top",
+  "description": "Master English vocabulary with WordGrind—AI-powered, personalized learning for fluency, confidence, and smarter language skills.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "Web",
+  "softwareVersion": "1.0.0",
+  "offers": {
+    "@type": "Offer",
+    "price": "9.99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "featureList": [
+    "AI-powered vocabulary learning",
+    "Personalized quizzes and word collections",
+    "Unlimited AI conversations",
+    "Learn and grow with the community",
+    "Track progress with detailed insights"
+  ],
+}
+
+
   return (
     <html lang="en" className={`${playfair.className}`} suppressHydrationWarning>
       <body>
           <Providers>
         <TRPCReactProvider>
             {children}
+            <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
           <Analytics />
         </TRPCReactProvider>
           </Providers>

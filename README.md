@@ -2,9 +2,10 @@
 for dev: user ngrok to properly go through the app flow (webhooks to work)
 ## Core functionalities
 
-custom plan remove, ref for pricing give it pt,typography change for the app,breadcumbs
 
-- [ ]- set up schema.org - 20min
+- [ ]- typography change for the app
+- [ ]- breadcumbs
+- [X]- set up schema.org - 20min
 - [ ]- update the content on hero page (check my history of perplexity) -20mi
 - [ ]- send email when purchase and also benefit to share?
 
