@@ -19,6 +19,8 @@ import { ExternalLink, Settings2 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { api } from "~/lib/api";
+import { Toaster } from "~/components/ui/sonner";
 
 interface User {
   id: string;
@@ -65,6 +67,13 @@ function SettingsContent() {
   // Profile form states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+
+  const trpc = api.useUtils()
+  const updateUsername = api.user.updateUserName.useMutation({
+    onSuccess:async()=>{
+      await trpc.user.invalidate() 
+    }
+  })
 
   // Profile picture upload states
   // const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -135,10 +144,13 @@ function SettingsContent() {
 
   const handleUpdateProfile = async () => {
     try {
-      await authClient.updateUser({
-        name,
-      });
+      // await authClient.updateUser({
+      //   name,
+      // });
+      await updateUsername.mutateAsync({userId:user?.id ?? "",name:name})
+      
       toast.success("Profile updated successfully");
+      
     } catch {
       toast.error("Failed to update profile");
     }
@@ -249,7 +261,7 @@ function SettingsContent() {
             </Card>
 
             {/* Change Password Card Skeleton */}
-            <Card>
+            {/* <Card>
               <CardHeader>
                 <Skeleton className="h-6 w-36 bg-gray-200 dark:bg-gray-800" />
                 <Skeleton className="h-4 w-64 bg-gray-200 dark:bg-gray-800" />
@@ -269,7 +281,7 @@ function SettingsContent() {
                 </div>
                 <Skeleton className="h-10 w-32 bg-gray-200 dark:bg-gray-800" />
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </div>
@@ -567,6 +579,7 @@ export default function SettingsPage() {
         </div>
       }
     >
+      <Toaster/>
       <SettingsContent />
     </Suspense>
   );

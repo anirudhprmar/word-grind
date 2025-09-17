@@ -16,16 +16,11 @@ import {
 import { CheckCheck, LayoutIcon, MessageCircle, SquareLibrary } from "lucide-react"
 import { NavSecondary } from "./nav-secondary"
 import { IconSettings} from "@tabler/icons-react"
+import { api } from "~/lib/api"
 
-interface userProps{
-  userInfo:{
-    name:string
-    email:string 
-    avatar:string
-  }
-}
 
-type AppSidebarProps = userProps & React.ComponentProps<typeof Sidebar>
+
+type AppSidebarProps =  React.ComponentProps<typeof Sidebar>
 
 const data = {
   navMain: [
@@ -62,7 +57,12 @@ const data = {
 
 
 
-export function AppSidebar({userInfo, ...props }:AppSidebarProps) {
+export function AppSidebar({ ...props }:AppSidebarProps) {
+  const {data:userInfo,isLoading} = api.user.userInfo.useQuery()
+    if (isLoading) return;
+    const username = userInfo?.name ?? "";
+    const email = userInfo?.email ?? "";
+    const avatar = userInfo?.image ?? "/default-avatar.png" 
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -85,7 +85,7 @@ export function AppSidebar({userInfo, ...props }:AppSidebarProps) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={userInfo}  />
+        <NavUser user={{name:username ?? "",email:email ?? "",avatar:avatar ?? ""}}  />
       </SidebarFooter>
     </Sidebar>
   )

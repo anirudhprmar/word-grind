@@ -7,6 +7,7 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "~/components/ui/sidebar"
+import { api } from "~/lib/api"
 import { auth } from "~/lib/auth"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -17,9 +18,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
       if(!session) {
             redirect("/")
         }
-    const username = session.user.name;
-    const email = session.user.email;
-    const avatar = session.user.image ?? "/default-avatar.png" 
+
+  
 
   return (
     <div>
@@ -31,7 +31,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" userInfo={{name:username,email,avatar}}  />
+      <AppSidebar variant="inset"   />
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">

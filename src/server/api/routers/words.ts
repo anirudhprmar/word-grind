@@ -30,7 +30,7 @@ export const wordRouter = createTRPCRouter({
               return {
                   message:"word added"
               }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
         } catch (error:any) {
 
           const existing = await ctx.db.query.words.findFirst({
