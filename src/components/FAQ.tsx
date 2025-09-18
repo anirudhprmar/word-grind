@@ -25,9 +25,9 @@ export default function FAQ() {
 
         <Accordion type="single" collapsible >
         <AccordionItem value="item-1" className='px-10'>
-            <AccordionTrigger className='text-lg cursor-pointer '>What is Word Grind?</AccordionTrigger>
+            <AccordionTrigger className='text-lg cursor-pointer '>How does it works?</AccordionTrigger>
             <AccordionContent>
-            Wordgrind is an interactive language learning platform powered by AI. It helps you build and remember new vocabulary, test your knowledge, and practice real conversations in English.
+         WordGrind acts as an intelligent vocabulary companion — letting you find and learn new words, then practice and master them efficiently through personalized AI-driven methods
             </AccordionContent>
         </AccordionItem>
         </Accordion>
@@ -43,9 +43,10 @@ export default function FAQ() {
        
         <Accordion type="single" collapsible >
         <AccordionItem value="item-1" className='px-10'>
-            <AccordionTrigger className='text-lg cursor-pointer '> How does AI-powered feedback work?</AccordionTrigger>
+            <AccordionTrigger className='text-lg cursor-pointer '>How does an AI vocabulary learning app differ from traditional methods like searching words on Google, and why is it more effective?
+</AccordionTrigger>
             <AccordionContent>
-            Our AI reviews your progress and conversation, offering tailored advice, corrections, and tips to help you use words naturally and correctly.
+            Instead of just looking up a word once on Google and forgetting it, an AI vocabulary learning app lets you save words in a personal database and uses AI-driven review schedules to prompt you to revisit and practice those words regularly. This method ensures better long-term retention by turning passive searches into active, personalized learning sessions.
             </AccordionContent>
         </AccordionItem>
         </Accordion>

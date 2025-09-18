@@ -114,7 +114,7 @@ export default function PricingTable({
   };
 
   return (
-    <section className="flex flex-col items-center justify-center px-4  w-full min-h-screen pt-10 md:pt-25" ref={ref}>
+    <section className="flex flex-col items-center justify-center px-4  w-full min-h-screen pt-10 md:pt-15" ref={ref}>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-medium tracking-tight mb-4">
           Subscription

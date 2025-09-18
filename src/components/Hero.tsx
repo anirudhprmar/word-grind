@@ -39,7 +39,7 @@ function Hero() {
         transition={{ duration: 0.8,delay:0.7 }}
         className="flex justify-center items-center w-full px-10"
         >
-          <Link href={'/pricing'} className="bg-foreground p-2 text-primary-foreground  rounded-lg text-xl cursor-pointer">Get WordGrind</Link>
+          <Link href={'/pricing'} className="bg-foreground p-2 text-primary-foreground  rounded-lg text-xl cursor-pointer font-bold">Get WordGrind</Link>
         </motion.div>
       </div>
 
@@ -62,7 +62,7 @@ function Hero() {
             <div className="text-primary-foreground font-semibold text-sm glow-word">
               {vocab.word}
             </div>
-            <div className="text-primary-foreground text-xs mt-1">
+            <div className="text-primary-foreground text-xs mt-1 dark:text-foreground">
               {vocab.definition}
             </div>
           </div>
