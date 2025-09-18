@@ -22,8 +22,9 @@ export function SiteHeader() {
       </BreadcrumbLink>
     </BreadcrumbItem>
 
+{ pathname === '/dashboard'?null:
+<>
     <BreadcrumbSeparator className="hidden md:block" />
-
     <BreadcrumbItem>
       {/* Show 'quiz' for /dashboard/quiz or any quiz subpage */}
       {(pathname === '/dashboard/quiz' || pathname.startsWith('/dashboard/quiz/')) ? (
@@ -33,6 +34,8 @@ export function SiteHeader() {
         <BreadcrumbPage>{pathname.replace('/dashboard/', '')}</BreadcrumbPage>
       )}
     </BreadcrumbItem>
+      </>
+    }
 
     {/* Conditionally render quiz ID breadcrumb if inside a specific quiz page */}
     {pathname.startsWith('/dashboard/quiz/') && (

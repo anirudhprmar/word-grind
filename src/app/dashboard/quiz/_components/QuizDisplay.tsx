@@ -56,11 +56,11 @@ export default function QuizDisplay() {
 
   return (
     <div>
-    <main className="container mx-auto flex flex-col justify-between gap-10">
+    <main className="container mx-auto flex flex-col gap-10 py-12">
 
             <section className="flex flex-col gap-2 items-center justify-center pt-3">
-              <h1 className="text-3xl font-bold font-serif">Test Yourself</h1>
-              <p className="font-regular text-md">Do you acutally understand word ??</p>
+              <h1 className="text-3xl font-bold font-serif">Quiz Your Vocabulary</h1>
+              <p className="font-regular text-md"> Ready to master new words? Challenge yourself now!</p>
             </section>
 
             <section className="flex flex-col gap-10  items-center justify-center"> 
@@ -90,16 +90,20 @@ export default function QuizDisplay() {
                     }}
                     total={finalNumQuestions}  />
                     </div>
-                  )): <div >
-                    <Link href={'/dashboard'} className="font-bold cursor-pointer ">
-                      No new words found! Add some new words to start quiz.
-                    </Link>
-            </div>}
+                  )): <div className="flex flex-col items-center">
+                <span className="text-lg font-medium mb-2">
+                  No new words found!
+                </span>
+                <Link href="/dashboard" className="underline text-blue-600">
+                  Add new words to begin your quiz.
+                </Link>
+              </div>
+            }
 
         </div>
 
         <div>
-        {fewWords.length > 5 && <Button
+        {fewWords.length >= 3 && <Button
         size={'lg'}
         onClick={()=>setisClicked(!isClicked)}
         className=" hover:transition-shadow hover:shadow-xl cursor-pointer shadow-md"
