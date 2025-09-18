@@ -3,8 +3,7 @@ Master English vocabulary with WordGrind—AI-powered, personalized learning for
 
 ## Core functionalities
 
-- [X]- Make quiz smooth (too much loading, questions change , transitition to next question is not smooth) -15min
-- [ ]- User profile with quiz data and profile analysis - 40min
+- [X]- User profile with quiz data and profile analysis - 40min
 - [ ]- gotta implement this Add a simple model to track learned words and streaks(words with learned true display them). Display progress on the calender (simple way to do it is by small boxes fill with color if learned a new word on that day each box is day and have months something like that , everything based on user data) - 30min
 - [ ]- update the content on hero page (check my history of perplexity) -20mi
 - [ ]- typography change for the app
