@@ -15,19 +15,6 @@ interface FeedbackPageProps {
   params: Promise<{ quizId: string }>
 }
 
-interface QuizResult {
-  id: number;
-  userId: string;
-  wordId: number;
-  createdAt: Date;
-  completedAt: Date | null;
-  result: "success" | "failure" | "null" | null;
-  feedback: string;
-  suggestion: string;
-  score: number;
-  totalQuestions: number;
-}
-
 export default function FeedbackPage({ params }: FeedbackPageProps) {
   const unwrappedParams = React.use(params);
   const quizId = parseInt(unwrappedParams.quizId, 10);
