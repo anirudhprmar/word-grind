@@ -9,6 +9,7 @@ import { Progress } from "~/components/ui/progress"
 import { Separator } from "~/components/ui/separator"
 import { api } from "~/lib/api"
 import { authClient } from "~/lib/auth-client"
+import StreakBox from "./_components/StreakBox"
 
 interface QuizProps {
   id: number;
@@ -101,6 +102,22 @@ export default function UserProfile() {
     unlearned: wordList.filter(w => w.learned !== true).length,
   };
 
+  
+  const LearndedDataByDate = wordList.reduce<Record<string,number>>((acc,word)=>{
+    if (word.learned && word.updatedAt) {
+    const date = new Date(word.updatedAt).toISOString().slice(0,10);
+    acc[date] = (acc[date] ?? 0) + 1; 
+    }
+
+  return acc
+  },{})
+
+const learnedDataArray = Object.entries(LearndedDataByDate).map(([date, count]) => ({
+  date,
+  count,
+}));
+
+
   const learningProgress = wordStats.total > 0 
     ? Math.round((wordStats.learned / wordStats.total) * 100)
     : 0;
@@ -137,7 +154,7 @@ export default function UserProfile() {
   const currentStreak = calculateStreak();
 
   // Average time per quiz (mock calculation)
-  const averageTimePerQuiz = Math.floor(Math.random() * 5) + 2; // 2-7 minutes (placeholder)
+  // const averageTimePerQuiz = Math.floor(Math.random() * 5) + 2; // 2-7 minutes (placeholder)
 
   return (
     <div className="container mx-auto p-6 space-y-6">
@@ -320,7 +337,7 @@ export default function UserProfile() {
         <CardContent>
           {recentQuizzes.length > 0 ? (
             <div className="space-y-3">
-              {recentQuizzes.map((quiz, index) => (
+              {recentQuizzes.map((quiz) => (
                 <div key={quiz.id} className="flex items-center justify-between p-3 border rounded-lg">
                   <div className="flex items-center gap-3">
                     <div className={`w-2 h-2 rounded-full ${
@@ -388,6 +405,8 @@ export default function UserProfile() {
           </div>
         </CardContent>
       </Card>
+
+      <StreakBox learnedData={learnedDataArray} />
     </div>
   );
 }
