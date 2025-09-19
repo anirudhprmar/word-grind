@@ -61,7 +61,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
 
   return (
     <header  >
-      <nav className=" py-2 fixed  bg-primary-foreground bg-opacity-30  z-10  left-0 right-0 flex items-center justify-around max-w-full md:mx-auto p-2 px-4 sm:px-6 text-black shadow-md  transition-all duration-200">
+      <nav className=" py-2 fixed bg-white dark:bg-primary-foreground z-10  left-0 right-0 flex items-center justify-around max-w-full md:mx-auto p-2 px-4 sm:px-6">
         <Link href={'/'}>
             <div className="flex items-center justify-center gap-2">
                 <Image src={'/wordgrindLogo.png'} width={'50'} height={'50'} alt="wordgrind logo, a cartoon with pencil in one hand and surrounded by a letter A" className="rounded-md"/>
@@ -95,7 +95,7 @@ function Navbar({scrollFunction,refs}:AboutProps) {
 
         <div className="hidden md:flex gap-5 items-center">
             <Link className="text-xl cursor-pointer dark:text-foreground" href={'/sign-in'}>Sign In</Link>
-            <Link className="bg-foreground text-primary-foreground p-2 font-bold rounded-lg cursor-pointer" href={'/pricing'} >Get WordGrind</Link>
+            <Link className="bg-foreground text-primary-foreground p-2 text-sm font-bold rounded-lg cursor-pointer" href={'/pricing'} >Get WordGrind</Link>
         </div>
 
       {/* Mobile Menu Button */}

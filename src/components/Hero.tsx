@@ -32,7 +32,7 @@ function Hero() {
          initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8,delay:0.45 }}
-        className="font-normal text-lg md:text-xl max-w-130  "
+        className="font-normal text-lg md:text-xl max-w-130"
         >Level up your language with Wordgrind: build your word collection, master meanings, and practice real conversations. Get AI feedback and boost your fluency—all in one addictive app for ambitious learners.</motion.p>
         <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ function Hero() {
         transition={{ duration: 0.8,delay:0.7 }}
         className="flex justify-center items-center w-full px-10"
         >
-          <Link href={'/pricing'} className="bg-foreground p-2 text-primary-foreground  rounded-lg text-xl cursor-pointer font-bold">Get WordGrind</Link>
+          <Link href={'/pricing'} className="bg-foreground p-2 text-primary-foreground rounded-lg text-lg cursor-pointer font-bold">Get WordGrind</Link>
         </motion.div>
       </div>
 

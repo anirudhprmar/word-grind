@@ -3,9 +3,6 @@ Master English vocabulary with WordGrind—AI-powered, personalized learning for
 
 ## Core functionalities
 
-- [X]- typography change for the app very important 
-make the the landing page clean
-
 - [ ]- send email when purchase (polar is sending the mail on purchase) and also benefit to share?
 
 - [ ]- Check safety and security -.5hr (server vs client component check with ai , don't query the db on client components, i've done that which i need to fix like getting list of words on client componenet, do all these on server side, rate limitter, also html semetics)
