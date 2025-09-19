@@ -3,9 +3,7 @@ Master English vocabulary with WordGrind—AI-powered, personalized learning for
 
 ## Core functionalities
 
-- [X]- make dark mode based styling , navbar , mobile view
-
-- [ ]- typography change for the app very important 
+- [X]- typography change for the app very important 
 make the the landing page clean
 
 - [ ]- send email when purchase (polar is sending the mail on purchase) and also benefit to share?

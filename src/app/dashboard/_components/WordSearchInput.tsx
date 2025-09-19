@@ -108,7 +108,7 @@ const displayedText = TypingEffect({ arrOfText: suggestions, typingSpeed: 100,er
               <FormItem>
                 <FormControl>
                   <Input
-                  placeholder={`Ask me about any word... e.g ${displayedText}`}
+                  placeholder={` ${displayedText}`}
                   {...field} 
                   className='text-left px-5 pt-7 pb-15  text-foreground inset-0 backdrop-blur-lg bg-transparent rounded-xl  shadow-md ' />
                 </FormControl>

@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 
 import { type Metadata } from "next";
-import {Playfair_Display } from "next/font/google";
+import {Playfair_Display,Open_Sans,Lora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
 
 // two different fonts
@@ -66,6 +66,16 @@ const playfair = Playfair_Display({
   variable: "--font-playfair-display",
 });
 
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  variable: "--font-open-sans",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -97,7 +107,7 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en" className={`${playfair.className}`} suppressHydrationWarning>
+    <html lang="en" className={`${playfair.className} ${openSans.className} ${lora.className}`} suppressHydrationWarning>
       <body>
           <Providers>
         <TRPCReactProvider>

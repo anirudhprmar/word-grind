@@ -85,6 +85,9 @@
   --font-sans: Inter;
   --font-serif: Georgia;
   --font-mono: monospace;
+  --font-playfair-display:"Playfair Display",serif;
+  --font-open-sans: 'Open Sans', sans-serif;
+  --font-lora: 'Lora', serif;
   --radius: 0.5rem;
   --shadow-2xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0px 4px 10px 0px hsl(0 0% 0% / 0.05);
@@ -182,6 +185,9 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
+  --font-lora:var(--font-lora);
+  --font-playfair-display:var(--font-playfair-display);
+  --font-open-sans:var(--font-open-sans)
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -207,4 +213,28 @@
 
 body {
   letter-spacing: var(--tracking-normal);
+  font-family: var(--font-lora), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.title, .headline, .modal-title {
+  font-family: var(--font-playfair-display), serif;
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide);
+}
+
+blockquote, .quote, .highlight, .testimonial {
+  font-family: var(--font-open-sans), serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: var(--tracking-wider);
+}
+
+nav, .nav-link, .sidebar, .button, .input, label, p, li {
+  font-family: var(--font-lora), ui-sans-serif, system-ui, sans-serif;
+}
+
+.floating-word {
+  animation: float 6s ease-in-out infinite;
+  font-family: var(--font-playfair-display), serif;
 }
