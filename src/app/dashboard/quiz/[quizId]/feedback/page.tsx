@@ -85,7 +85,10 @@ export default function FeedbackPage({ params }: FeedbackPageProps) {
   };
 
   const { minutes, seconds } = getTimeTaken();
-  const scorePercentage = report ? Math.round((report.score / report.totalQuestions) * 100) : 0;
+  const total = Math.max(0, report?.totalQuestions ?? 0);
+  const correct = Math.min(Math.max(0, report?.score ?? 0), total);
+  const scorePercentage = total > 0 ? Math.round((correct / total) * 100) : 0;
+
   const isSuccess = report?.result === "success";
   
   // Get performance level

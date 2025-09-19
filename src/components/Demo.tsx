@@ -31,7 +31,7 @@ function Demo({ref}:props) {
         <motion.h3
          transition={{ duration: 1, ease: 'easeInOut' }}
               variants={variants}
-        className="font-bold text-3xl text-center px-4">Learning new vocab is so easy and fun !! </motion.h3>
+        className="font-bold text-3xl text-center px-4">Demo</motion.h3>
       </div>
 
         <motion.div

@@ -2,18 +2,13 @@
 Master English vocabulary with WordGrind—AI-powered, personalized learning for fluency, confidence, and smarter language skills.
 
 ## Core functionalities
-
-
-- [X]- Check safety and security -.5hr (server vs client component check with ai , don't query the db on client components, i've done that which i need to fix like getting list of words on client componenet, do all these on server side, rate limitter, also html semetics)
-
-profile analysis stats check
-
-- [ ]- record a demo video and update the landing page with demo video 
-
+loading states on switching tabs or trpc calls 
+shuffle the answers for quiz
+fix the profile page percentage
+- [X]- record a demo video and update the landing page with demo video 
 - [ ]- start marketting the app: reddit , x , linkedIn, hacker news distribution is the key - 1.5 hr
 
 ______
 
-- [X] - profile pic update
 - [ ] - upstash redis Caching words,profile, quizzes
 - [ ]- additional features to work on : llm suggestions after quiz a analysis , chat with an llm vercel ai sdk , speech to text conversation and one to one call   with aiusing the word you are learning, learderboard
