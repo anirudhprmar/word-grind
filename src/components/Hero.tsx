@@ -59,7 +59,7 @@ function Hero() {
           }}
         >
           <div className="bg-primary backdrop-blur-sm rounded-xl p-3 shadow-lg border border-gray-200 hover:scale-105 transition-transform duration-300 cursor-pointer">
-            <div className="text-primary-foreground font-semibold text-sm glow-word">
+            <div className="text-primary-foreground font-semibold text-sm glow-word dark:text-foreground">
               {vocab.word}
             </div>
             <div className="text-primary-foreground text-xs mt-1 dark:text-foreground">

@@ -1,4 +1,4 @@
-import type { RefObject } from "react";
+import {  type RefObject } from "react";
 import { motion } from "motion/react";
 
 interface props{
@@ -18,6 +18,7 @@ function Demo({ref}:props) {
     opacity: 1
   }
 }
+
   return (
      <motion.section
       initial="hidden"
@@ -36,8 +37,9 @@ function Demo({ref}:props) {
         <motion.div
          transition={{ duration: 1, ease: 'easeInOut' }}
               variants={variants}
-        className="p-15 px-5 w-100 md:w-200 h-80 md:h-120 flex flex-col gap-3 border backdrop-filter backdrop-blur-lg bg-opacity-30 bg-green-500 text-white rounded-xl">
-            <span className="text-sm text-green-100 rounded-xl">demo video here</span>
+        >
+            {/* <span className="text-sm text-green-100 rounded-xl">demo video here</span> */}
+              <video controls width="600" height="400" src="/demo.mp4" className="relative border backdrop-filter backdrop-blur-lg bg-opacity-30  text-white rounded-xl w-200" />
         </motion.div>
     </motion.section>
   )

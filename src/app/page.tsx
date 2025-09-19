@@ -3,7 +3,7 @@
 import Hero from "~/components/Hero";
 import Navbar from "../components/Navbar";
 import Features from "~/components/Features";
-// import Demo from "~/components/Demo";
+import Demo from "~/components/Demo";
 import CTA from "~/components/CTA";
 import FAQ from "~/components/FAQ";
 import { useEffect, useRef, useState, type RefObject } from "react";
@@ -73,7 +73,7 @@ export default function Home() {
       <main>
     <Hero/>
     <Features ref={featuresRef}/>
-    {/* <Demo ref={demoRef}/> */}
+    <Demo ref={demoRef}/>
     {subDetails &&
     <PricingTable subscriptionDetails={subDetails} ref={pricingRef}/>
     }

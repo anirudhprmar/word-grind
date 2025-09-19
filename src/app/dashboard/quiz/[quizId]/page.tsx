@@ -156,7 +156,7 @@ export default function QuizPage({ params }: { params: Promise<{ quizId: string 
 
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-2">
+          <h3 className="text-lg font-semibold mb-2 dark:text-primary-foreground">
             {currentQuestion?.question}
           </h3>
         </div>
@@ -165,19 +165,19 @@ export default function QuizPage({ params }: { params: Promise<{ quizId: string 
           {currentQuestion?.choices.map((choice, idx) => (
             <div
               key={idx}
-              className={`p-3 border rounded-lg ${
+              className={`p-3 border rounded-lg  ${
                 getChoiceClassName(choice)
               }`}
               onClick={() => handleAnswerSelect(choice)}
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 dark:text-primary-foreground">
                 <input
                   type="radio"
                   value={choice}
                   checked={questionStates[currentIndex]?.selectedAnswer === choice}
                   onChange={() => handleAnswerSelect(choice)}
                   disabled={questionStates[currentIndex]?.isSubmitted}
-                  className="mr-3"
+                  className="mr-3 "
                 />
                 <Label>{choice}</Label>
               </div>

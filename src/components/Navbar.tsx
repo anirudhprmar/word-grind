@@ -134,16 +134,9 @@ function Navbar({scrollFunction,refs}:AboutProps) {
             <div className='mt-6 pt-4 border-t border-gray-200'>
               <Link
                 href={'/pricing'}
-                className='w-full flex items-center  gap-1 text-sm bg-foreground text-primary-foreground  '
+                className='w-full flex items-center  gap-1 text-sm bg-foreground text-primary-foreground p-2 rounded-lg  '
                 onClick={() => setisOpen(false)}
               >
-                {/* <a 
-                onClick={(e) =>{
-                      setisOpen(false)
-                      handleNavClick(e, navItems[2] ?? { label: 'Pricing', href: '',section:refs.pricing })
-                    }}
-                >
-              </a> */}
                 Get WordGrind
                 <ChevronRight className='size-5' />
               </Link>
