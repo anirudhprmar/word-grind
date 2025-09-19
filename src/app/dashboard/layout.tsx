@@ -8,6 +8,7 @@ import {
   SidebarProvider,
 } from "~/components/ui/sidebar"
 import { auth } from "~/lib/auth"
+import { getUserSubscriptionStatus } from "~/lib/subscription"
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
       const session = await auth.api.getSession({
@@ -17,8 +18,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
       if(!session) {
             redirect("/")
         }
-
-  
+      
+        const subscriptionStatus = await getUserSubscriptionStatus()
+        const username = session.user.name
+        const email = session.user.email
+        const avatar = session.user.image ?? ""
 
   return (
     <div>
@@ -30,7 +34,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset"   />
+      <AppSidebar variant="inset" username={username} email={email} avatar={avatar} subscriptionStatus={subscriptionStatus} />
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">

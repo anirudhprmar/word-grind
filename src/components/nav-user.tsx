@@ -1,5 +1,4 @@
 "use client"
-
 import {
   BadgeCheck,
   ChevronsUpDown,
@@ -29,31 +28,21 @@ import {
   useSidebar,
 } from "~/components/ui/sidebar"
 import { LogoutButton } from "./LogoutBtn"
-import { useEffect, useState } from "react"
 import Link from "next/link"
-import { getUserSubscriptionStatus } from "~/lib/subscription"
 import ThemeSwitch from "./ThemeSwitch"
 
 export function NavUser({
   user,
+  subscriptionStatus,
 }: {
   user: {
     name: string
     email: string
     avatar: string
-  }
+  },
+  subscriptionStatus:"none" | "active" | "canceled" | "expired" |  null
 }) {
   const { isMobile } = useSidebar()
-  
-
-const [userInfo,setUserInfo] = useState<"none" | "active" | "canceled" | "expired" |  null>(null)
-     useEffect(()=>{
-          async function fetchUser() {
-             const data = await getUserSubscriptionStatus()
-            setUserInfo(data)
-          }
-           void fetchUser()
-        },[])
 
   return (
     <SidebarMenu>
@@ -99,7 +88,7 @@ const [userInfo,setUserInfo] = useState<"none" | "active" | "canceled" | "expire
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 
-                {userInfo === "active" ? <div className="flex items-center gap-2 "><Sparkles /> Starter Plan Active</div> :"No Active Plan"}
+                {subscriptionStatus === "active" ? <div className="flex items-center gap-2 "><Sparkles /> Starter Plan Active</div> :"No Active Plan"}
 
               </DropdownMenuItem>
             </DropdownMenuGroup>

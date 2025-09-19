@@ -1,6 +1,7 @@
 import { uploadImageAssets } from "~/lib/upload-image";
 import {type NextRequest, NextResponse } from "next/server";
 import { rlUpload,getClientIP } from "~/lib/ratelimit";
+import { auth } from "~/lib/auth";
 
 export const config = {
   api: { bodyParser: false }, // Disable default body parsing
@@ -8,7 +9,19 @@ export const config = {
 
 export async function POST(req: NextRequest) {
   try {
+    const origin = req.headers.get("origin");
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+    if (!origin || !appUrl || !origin.startsWith(appUrl)) {
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+    }
+
+    const session = await auth.api.getSession({ headers: req.headers });
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const ip = getClientIP(req);
+    
     const { success, reset } = await rlUpload.limit(`upload:${ip}`);
     if (!success) {
       return new NextResponse("Too many uploads", {
@@ -60,9 +73,9 @@ export async function POST(req: NextRequest) {
     const filename = `upload-${timestamp}.${fileExt || "png"}`;
 
     // Upload the file
-    const url = await uploadImageAssets(buffer, filename);
-
+    const url = await uploadImageAssets(buffer, filename, file.type);
     return NextResponse.json({ url });
+    
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(

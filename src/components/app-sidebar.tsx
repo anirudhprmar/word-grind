@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react"
 
 import { NavMain } from "~/components/nav-main"
@@ -16,8 +15,6 @@ import {
 import { CheckCheck, LayoutIcon, MessageCircle, SquareLibrary } from "lucide-react"
 import { NavSecondary } from "./nav-secondary"
 import { IconSettings} from "@tabler/icons-react"
-import { api } from "~/lib/api"
-
 
 
 type AppSidebarProps =  React.ComponentProps<typeof Sidebar>
@@ -57,12 +54,7 @@ const data = {
 
 
 
-export function AppSidebar({ ...props }:AppSidebarProps) {
-  const {data:userInfo,isLoading} = api.user.userInfo.useQuery()
-    if (isLoading) return;
-    const username = userInfo?.name ?? "";
-    const email = userInfo?.email ?? "";
-    const avatar = userInfo?.image ?? "/default-avatar.png" 
+export function AppSidebar({ subscriptionStatus,username,email,avatar,...props }:AppSidebarProps & { subscriptionStatus:"none" | "active" | "canceled" | "expired" |  null,username:string,email:string,avatar:string }) {
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -85,7 +77,7 @@ export function AppSidebar({ ...props }:AppSidebarProps) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={{name:username ?? "",email:email ?? "",avatar:avatar ?? ""}}  />
+        <NavUser user={{name:username ?? "",email:email ?? "",avatar:avatar ?? ""} } subscriptionStatus={subscriptionStatus}  />
       </SidebarFooter>
     </Sidebar>
   )

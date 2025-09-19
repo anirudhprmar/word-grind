@@ -1,5 +1,4 @@
 "use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -61,8 +60,10 @@ function SettingsContent() {
   const [orders, setOrders] = useState<OrdersResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentTab, setCurrentTab] = useState("profile");
-  const router = useRouter();
+  // const router = useRouter();
   const searchParams = useSearchParams();
+  const router = useRouter()
+
 
   // Profile form states
   const [name, setName] = useState("");
@@ -148,8 +149,9 @@ function SettingsContent() {
       //   name,
       // });
       await updateUsername.mutateAsync({userId:user?.id ?? "",name:name})
-      
+      router.refresh()
       toast.success("Profile updated successfully");
+
       
     } catch {
       toast.error("Failed to update profile");
@@ -194,6 +196,7 @@ function SettingsContent() {
         setUser((prev) => (prev ? { ...prev, image: url } : null));
         setImagePreview(null);
         setProfileImage(null);
+        router.refresh()
         toast.success("Profile picture updated successfully");
       } else {
         throw new Error("Upload failed");
