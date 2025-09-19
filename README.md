@@ -5,7 +5,7 @@ Master English vocabulary with WordGrind—AI-powered, personalized learning for
 loading states on switching tabs or trpc calls 
 shuffle the answers for quiz
 fix the profile page percentage
-- [X]- record a demo video and update the landing page with demo video 
+
 - [ ]- start marketting the app: reddit , x , linkedIn, hacker news distribution is the key - 1.5 hr
 
 ______

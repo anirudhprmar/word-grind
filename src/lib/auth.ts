@@ -22,7 +22,7 @@ const resend = new Resend(env.RESEND_API_KEY)
 
 const polarClient = new Polar({
     accessToken: env.POLAR_ACCESS_TOKEN,
-    server: 'sandbox'
+    server: 'production'
 });
  
 export const auth = betterAuth({

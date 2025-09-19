@@ -10,9 +10,16 @@ import {
 } from "~/components/ui/card";
 import { CheckCircle, ArrowRight, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SuccessPage() {
   const router = useRouter();
+
+  useEffect(() => { router.refresh(); }, []);
+  
+  const go = async()=>{
+    router.push("/dashboard")
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
@@ -41,7 +48,7 @@ export default function SuccessPage() {
           </div>
 
           <Button
-            onClick={() => router.push("/dashboard")}
+            onClick={go}
             className="w-full text-white font-medium py-3"
             size="lg"
           >
