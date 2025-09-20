@@ -1,42 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 import { rlGlobal, getClientIP } from "~/lib/ratelimit";
-import { env } from "~/env";
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const { pathname } = request.nextUrl;
-
-  // Handle CORS for Better Auth API routes
-  if (pathname.startsWith("/api/auth")) {
-    const origin = request.headers.get("origin");
-    const allowedOrigins = [
-      env.NEXT_PUBLIC_APP_URL,
-      "https://wordgrind.top",
-      "https://www.wordgrind.top",
-      "http://localhost:3000"
-    ];
-    
-    const response = NextResponse.next();
-    
-    // Set CORS headers for Better Auth
-    if (origin && allowedOrigins.includes(origin)) {
-      response.headers.set("Access-Control-Allow-Origin", origin);
-    } else {
-      response.headers.set("Access-Control-Allow-Origin", env.NEXT_PUBLIC_APP_URL || "*");
-    }
-    
-    response.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    response.headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
-    response.headers.set("Access-Control-Allow-Credentials", "true");
-    
-    // Handle preflight requests
-    if (request.method === "OPTIONS") {
-      return new Response(null, { status: 200, headers: response.headers });
-    }
-    
-    return response;
-  }
 
   // Allow webhooks
   if (pathname.startsWith("/api/polar/webhooks")) {
@@ -71,15 +39,6 @@ export async function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
-
 export const config = {
-  matcher: [
-    "/dashboard/:path*", 
-    "/sign-in", 
-    "/sign-up", 
-    "/api/auth/:path*",
-    "/api/trpc/:path*",
-    "/api/upload-image/:path*",
-    "/api/polar/webhooks/:path*"
-  ],
+  matcher: ["/dashboard/:path*", "/sign-in", "/sign-up"],
 };
