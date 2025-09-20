@@ -9,6 +9,7 @@ import FAQ from "~/components/FAQ";
 import { useEffect, useRef, useState, type RefObject } from "react";
 import PricingTable from "./pricing/_component/pricing-table";
 import { getSubscriptionDetails } from "~/lib/subscription";
+import Footer from "~/components/Footer";
 
 type SubscriptionDetails = {
   id: string;
@@ -81,6 +82,7 @@ export default function Home() {
     <CTA/>
       </main>
 
+    <Footer />
      
     </div>
   );
