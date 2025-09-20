@@ -191,13 +191,22 @@ export const auth = betterAuth({
         }),
     magicLink({
     sendMagicLink:async({email,url},_request) =>{
-  
-      await resend.emails.send({
-        from: "Wordgrind <onboarding@resend.wordgrind.top>",
-        to: email,
-        subject: "Your Magic Sign-In Link",
-        html: `Click <a href="${url}">here</a> to sign in. This link will expire within 5 min.`,
-      });
+        try {
+            const { data, error } = await resend.emails.send({
+              from: "Wordgrind <onboarding@resend.wordgrind.top>",
+              to: email,
+              subject: "Your Magic Sign-In Link", 
+              html: `Click <a href="${url}">here</a> to sign in. This link will expire within 5 min.`,
+            });
+            if (error) {
+              console.error("Resend error:", error);
+              throw new Error("Failed to send magic link");
+            }
+            console.log("Magic link sent to:", email);
+          } catch (error) {
+            console.error("Magic link error:", error);
+            throw error; // Re-throw to show user error
+          }
     }
     }),
     admin(), 
