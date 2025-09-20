@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 import { rlGlobal, getClientIP } from "~/lib/ratelimit";
-import { env } from "./env";
+import { env } from "~/env";
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
@@ -60,5 +60,13 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/sign-in", "/sign-up", "/api/:path*"],
+  matcher: [
+    "/dashboard/:path*", 
+    "/sign-in", 
+    "/sign-up", 
+    "/api/auth/:path*",
+    "/api/trpc/:path*",
+    "/api/upload-image/:path*",
+    "/api/polar/webhooks/:path*"
+  ],
 };

@@ -37,6 +37,7 @@ export const auth = betterAuth({
         "https://wordgrind.top",
         "https://www.wordgrind.top"
     ],
+    baseURL: env.NEXT_PUBLIC_APP_URL,
     cookieCache: {
         enabled: true,
         maxAge: 5 * 60, // Cache duration in seconds
