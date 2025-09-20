@@ -27,15 +27,10 @@ const polarClient = new Polar({
  
 export const auth = betterAuth({
     trustedOrigins: [
-        env.NEXT_PUBLIC_APP_URL,
-        "https://wordgrind.top",
-        "https://www.wordgrind.top"
+        env.NEXT_PUBLIC_APP_URL
     ],
     allowedDevOrigins: [
-        env.NEXT_PUBLIC_APP_URL,
-        "http://localhost:3000",
-        "https://wordgrind.top",
-        "https://www.wordgrind.top"
+        env.NEXT_PUBLIC_APP_URL
     ],
     cookieCache: {
         enabled: true,
