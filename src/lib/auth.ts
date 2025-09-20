@@ -29,7 +29,8 @@ export const auth = betterAuth({
     trustedOrigins: [
         env.NEXT_PUBLIC_APP_URL,
         "https://wordgrind.top",
-        "https://www.wordgrind.top"
+        "https://www.wordgrind.top",
+        "http://localhost:3000"
     ],
     allowedDevOrigins: [
         env.NEXT_PUBLIC_APP_URL,
