@@ -16,7 +16,7 @@ const r2 = new S3Client({
 
 // Set this in .env (examples below)
 const PUBLIC_BASE =
-  process.env.R2_PUBLIC_BASE_URL // e.g. https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev
+  env.R2_PUBLIC_BASE_URL // e.g. https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev
   ?? `https://${env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com/${env.R2_UPLOAD_IMAGE_BUCKET_NAME}`;
 
 export const uploadImageAssets = async (

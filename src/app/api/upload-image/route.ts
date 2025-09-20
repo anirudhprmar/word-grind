@@ -2,6 +2,7 @@ import { uploadImageAssets } from "~/lib/upload-image";
 import {type NextRequest, NextResponse } from "next/server";
 import { rlUpload,getClientIP } from "~/lib/ratelimit";
 import { auth } from "~/lib/auth";
+import { env } from "~/env";
 
 export const config = {
   api: { bodyParser: false }, // Disable default body parsing
@@ -10,7 +11,7 @@ export const config = {
 export async function POST(req: NextRequest) {
   try {
     const origin = req.headers.get("origin");
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+    const appUrl = env.NEXT_PUBLIC_APP_URL;
     if (!origin || !appUrl || !origin.startsWith(appUrl)) {
       return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
     }

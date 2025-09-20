@@ -26,8 +26,17 @@ const polarClient = new Polar({
 });
  
 export const auth = betterAuth({
-    trustedOrigins: [`${env.NEXT_PUBLIC_APP_URL}`],
-    allowedDevOrigins: [`${env.NEXT_PUBLIC_APP_URL}`],
+    trustedOrigins: [
+        env.NEXT_PUBLIC_APP_URL,
+        "https://wordgrind.top",
+        "https://www.wordgrind.top"
+    ],
+    allowedDevOrigins: [
+        env.NEXT_PUBLIC_APP_URL,
+        "http://localhost:3000",
+        "https://wordgrind.top",
+        "https://www.wordgrind.top"
+    ],
     cookieCache: {
         enabled: true,
         maxAge: 5 * 60, // Cache duration in seconds
@@ -44,6 +53,7 @@ export const auth = betterAuth({
     }),
     socialProviders:{
         google:{
+            prompt:"select_account",
             clientId:env.AUTH_GOOGLE_ID,
             clientSecret:env.AUTH_GOOGLE_SECRET
         }

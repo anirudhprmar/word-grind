@@ -30,6 +30,7 @@ export const env = createEnv({
       R2_UPLOAD_IMAGE_SECRET_ACCESS_KEY:z.string(),
       CLOUDFLARE_ACCOUNT_ID:z.string(),
       R2_UPLOAD_IMAGE_BUCKET_NAME:z.string(),
+      R2_PUBLIC_BASE_URL:z.string(),
   },
 
   /**
@@ -71,6 +72,7 @@ export const env = createEnv({
     R2_UPLOAD_IMAGE_SECRET_ACCESS_KEY: process.env.R2_UPLOAD_IMAGE_SECRET_ACCESS_KEY,
     CLOUDFLARE_ACCOUNT_ID: process.env.CLOUDFLARE_ACCOUNT_ID,
     R2_UPLOAD_IMAGE_BUCKET_NAME: process.env.R2_UPLOAD_IMAGE_BUCKET_NAME,
+    R2_PUBLIC_BASE_URL: process.env.R2_PUBLIC_BASE_URL,
     UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
     UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
   },
