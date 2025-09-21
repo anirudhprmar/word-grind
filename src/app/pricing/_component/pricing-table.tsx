@@ -141,11 +141,11 @@ export default function PricingTable({
             </div>
           )}
           <CardHeader>
-            <CardTitle className="text-2xl">1 Year Plan</CardTitle>
+            <CardTitle className="text-2xl">1-Year Pass</CardTitle>
             <CardDescription>Perfect for People who want to explore</CardDescription>
             <div className="mt-4 flex items-baseline gap-1">
               <span className="text-4xl font-bold flex items-center gap-1">$ <span>25</span></span>
-              <span className="text-muted-foreground">usd /yr</span>
+              <span className="text-muted-foreground">usd</span>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -218,7 +218,7 @@ export default function PricingTable({
             </div>
           )}
           <CardHeader>
-            <CardTitle className="text-2xl">Lifetime</CardTitle>
+            <CardTitle className="text-2xl">Lifetime Deal</CardTitle>
             <CardDescription>Perfect for Lifelong Learners</CardDescription>
             <div className="mt-4 flex items-baseline gap-1">
               <span className="text-4xl font-bold flex items-center gap-1">$ <span>45</span></span>
