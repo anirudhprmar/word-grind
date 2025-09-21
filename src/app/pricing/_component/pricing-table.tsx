@@ -123,11 +123,11 @@ export default function PricingTable({
           Pricing
         </h1>
         <p className="text-xl text-muted-foreground">
-          Start using WordGrind Now
+        Choose your learning journey and unlock unlimited vocabulary growth
         </p>
       </div>
 
-      <div className="flex items-center justify-center gap-8 max-w-4xl w-full">
+      <div className="flex items-center justify-center gap-8 max-w-4xl w-full flex-col md:flex-row ">
         {/* Starter Tier */}
         <Card className="relative h-fit">
           {isCurrentPlan(STARTER_TIER) && (
@@ -142,7 +142,7 @@ export default function PricingTable({
           )}
           <CardHeader>
             <CardTitle className="text-2xl">1-Year Pass</CardTitle>
-            <CardDescription>Perfect for People who want to explore</CardDescription>
+            <CardDescription>Ideal for students and professionals ready to expand their vocabulary</CardDescription>
             <div className="mt-4 flex items-baseline gap-1">
               <span className="text-4xl font-bold flex items-center gap-1">$ <span>25</span></span>
               <span className="text-muted-foreground">usd</span>
@@ -219,7 +219,7 @@ export default function PricingTable({
           )}
           <CardHeader>
             <CardTitle className="text-2xl">Lifetime Deal</CardTitle>
-            <CardDescription>Perfect for Lifelong Learners</CardDescription>
+            <CardDescription>Best value for dedicated learners committed to long-term vocabulary mastery</CardDescription>
             <div className="mt-4 flex items-baseline gap-1">
               <span className="text-4xl font-bold flex items-center gap-1">$ <span>45</span></span>
               <span className="text-muted-foreground">usd</span>
