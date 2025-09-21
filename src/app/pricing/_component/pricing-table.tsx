@@ -93,7 +93,10 @@ export default function PricingTable({
   const STARTER_TIER = env.NEXT_PUBLIC_STARTER_TIER;
   const STARTER_SLUG = env.NEXT_PUBLIC_STARTER_SLUG;
 
-  if (!STARTER_TIER || !STARTER_SLUG) {
+  const LIFETIME_TIER = env.NEXT_PUBLIC_LIFETIME_TIER;
+  const LIFETIME_SLUG = env.NEXT_PUBLIC_LIFETIME_SLUG;
+
+  if (!STARTER_TIER || !STARTER_SLUG || !LIFETIME_TIER || !LIFETIME_SLUG) {
     throw new Error("Missing required environment variables for Starter tier");
   }
 
@@ -117,7 +120,7 @@ export default function PricingTable({
     <section className="flex flex-col items-center justify-center px-4  w-full min-h-screen pt-10 md:pt-15" ref={ref}>
       <div className="text-center mb-12">
         <h1 className="text-4xl font-medium tracking-tight mb-4">
-          Subscription
+          Pricing
         </h1>
         <p className="text-xl text-muted-foreground">
           Start using WordGrind Now
@@ -138,11 +141,11 @@ export default function PricingTable({
             </div>
           )}
           <CardHeader>
-            <CardTitle className="text-2xl">Starter</CardTitle>
-            <CardDescription>Perfect for getting started</CardDescription>
-            <div className="mt-4">
-              <span className="text-4xl font-bold flex items-center gap-1">$ <span>9.99</span></span>
-              <span className="text-muted-foreground">/month</span>
+            <CardTitle className="text-2xl">1 Year Plan</CardTitle>
+            <CardDescription>Perfect for People who want to explore</CardDescription>
+            <div className="mt-4 flex items-baseline gap-1">
+              <span className="text-4xl font-bold flex items-center gap-1">$ <span>25</span></span>
+              <span className="text-muted-foreground">usd /yr</span>
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -186,14 +189,96 @@ export default function PricingTable({
                 )}
               </div>
             ) : (
+              <div className="flex items-center justify-center flex-col w-full gap-2">
+
               <Button
                 className="w-full"
                 onClick={() => handleCheckout(STARTER_TIER, STARTER_SLUG)}
-              >
+                >
                 {isAuthenticated === false
                   ? "Sign In to Get Started"
                   : "Get Started"}
               </Button>
+
+              <p className="text-muted-foreground text-sm">Pay once. Learn unlimited times!</p>
+              </div>
+            )}
+          </CardFooter>
+        </Card>
+
+        <Card className="relative h-fit">
+          {isCurrentPlan(LIFETIME_TIER) && (
+            <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <Badge
+                variant="secondary"
+                className="bg-green-100 text-green-800"
+              >
+                Current Plan
+              </Badge>
+            </div>
+          )}
+          <CardHeader>
+            <CardTitle className="text-2xl">Lifetime</CardTitle>
+            <CardDescription>Perfect for Lifelong Learners</CardDescription>
+            <div className="mt-4 flex items-baseline gap-1">
+              <span className="text-4xl font-bold flex items-center gap-1">$ <span>45</span></span>
+              <span className="text-muted-foreground">usd</span>
+            </div>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center gap-3">
+              <Check className="h-5 w-5 text-green-500" />
+              <span>Add Unlimited Words</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Check className="h-5 w-5 text-green-500" />
+              <span>Practice Unlimited Times</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Check className="h-5 w-5 text-green-500" />
+              <span>Unlimited AI conversations</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Check className="h-5 w-5 text-green-500" />
+              <span>Track progress with detailed insights</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <Check className="h-5 w-5 text-green-500" />
+              <span>Learn and grow with the community</span>
+            </div>
+          </CardContent>
+          <CardFooter>
+            {isCurrentPlan(LIFETIME_TIER) ? (
+              <div className="w-full space-y-2">
+                <Button
+                  className="w-full"
+                  variant="outline"
+                  onClick={handleManageSubscription}
+                >
+                  Manage Subscription
+                </Button>
+                {subscriptionDetails.subscription && (
+                  <p className="text-sm text-muted-foreground text-center">
+                    {subscriptionDetails.subscription.cancelAtPeriodEnd
+                      ? `Expires ${formatDate(subscriptionDetails.subscription.currentPeriodEnd)}`
+                      : `Renews ${formatDate(subscriptionDetails.subscription.currentPeriodEnd)}`}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center justify-center flex-col w-full gap-2">
+
+              <Button
+                className="w-full"
+                onClick={() => handleCheckout(LIFETIME_TIER, LIFETIME_SLUG)}
+                >
+                {isAuthenticated === false
+                  ? "Sign In to Get Started"
+                  : "Get Started"}
+              </Button>
+
+              <p className="text-muted-foreground text-sm">Pay once. Learn unlimited times!</p>
+              </div>
             )}
           </CardFooter>
         </Card>

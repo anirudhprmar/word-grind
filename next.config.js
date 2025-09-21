@@ -9,7 +9,8 @@ const config = {
 reactStrictMode: false,
   typescript: {
     ignoreBuildErrors: true,
-  }
+  },
+  // allowedDevOrigins:["https://98e1d4909b5a.ngrok-free.app"]
 };
 
 export default config;

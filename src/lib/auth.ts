@@ -22,7 +22,8 @@ const resend = new Resend(env.RESEND_API_KEY)
 
 const polarClient = new Polar({
     accessToken: env.POLAR_ACCESS_TOKEN,
-    server: 'production'
+    // server: 'production'
+    server: 'sandbox'
 });
  
 export const auth = betterAuth({
@@ -75,7 +76,23 @@ export const auth = betterAuth({
                                 "NEXT_PUBLIC_STARTER_SLUG environment variable is required",
                             );
                             })(),
-                        }
+                        },
+                        {
+                        productId:
+                            env.NEXT_PUBLIC_LIFETIME_TIER  ??
+                            (() => {
+                            throw new Error(
+                                "NEXT_PUBLIC_LIFETIME_TIER environment variable is required",
+                            );
+                            })(),
+                        slug:
+                            env.NEXT_PUBLIC_LIFETIME_SLUG ??
+                            (() => {
+                            throw new Error(
+                                "NEXT_PUBLIC_LIFETIME_SLUG environment variable is required",
+                            );
+                            })(),
+                        },
                     ],
                     successUrl:  `${env.NEXT_PUBLIC_APP_URL}/${env.POLAR_SUCCESS_URL}`,
                     authenticatedUsersOnly: true

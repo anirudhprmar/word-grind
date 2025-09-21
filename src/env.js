@@ -41,7 +41,9 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_APP_URL: z.string(),
     NEXT_PUBLIC_STARTER_TIER: z.string(),
-    NEXT_PUBLIC_STARTER_SLUG: z.string()
+    NEXT_PUBLIC_STARTER_SLUG: z.string(),
+    NEXT_PUBLIC_LIFETIME_TIER:z.string(),
+    NEXT_PUBLIC_LIFETIME_SLUG:z.string()
   },
 
   /**
@@ -58,6 +60,8 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_STARTER_TIER: process.env.NEXT_PUBLIC_STARTER_TIER,
     NEXT_PUBLIC_STARTER_SLUG: process.env.NEXT_PUBLIC_STARTER_SLUG,
+    NEXT_PUBLIC_LIFETIME_TIER:process.env.NEXT_PUBLIC_LIFETIME_TIER,
+    NEXT_PUBLIC_LIFETIME_SLUG:process.env.NEXT_PUBLIC_LIFETIME_SLUG,
     POLAR_SUCCESS_URL:process.env.POLAR_SUCCESS_URL,
     POLAR_ACCESS_TOKEN:process.env.POLAR_ACCESS_TOKEN,
     POLAR_WEBHOOK_SECRET:process.env.POLAR_WEBHOOK_SECRET,

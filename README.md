@@ -7,7 +7,9 @@ shuffle the answers for quiz
 fix the profile page percentage
 
 - [ ]- start marketting the app: reddit , x , linkedIn, hacker news distribution is the key - 1.5 hr
+change each dashboard page sub. modal, change the text 
 
+in nav user show starter or lifetime whichever was active
 ______
 
 - [ ] - upstash redis Caching words,profile, quizzes
