@@ -10,6 +10,8 @@ fix the profile page percentage
 change each dashboard page sub. modal, change the text 
 
 in nav user show starter or lifetime whichever was active
+remove photo upload thing from : wordgrindremove photo upload thing from : wordgrind
+implement 3 days free trial
 ______
 
 - [ ] - upstash redis Caching words,profile, quizzes
